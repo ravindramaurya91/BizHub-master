@@ -1,0 +1,54 @@
+﻿<div class="container">
+    <div class="row broker-history">
+        <div class="col-md-2 col-sm-6">
+            <div class="broker-img-cate">
+                <!--TODO: add this back when actual data images are bound-->
+                @if (BrokerDTO.Avatar != null) {
+                    <img class="img-fluid bizhub-cursor-pointer" src="@BrokerDTO.Avatar" @onclick="ViewProfileCard">
+                } else {
+                    <img src="/images/elite-broker.jpg" class="img-fluid bizhub-cursor-pointer" @onclick="ViewProfileCard">
+                }
+                @* <img src="/images/elite-broker.jpg" class="img-fluid bizhub-cursor-pointer" @onclick="ViewProfileCard"> *@
+                @if (BrokerDTO.IsElite == true) {
+                    <div class="broker-container">
+                        <div class="broker-name">
+                            <a class="global-green-button" style="color:white;">Elite Broker</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 my-auto">
+            <div class="broker-text-wrap-first py-1">
+                <h4 class="global-overflow-hidden" style="color: var(--primary-blue)" data-toggle="tooltip" data-placement="top" title="@BrokerDTO.DisplayName">
+                    @BrokerDTO.DisplayName
+                </h4>
+                <label style="max-width: 255px;" class="global-overflow-hidden mb-0" data-toggle="tooltip" data-placement="top" title="@BrokerDTO.TagLine">
+                    @BrokerDTO.TagLine
+                </label>
+                <p class="first global-overflow-hidden bizhub-cursor-pointer m-0">@BrokerDTO.CompanyName</p>
+                <p class="second mb-0">@BrokerDTO.City, @BrokerDTO.State</p>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-7 my-auto">
+            <div class="broker-text-wrap-second">
+                <h3 class="global-vertical-ellipsis global-3-lines-tall">@BrokerDTO.Body</h3>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-5 my-auto bizhub-align-center">
+            @if (!IsBrokerLoggedInUser) {
+                <button class="btn btn-sm" style="background-color: var(--primary-green); color: white;" @onclick="ShowContactBrokerModal">Contact Broker</button>
+                @if (BrokerDTO.DatesContacted.Count > 0) {
+                    <div class="row">
+                        <span style="font-size:14px;">
+                            Last Contact Request:
+                            <span class="last-contact-request">@BrokerDTO.DatesContacted[0].Value</span>
+                        </span>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+

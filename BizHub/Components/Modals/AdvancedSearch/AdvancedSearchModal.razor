@@ -1,0 +1,10 @@
+﻿<div class="large-modal-content pt-2 pl-0 pr-0 pb-0">
+    <div class="row mb-1 mx-auto">
+   <CmpAdvancedSearch Controller="Controller" IsAlignAttributes="true" IsShowRecipientTitle="true" IsShowFooterButtons="false" 
+                      IsShowParentCheckBoxInBusinessCategoryModal="@IsShowParentCheckBoxInBusinessCategoryModal" IsShowSortBy="false" IsZipCodeValid="@IsZipCodeValid"></CmpAdvancedSearch>
+    </div>
+    <div class="modal-footer category-modal-footer py-2">
+        <button class="btn btn-sm btn-secondary" @onclick="BlazoredModal.Cancel">Cancel</button>
+        <button class="btn btn-sm btn-secondary" @onclick="SaveChanges">Save</button>
+    </div>
+</div>

@@ -1,0 +1,270 @@
+﻿<div class="row">
+    <div class="col-lg-9 mx-auto">
+        <div class="business">
+            <div class="business-head row m-auto">
+                <h2 class="col-md-4">Ad Information</h2>
+                <div class="col-md-8 text-right my-auto">
+                    <button class="btn btn-sm btn-primary" @onclick="PreviewAd">Preview Ad</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right"><b>Create title for you ad &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-6">
+                <input id="txtAdTitle" type="text" class="@((IsSubmitted) && (String.IsNullOrEmpty(ListingDTO.AdTitle)) ? "invalid-text-error" : "") form-control" @bind="ListingDTO.AdTitle" placeholder="">
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right"></label>
+            <div class="col-sm-6">
+                @foreach (var item in new string[] { "Allow ad to be seen by the general public", "Only allow ad to be seen by the biz Hub brokers network" }) {
+                    <div>
+                        <input type="radio" id="@item" value="@item" @onchange="RadioSelection" checked=@(RadioValue.Equals(item)) />
+                        <label for="@item">@item</label>
+                    </div>
+                }
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right"><b>Tag Line &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-6">
+                <input type="text" id="txtTagLine" class="@((IsSubmitted) && (String.IsNullOrEmpty(ListingDTO.AdTagLine)) ? "invalid-text-error" : "") form-control" @bind="ListingDTO.AdTagLine" placeholder="">
+                <div class="title-tag">
+                    <p class="text-center">A good Tag Line is 5 - 8 words that describe your industry and hook the buyer</p>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right"><b>Business Opportunity Description &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-6">
+
+                <FSRichTextEditor CustomCss="required-box" OnSelect="UpdateBusinessDescription" BoundValue="@ListingDTO.AdDescription"></FSRichTextEditor>
+
+                @* <textarea id="txtDescription" class="@(String.IsNullOrEmpty(ListingDTO.AdDescription) ? "invalid-text-error" : "") form-control busi-opp-desc" @bind="ListingDTO.AdDescription"></textarea> *@
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right mb-1"><b>Upload main photo for the ad</b></label>
+            <div class="col-sm-2 mb-1" title="Upload">
+                <CmpUploadFile></CmpUploadFile>
+            </div>
+            <div class="col-sm-4 mb-1">
+                <div class="up-img-wrapper text-center">
+                    <img src="@ListingDTO.AdPhoto" style="max-height:150px;">
+                </div>
+            </div>
+        </div>
+        
+        <div class="business">
+            <div class="business-head row m-auto">
+                <h2 class="col-md-4">Detailed Information</h2>
+                <div class="col-md-8 text-right my-auto">
+                    <button class="btn btn-sm btn-primary" @onclick="PreviewAd">Preview Ad</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right"><b>Facility Description</b></label>
+            <div class="col-sm-6">
+                <textarea class="form-control speciality" @bind="@ListingDTO.AdFacilityDescription"></textarea>
+            </div>
+            <div class="col-sm-3">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right"><b>Reason For Selling</b></label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control height-30" placeholder="" @bind-value="ListingDTO.AdReasonForSelling">
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label text-right"><b>Support & Training</b></label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control height-30" placeholder="" @bind-value="ListingDTO.AdSupportAndTraining">
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 mb-1 col-form-label text-right"><b>Upload Additional photo and create a photo gallery</b></label>
+            <div class="col-sm-2 mb-1">
+                <a class="btn-img-upload">Upload</a>
+
+            </div>
+            <div class="col-sm-4 mb-1">
+                <div class="img-photo-gallery text-center">
+                    <img src="/images/companyLogo.png" class="img-fluid img-thumbnail">
+                    <img src="/images/companyLogo.png" class="img-fluid img-thumbnail">
+                    <img src="/images/companyLogo.png" class="img-fluid img-thumbnail">
+                    <img src="/images/companyLogo.png" class="img-fluid img-thumbnail">
+                </div>
+            </div>
+        </div>
+
+        @*<div class="form-group row">
+            <label class="col-md-3 offset-1"><span class="float-right mt-1">Create a landing page?</span></label>
+            @foreach (var item in new string[] { "yes", "no" })
+            {
+                <div class="radio mr-3">
+                    <input type="radio" id="@item" value="@item" @onchange="LandingPageSelection" checked=@(LandingPage.Equals(item)) />
+                    <label for="@item">@item</label>
+                </div>
+            }
+        </div>*@
+
+    </div>
+</div>
+
+@*<div class="row m-auto">
+    <div class="col-md-12 text-center my-5">
+        <button class="btn btn-sm btn-primary col-md-3" @onclick="PreviewAd">Preview Ad</button>
+    </div>
+</div>*@
+
+<div class="row">
+    <div class="col-lg-9 mx-auto">
+        <div class="second-wrapper">
+            <h2>Confindentiality</h2>
+        </div>
+        <div class="text-wrapper-third">
+            <p>
+                This page focuses on what information you would like to keep private and what
+                information you would like to share with the public. For each data element below there are three options...
+            </p>
+        </div>
+        <div class="text-wrapper-fourth">
+            <p>1) Public <span>(display this information on the advertisement for all to see)</span></p>
+            <p>2) Protected <span>(display on advertisement but only show to business brokers, agents, abd advisors)</span></p>
+            <p>3) Private <span>(do not display on the advertisement. this information is confidential)</span></p>
+        </div>
+        <div class="text-wrapper-fifth">
+            <p>Biz-Hub recommends seller's consider carefully what information they wish to share with others. However, the more information you elect to share the greater your chances for are for being discovered.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-9 mx-auto">
+        <div class="information-mgt">
+            <table class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th>
+                            <h5>Information Management</h5>
+                        </th>
+                        <th class="text-center">
+                            <h5>Public</h5>
+                            <h6>(share openly)</h6>
+                        </th>
+                        <th class="text-center">
+                            <h5>Protected</h5>
+                            <h6>(agent network only)</h6>
+                        </th>
+                        <th class="text-center">
+                            <h5>Private</h5>
+                            <h6>(do not share)</h6>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h4>Address</h4></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="bg-grey">
+                        <td><p>County</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowCounty_Int == 1)" @onchange="@(() => ListingDTO.ShowCounty_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowCounty_Int == 2)" @onchange="@(() => ListingDTO.ShowCounty_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowCounty_Int == 3)" @onchange="@(() => ListingDTO.ShowCounty_Int = 3)"></td>
+                    </tr>
+                    <tr>
+                        <td><p>City</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowCity_Int == 1)" @onchange="@(() => ListingDTO.ShowCity_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowCity_Int == 2)" @onchange="@(() => ListingDTO.ShowCity_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowCity_Int == 3)" @onchange="@(() => ListingDTO.ShowCity_Int = 3)"></td>
+                    </tr>
+                    <tr class="bg-grey">
+                        <td><p>Zip</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowZip_Int == 1)" @onchange="@(() => ListingDTO.ShowZip_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowZip_Int == 2)" @onchange="@(() => ListingDTO.ShowZip_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowZip_Int == 3)" @onchange="@(() => ListingDTO.ShowZip_Int = 3)"></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Business</h4></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="bg-grey">
+                        <td><p>Gross Revenues</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowGrossRevenues_Int == 1)" @onchange="@(() => ListingDTO.ShowGrossRevenues_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowGrossRevenues_Int == 2)" @onchange="@(() => ListingDTO.ShowGrossRevenues_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowGrossRevenues_Int == 3)" @onchange="@(() => ListingDTO.ShowGrossRevenues_Int = 3)"></td>
+                    </tr>
+                    <tr>
+                        <td><p>Cash Flow</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowCashFlow_Int == 1)" @onchange="@(() => ListingDTO.ShowCashFlow_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowCashFlow_Int == 2)" @onchange="@(() => ListingDTO.ShowCashFlow_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowCashFlow_Int == 3)" @onchange="@(() => ListingDTO.ShowCashFlow_Int = 3)"></td>
+                    </tr>
+                    <tr class="bg-grey">
+                        <td><p>EBITDA</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowEBITDA_Int == 1)" @onchange="@(() => ListingDTO.ShowEBITDA_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowEBITDA_Int == 2)" @onchange="@(() => ListingDTO.ShowEBITDA_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowEBITDA_Int == 3)" @onchange="@(() => ListingDTO.ShowEBITDA_Int = 3)"></td>
+                    </tr>
+                    <tr>
+                        <td><p>Inventory</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowInventory_Int == 1)" @onchange="@(() => ListingDTO.ShowInventory_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowInventory_Int == 2)" @onchange="@(() => ListingDTO.ShowInventory_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowInventory_Int == 3)" @onchange="@(() => ListingDTO.ShowInventory_Int = 3)"></td>
+                    </tr>
+                    <tr class="bg-grey">
+                        <td><p>FF&E</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowFFE_Int == 1)" @onchange="@(() => ListingDTO.ShowFFE_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowFFE_Int == 2)" @onchange="@(() => ListingDTO.ShowFFE_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowFFE_Int == 3)" @onchange="@(() => ListingDTO.ShowFFE_Int = 3)"></td>
+                    </tr>
+                    <tr>
+                        <td><p>Company Website</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowCompanyWebsite_Int == 1)" @onchange="@(() => ListingDTO.ShowCompanyWebsite_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowCompanyWebsite_Int == 2)" @onchange="@(() => ListingDTO.ShowCompanyWebsite_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowCompanyWebsite_Int == 3)" @onchange="@(() => ListingDTO.ShowCompanyWebsite_Int = 3)"></td>
+                    </tr>
+                    <tr class="bg-grey">
+                        <td><p>Number of Employees</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowNumberOfEmployees_Int == 1)" @onchange="@(() => ListingDTO.ShowNumberOfEmployees_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowNumberOfEmployees_Int == 2)" @onchange="@(() => ListingDTO.ShowNumberOfEmployees_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowNumberOfEmployees_Int == 3)" @onchange="@(() => ListingDTO.ShowNumberOfEmployees_Int = 3)"></td>
+                    </tr>
+                    <tr>
+                        <td><p>Year Established</p></td>
+                        <td class="text-center"><input type="radio" value="1" checked="@(ListingDTO.ShowYearEstablished_Int == 1)" @onchange="@(() => ListingDTO.ShowYearEstablished_Int = 1)"></td>
+                        <td class="text-center"><input type="radio" value="2" checked="@(ListingDTO.ShowYearEstablished_Int == 2)" @onchange="@(() => ListingDTO.ShowYearEstablished_Int = 2)"></td>
+                        <td class="text-center"><input type="radio" value="3" checked="@(ListingDTO.ShowYearEstablished_Int == 3)" @onchange="@(() => ListingDTO.ShowYearEstablished_Int = 3)"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row m-auto">
+            <div class="col-md-12 text-center my-5">
+                <button class="btn btn-sm btn-primary col-md-3" @onclick="PreviewAd">Preview Ad</button>
+            </div>
+        </div>
+
+        <div class="col-lg-9 mx-auto text-center">
+            <p>NOTE: Information marked "Private" will not be made avaliable to the search engine which may reduce the number of buyers and agents that will discover your business for sale.</p>
+        </div>
+    </div>
+</div>

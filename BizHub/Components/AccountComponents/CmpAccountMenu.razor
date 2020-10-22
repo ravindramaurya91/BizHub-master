@@ -1,0 +1,45 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <div class="list-group" id="list-tab" role="tablist">
+            <div class="profile">
+                <i class="fas fa-user-circle fa-2x fa-fw"></i>@SessionMgr.Instance.User.DisplayName
+            </div>
+            <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 1 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(1))">
+                <i class="fas fa-user fa-fw"></i> Dashboard
+            </a>
+            <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 2 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(2))">
+                <i class="fas fa-user fa-fw"></i> Profile
+            </a>
+            @*<a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 3 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(3))">
+                <i class="fas fa-home"></i> My Listings
+            </a>*@
+            <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 4 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(4))">
+                <i class="far fa-credit-card"></i> Payments
+            </a>
+            <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 5 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(5))">
+                <i class="fas fa-building"></i> Organization
+            </a>
+            <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 6 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(6))">
+                <i class="far fa-comments"></i> Message Center
+            </a>
+            <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 7 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(7))">
+                <i class="fas fa-calculator fa-fw"></i> Research
+            </a>
+            <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 8 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(8))">
+                <i class="fas fa-calculator fa-fw"></i> Preferences
+            </a>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+        [Parameter]
+        public EventCallback<int> MenuItemSelected { get; set; }
+
+        [Parameter]
+        public long ActiveMenu { get; set; }
+
+    public CmpAccountMenuController Controller { get; set; } = new CmpAccountMenuController();
+}

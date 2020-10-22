@@ -1,0 +1,67 @@
+﻿@using BizHub.Components.OnBoard.DynamicPages
+    <div class="OnBoard-page">
+        <h3>Company Name</h3>
+        <div class="row">
+
+            <div class="col-md-8">
+                <p>Does your company have more than one office ?</p>
+            </div>
+            <div class="col-md-4">
+                <FSRadioButtons Items="@ONBOARD_OFFICE_RADIO_BUTTONS" BoundValue="@HasMultipleOffices.ToString()"
+                                IsVerticalDisplay="false" OnSelect="ChangeMorethanOffice"></FSRadioButtons>
+            </div>
+            @if (HasMultipleOffices)
+            {
+                <div class="col-md-8">
+                    <p>Are your offices located in more than one region ?</p>
+                </div>
+                <div class="col-md-4">
+                    <FSRadioButtons Items="@ONBOARD_OFFICEREGION_RADIO_BUTTONS" BoundValue="@HasMultipleRegions.ToString()"
+                                    IsVerticalDisplay="false" OnSelect="ChangeMorethanRegions"></FSRadioButtons>
+                </div>
+            }
+        </div>
+        <div class="cmp-second-page py-3">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="row mx-auto mb-3">
+                        @if (HasMultipleOffices && !HasMultipleRegions && IsClicked)
+                        {
+                            <label class="col-md-3 text-right">Number of Offices</label>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="number" @bind-value="@Controller.OfficeCount" class="form-control height-30">
+                                </div>
+                            </div>
+                        }
+                        @if (HasMultipleRegions && HasMultipleOffices)
+                        {
+                            <label class="col-md-4 text-left">Number of Regions</label>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="number" @bind-value="@Controller.RegionCount" class="form-control height-30">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    @if (Controller.OfficeCount > 0 && Controller.RegionCount == 0)
+                    {
+                        @for (int j = 0; j < Controller.OfficeCount; j++)
+                        {
+                            var CurOfficeNumber = j;
+                            <CmpOnBoard_CompanyOffice RegionNumber="-1" OfficeNumber="@CurOfficeNumber" Controller="@Controller"></CmpOnBoard_CompanyOffice>
+                        }
+                    }
+                    @if (Controller.RegionCount > 0)
+                    {
+                        <CmpOnBoard_CompanyRegions Controller="@Controller"></CmpOnBoard_CompanyRegions>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+@code {
+
+}

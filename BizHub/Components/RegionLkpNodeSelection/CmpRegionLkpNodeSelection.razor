@@ -1,0 +1,41 @@
+﻿<div class="row list-border pb-2">
+    @* <div class="col-md-1 text-center pr-0 pl-1 pt-2"> *@
+    @*     <div class="listing-home-icon"> *@
+    @*         <i class="fas fa-user-tie"></i> *@
+    @*         <h5 style="font-size: 15px; color: var(--primary-blue)" class="mb-0">Agent Finder</h5> *@
+    @*     </div> *@
+    @* </div> *@
+    <div class="col-md-1 pt-3 text-right">
+        <label>Country</label>
+    </div>
+    <div class="col-md-2 pt-3 px-0">
+        <select class="form-control" disabled>
+            <option>USA</option>
+        </select>
+    </div>
+    <div class="col-md-1 pt-3 text-right">
+        <label>State</label>
+    </div>
+    <div class="col-md-2 pt-3 px-0">
+        <FSSelect PlaceHolder="Select a State" Items="@StatesAsFSItems" OnSelect="StateSelected" BoundValue="@SelectedStateNode.Oid.ToString()"></FSSelect>
+    </div>
+    <div class="col-md-1 pt-3 text-right">
+        <label>County</label>
+    </div>
+    <div class="col-md-3 pt-3 pl-0">
+        <SfMultiSelect Value="@SelectedCountyOids" DataSource="@AvailableCounties" Mode="@VisualMode.CheckBox"
+                       ShowDropDownIcon="true" FilterBarPlaceholder="Select up to 5 Counties" ShowSelectAll="false" MaximumSelectionLength="5">
+            <MultiSelectEvents TValue="List<Int64>" ValueChange="OnMultiSelectChange"></MultiSelectEvents>
+            <MultiSelectFieldSettings Text="Name" Value="Oid"></MultiSelectFieldSettings>
+        </SfMultiSelect>
+    </div>
+    <div class="col-md-1 pt-3">
+        <button class="btn btn-sm global-green-button" style="color: white" @onclick="SearchByStateOrCounty">
+            Search 
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <!--TODO: Add tags back to this once dropdown selection hooked up-->
+</div>

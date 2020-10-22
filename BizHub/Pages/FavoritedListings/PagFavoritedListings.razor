@@ -1,0 +1,80 @@
+@page "/Favorited-Listings"
+
+<section class="page-title pt-4 pb-2">
+    <div class="container">
+        <div class="row pb-3" style="border-bottom: 1px solid #1b5996;">
+            <div class="col-md-3">
+                <div class="title">
+                    <h2>My Favorites (@Listings.Count)</h2>
+                </div>
+            </div>
+            <div class="col-md-9 pt-3 pr-0">
+                <div class="row">
+                    <input placeholder="Search Keyword" @onkeydown="CheckForSearchEnter" @bind-value="SearchString" @bind-value:event="oninput" class="form-control col-md-5" type="text">
+                    <button @onclick="ClearSearchString" class="btn btn-transparent clear-search-string">
+                        <i class="fas fa-times text-danger"></i>
+                    </button>
+                    <button @onclick="SearchFavorites" class="btn btn-sm btn-secondary col-md-1 bizhub-cursor-pointer" style=" height: 30px;">Search</button>
+                    <label for="sortby" class="col-md-2 text-right">Sort By</label>
+                    <div class="col-md-3">
+                        <div class="btn-group dropleft">
+                            <a style="background: white;" id="dLabel" role="button" data-toggle="dropdown" class="btn dropdown-toggle form-control py-0" href="" aria-expanded="false">Alpha</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="">
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item" tabindex="-1" href="#">Alpha</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("AdTitle"))">Ad Title</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("EBITDA"))">EBITDA</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("ListingPrice"))">Listing Price</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("CashFlow"))">Cash Flow</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("IsSbaPreApproved"))">SBA Pre-Approved</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("IsSellerFinance"))">Is Seller Financed</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 pt-2 pb-4 text-right">
+                <label class="mr-2">View As: </label>
+                <button @onclick="@(() => ListingViewSelection(Constants.LISTINGS_VIEW_STYLE_TILE))" data-toggle="tooltip" data-placement="top" title="TILE VIEW" class="@(ListingDisplaySetting == Constants.LISTINGS_VIEW_STYLE_TILE ? "btn-primary" : "btn-outline-primary") btn btn-sm px-1 pb-0 pt-1 mr-2">
+                    <i class="fas fa-th" style="font-size: 20px;"></i>
+                </button>
+                <button @onclick="@(() => ListingViewSelection(Constants.LISTINGS_VIEW_STYLE_LIST))" data-toggle="tooltip" data-placement="top" title="LIST VIEW" class="btn btn-sm @(ListingDisplaySetting == Constants.LISTINGS_VIEW_STYLE_LIST ? "btn-primary" : "btn-outline-primary") px-1 pb-0 pt-1">
+                    <i class="fas fa-list" style="font-size: 20px;"></i>
+                </button>
+            </div>
+            <hr class="mt-0">
+            @if (Listings != null && Listings.Count > 0) {
+                <div class="container-fluid p-0">
+                    @if (ListingDisplaySetting.Equals(Constants.LISTINGS_VIEW_STYLE_LIST)) {
+                        @foreach (ListingDTO Listing in Listings) {
+                            <CmpListing ListingDTO="@Listing" Controller="@Controller"></CmpListing>
+                        }
+                    } else if (ListingDisplaySetting.Equals(Constants.LISTINGS_VIEW_STYLE_TILE)) {
+                        <div class="row m-auto">
+                            @foreach (ListingDTO Listing in Listings) {
+                                <div class="col-md-3 mb-3 px-2" style="height:100%; min-width: 360px;">
+                                    <TileListing ListingDTO="@Listing" Controller="@Controller"></TileListing>
+                                </div>
+                            }
+                        </div>
+                    } else {
+                        @foreach (ListingDTO Listing in Listings) {
+                            <CmpListing ListingDTO="@Listing" Controller="@Controller"></CmpListing>
+                        }
+                    }
+                </div>
+            } else {
+                <span>No Favorites</span>
+            }
+        </div>
+    </div>
+</section>

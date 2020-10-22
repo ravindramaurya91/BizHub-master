@@ -1,0 +1,47 @@
+﻿@page "/Broker-Search"
+@page "/Agent-Finder"
+
+<div class="container bg-back">
+    @if (IsLoading) {
+        <CmpLoadingSpinner></CmpLoadingSpinner>
+    } else {
+        <CmpRegionLkpNodeSelection RegionNodeController="Controller.RegionNodeController" eRunBrokerSearch="GetBrokerCards"></CmpRegionLkpNodeSelection>
+        <div class="row">
+                 <div class="col-md-12">
+                     <h1 class="template-title">Agent Finder</h1>
+                 </div>
+             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="chatbox">
+                        <img class="chatroom_img" src="/images/user-avatar.png"/>
+                         @if (BrokerCards != null && BrokerCards.Count > 0)
+                         {
+                             <div class="col-md-12 float-right pt-2">
+                                 <button class="btn btn-sm global-green-button mb-2 float-right bizhub-cursor-pointer" style="color: white">Search</button>
+                                 <input placeholder="Search By Name" type="text" class="float-right mr-2 form-control col-md-3">
+                             </div>
+                         }
+                        <div class="broker-card-container">
+
+                            @if (BrokerCards != null && BrokerCards.Count > 0) {
+                                        @foreach (BrokerCardDTO card in BrokerCards) {
+                                            <CmpBrokerCard BrokerDTO="@card" />
+                                        }
+                                    }
+                             else
+                             {
+                                 <div class="col-md-12 text-center">
+                                     <i class="fas fa-exclamation col-md-12" style=" font-size: 7rem; color: #b5b3b3;"></i>
+                                     <label class="mt-3" style="color:gray;">No Agent Found</label>
+                                 </div>
+                             }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+                                                                     
+                                                                     }
+                                                                 </div>

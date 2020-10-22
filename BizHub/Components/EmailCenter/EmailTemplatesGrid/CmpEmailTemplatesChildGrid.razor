@@ -1,0 +1,17 @@
+﻿<SfGrid DataSource="@GridData" AllowPaging="true" AllowSorting="true" >
+    <GridPageSettings PageSize="5"></GridPageSettings>
+    <GridColumns>
+        <GridColumn Field="@nameof(ChildEmailObj.Name)" Width="100">
+            <HeaderTemplate>
+                <div style="background-color: gray; color: white; font-size: 14px;">
+                    <span>Name</span>
+                </div>
+            </HeaderTemplate>
+        </GridColumn>
+        <GridColumn Field="@nameof(ChildEmailObj.Description)" HeaderText="Description"  Width="150" ></GridColumn>
+        <GridColumn Field="@nameof(ChildEmailObj.PercentDelivered)" HeaderText="% Delivered" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right"  Width="50"></GridColumn>
+        <GridColumn Field="@nameof(ChildEmailObj.PercentOpened)" HeaderText="% Opened" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" Width="50"></GridColumn>
+        <GridColumn Field="@nameof(ChildEmailObj.NumberOfAttachments)" HeaderText="Attachments" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" Width="50"></GridColumn>
+        <GridColumn Field="@nameof(ChildEmailObj.DateAdded)" HeaderText="Date Added" TextAlign="Syncfusion.Blazor.Grids.TextAlign.Right" Width="75" Format="d"></GridColumn>
+    </GridColumns>
+</SfGrid>

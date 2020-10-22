@@ -1,0 +1,14 @@
+﻿<div class="p-2" style=" text-align: center; background: white;">
+    <div class="col-md-12 text-center mb-3">
+        <i class="fas dialog-icon-styles @Options.IconCSS"></i>
+        <div class="col-md-12 dialog-header-styles @Options.HeaderCSS">@((MarkupString) Options.Header)</div>
+    </div>
+    <div class="col-md-12 text-center @Options.BodyCSS" style="font-size: 16px;">
+        @((MarkupString) Options.Body)
+    </div>
+    <div class="modal-footer row m-auto pt-2 pb-0 pr-0" style="">
+        @foreach (FSModalButton Button in Options.Buttons) {
+            <button class="@Button.CSS" @onclick="@(() => ButtonSelected(Button))">@Button.Name</button>
+        }
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@page "/"
+@page "/Home"
+
+<div class="row dashboard-background-image">
+    
+    <div class="col-md-12 mt-5">
+        <h2 class="m-auto dashboard-title p-1 col-md-4">Your Portal to Wealth</h2>
+        <div class="col-md-4 m-auto">
+            <input class="col-md-12 p-2" placeholder="Enter a Zip Code from which to center your search" type="text"
+                   @bind="@ZipCode" @bind:event="oninput"@onkeydown="CheckForZipCodeEnter"/>
+            <button @onclick="NavigateToListingsWithPayload" class="btn btn-transparent dashboard-search-icon">
+                <i class="fas fa-search" style="color:#036aff;"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row pt-4 m-auto">
+        <div class="col-md-4 col-sm-6">
+            <div class="home-box-shadow dashboard-height-width business-widget bizhub-cursor-pointer" @onclick="@(() => NavigateToNewPage("/Listings"))">
+                <h5 class="bizhub-align-center pt-3">Buy Your Next Business</h5>
+                <img class="col-md-5 m-auto universal-block-display py-4" src="/images/BuyNow.png" style="width:50%" />
+                <p class="col-md-10  m-auto">Search the registry for businesses in your area that best meet your criteria for success</p>
+                <button class="my-2 btn btn-outline-secondary col-md-5 button-absolute" style="color: #1b5996;">Search</button>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="home-box-shadow dashboard-height-width bizhub-cursor-pointer" @onclick="@(() => NavigateToNewPage("/Listing-Setup"))">
+                <h5 class="bizhub-align-center pt-3">Sell Your Business</h5>
+                <img src="/images/Renew.png" style="width:50%" class="col-md-4 m-auto universal-block-display py-4" />
+                <p class="col-md-10  m-auto">Register your business for sale within the global economy</p>
+                <button class="my-2 btn btn-outline-secondary col-md-5 button-absolute" style="color: #1b5996;">Sell</button>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="home-box-shadow dashboard-height-width bizhub-cursor-pointer" @onclick="@(() => NavigateToNewPage("/Notifications"))">
+                <h5 class="bizhub-align-center pt-3">Register For Notifications</h5>
+                <img src="/images/register.png" style="width:50%" class="col-md-4 m-auto universal-block-display py-4" />
+                <p class="col-md-10 m-auto">Register for early alerts when businesses matching your criteria are published for sale</p>
+                <button class="my-2 btn btn-outline-secondary col-md-5 button-absolute" style="color: #1b5996;">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row my-4">
+    <h3 class="col-md-4 offset-4 mb-0" style="text-align: center; color: #1b5996;">Good Deals for Good People</h3>
+    @* <button @onclick="CreateContact">Test Create Contact</button> *@
+</div>

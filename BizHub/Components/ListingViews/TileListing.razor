@@ -1,0 +1,62 @@
+<div class="col-md-12 listing-image-outlines px-0">
+    <div class="row m-auto">
+        <div class="col-md-11 pl-1">
+            <h5 @onclick="ViewListingDetail" class="global-blue-text m-0 vertical-ellipsis-2-lines bizhub-cursor-pointer" style="font-weight:400; height: 48px;">@ListingDTO.AdTitle</h5>
+        </div>
+        <div class="col-md-1 p-0">
+            <i class="@(ListingDTO.IsFavorite == true ? "fas fa-heart" : "far fa-heart")  global-heart-size heart-red col-md-2 pl-1 mt-1 bizhub-cursor-pointer" @onclick="ToggleFavorite" style="text-align: right;"></i>
+        </div>
+    </div>
+    <div class="col-md-12 p-0">
+     @if (@ListingDTO.IsSbaPreApproved == true)
+        {
+            <img src="/images/SBA.png" class="sba-approved-tile"> 
+        }
+        <img @onclick="ViewListingDetail" class="img-fluid d-block px-0 tile-listing-image bizhub-cursor-pointer" src="@((!string.IsNullOrEmpty(ListingDTO.AdPhoto)) ? @ListingDTO.AdPhoto : "/images/truckCompany.jpg")">
+    </div>
+   <div class="col-md-12" style="background: white;">
+        <div class="row mt-1">
+            <div class="col-md-12">
+                <label class="global-green-text mb-0 vertical-ellipsis-2-lines tile-listing-tagline">@ListingDTO.AdTagLine</label>
+            </div>
+            <div class="col-md-7">
+                <label class="global-green-text m-0" style="font-weight: 500;color: gray;">@ListingDTO.CityState</label>
+                <label class="global-green-text m-0" style="color: gray;">Listing ID: @ListingDTO.Oid</label>
+            </div>
+            <div class="col-md-5 pr-2">
+                <h5 class="global-blue-text float-right px-0" style="font-weight: 400">$@Convert.ToDecimal(@ListingDTO.ListingPrice).ToString(Constants.SHORT_CURRENCY)</h5>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 p-0">
+                <label class="col-md-12 mb-0 listing-highlights">Revenue</label>
+                <p class="col-md-12">$@Convert.ToDecimal(@ListingDTO.GrossRevenue).ToString(Constants.SHORT_CURRENCY)</p>
+            </div>
+            <div class="col-md-4 p-0">
+                <label class="col-md-12 mb-0 listing-highlights">Cash Flow</label>
+                <p class="col-md-12">$@Convert.ToDecimal(@ListingDTO.CashFlow).ToString(Constants.SHORT_CURRENCY)</p>
+            </div>
+            <div class="col-md-4 p-0">
+                <label class="col-md-12 mb-0 listing-highlights">Date Listed</label>
+                <p class="col-md-12">@ListingDTO.ListingDate.ToShortDateString()</p>
+            </div>
+        </div>
+        <div class="row pr-2 pb-1">
+            <div class="col-md-12 pr-0 pt-2">
+                <small style="font-size: 14px;" class="float-right">
+                    Contacted on:
+                    <strong style="text-decoration: underline;">02/22/20</strong>
+                </small>
+                @if (ListingDTO.IsSellerFinanace == true) {
+                    <small style="font-size: 14px;" class=""><i class="fa fa-check" style="color:green"></i> Seller Financed</small>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-0">
+                <button disabled="@IsContactDisabled(ListingDTO.EntityOid)" @onclick="ShowContactBrokerModal" class="btn btn-md global-green-button col-md-12" style="color:white;border-radius: 4px 4px 0 0;">Contact Seller</button>
+            </div>
+        </div>
+    </div>
+</div>

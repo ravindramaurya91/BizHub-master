@@ -1,0 +1,74 @@
+﻿<div class="col-lg-12 control-section">
+    <div class="content-wrapper">
+        <div class="row ml-2 mb-3">
+            <div id="container" class="amortization-grid">
+                <SfGrid @ref="@Grid" DataSource="@GridData" AllowPaging="@GridOptions.IsAllowPaging" AllowSorting="@GridOptions.IsAllowSorting"
+                        AllowGrouping="@GridOptions.IsAllowGrouping" AllowFiltering="@GridOptions.IsAllowFiltering" AllowReordering="@GridOptions.IsAllowReordering">
+                    <GridEditSettings AllowEditing="true" AllowEditOnDblClick="false" AllowDeleting="true"></GridEditSettings>
+                    <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.CheckBox"></GridFilterSettings>
+                    <GridPageSettings PageSize="@GridOptions.PageSize"></GridPageSettings>
+                    <GridAggregates>
+                        <GridAggregate>
+                            <GridAggregateColumns>
+                                <GridAggregateColumn Field="@nameof(LoanPayment.Payment)" Type="AggregateType.Sum" Format="$ ###,###,###.##">
+                                    <FooterTemplate>
+                                        @{
+                                            var Avgvalue = (context as AggregateTemplateContext);
+                                            <div class="text-right">
+                                                @Avgvalue.Sum
+                                            </div>
+                                        }
+                                    </FooterTemplate>
+                                </GridAggregateColumn>
+                                <GridAggregateColumn Field="@nameof(LoanPayment.Principal)" Type="AggregateType.Sum" Format="$ ###,###,###.##">
+                                    <FooterTemplate>
+                                        @{
+                                            var Avgvalue = (context as AggregateTemplateContext);
+                                            <div>
+                                                @Avgvalue.Sum
+                                            </div>
+                                        }
+                                    </FooterTemplate>
+                                </GridAggregateColumn>
+                                <GridAggregateColumn Field="@nameof(LoanPayment.Interest)" Type="AggregateType.Sum" Format="$ ###,###,###.##">
+                                    <FooterTemplate>
+                                        @{
+                                            var Avgvalue = (context as AggregateTemplateContext);
+                                            <div>
+                                                @Avgvalue.Sum
+                                            </div>
+                                        }
+                                    </FooterTemplate>
+                                </GridAggregateColumn>
+                                <GridAggregateColumn Field="@nameof(LoanPayment.Balance)" Type="AggregateType.Sum" Format="$ ###,###,###.##">
+                                    <FooterTemplate>
+                                        @{
+                                            var Avgvalue = (context as AggregateTemplateContext);
+                                            <div>
+                                                @Avgvalue.Sum
+                                            </div>
+                                        }
+                                    </FooterTemplate>
+                                </GridAggregateColumn>
+                            </GridAggregateColumns>
+                        </GridAggregate>
+                    </GridAggregates>
+                    <GridColumns>
+                        <GridColumn HeaderText="Index" Width="110">
+                            <Template>
+                                @{
+                                    <div>@RowCount</div>
+                                    RowCount++;
+                                }
+                            </Template>
+                        </GridColumn>
+                        <GridColumn Field="@nameof(LoanPayment.Payment)" HeaderText="Payment" Format="C2" IsPrimaryKey="true" Width="250"></GridColumn>
+                        <GridColumn Field="@nameof(LoanPayment.Interest)" HeaderText="Interest" Format="C2" Width="150"></GridColumn>
+                        <GridColumn Field="@nameof(LoanPayment.Principal)" HeaderText="Principal" Format="C2" Width="150"></GridColumn>
+                        <GridColumn Field="@nameof(LoanPayment.Balance)" HeaderText="Balance" Format="C2" Width="250"></GridColumn>
+                    </GridColumns>
+                </SfGrid>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+@if (ShowButtons == true)
+{
+    <div class="col-md-12 text-right">
+        <div class="cigar-icon-sec text-right">
+            <i class="@(ListingDTO.IsFavorite == true ? "fas fa-heart":"far fa-heart") heart-red fa-2x bizhub-cursor-pointer" @onclick="ToggleFavorite"></i>
+        </div>
+    </div>
+}
+<div class="col-md-12" style="position: sticky; top:  130px;">
+    <div class="sale-details">
+        @if (ListingDTO != null) {
+            <table class="table table-borderless">
+                <tbody>
+                <CmpListingFinancialInfoDisplay Label="Asking Price" Value="@ListingDTO.ListingPrice?.ToString(Constants.SHORT_CURRENCY)" ValuePrecursor="$" Enum="1"></CmpListingFinancialInfoDisplay>
+                <CmpListingFinancialInfoDisplay Label="Gross Revenue" Value="@ListingDTO.GrossRevenue?.ToString(Constants.SHORT_CURRENCY)" Enum="@ListingDTO.ShowGrossRevenues_Int" ValuePrecursor="$"></CmpListingFinancialInfoDisplay>
+                <CmpListingFinancialInfoDisplay Label="EBITDA" Value="@ListingDTO.EBITDA?.ToString(Constants.SHORT_CURRENCY)" Enum="@ListingDTO.ShowEBITDA_Int" ValuePrecursor="$"></CmpListingFinancialInfoDisplay>
+                <CmpListingFinancialInfoDisplay Label="Cash Flow" Value="@ListingDTO.CashFlow?.ToString(Constants.SHORT_CURRENCY)" Enum="@ListingDTO.ShowCashFlow_Int" ValuePrecursor="$"></CmpListingFinancialInfoDisplay>
+                <CmpListingFinancialInfoDisplay Label="Inventory" Value="@ListingDTO.Inventory?.ToString(Constants.SHORT_CURRENCY)" Enum="@ListingDTO.ShowInventory_Int" ValuePrecursor="$"></CmpListingFinancialInfoDisplay>
+                <CmpListingFinancialInfoDisplay Label="FF&E" Value="@ListingDTO.FFandE?.ToString(Constants.SHORT_CURRENCY)" Enum="@ListingDTO.ShowFFE_Int" ValuePrecursor="$"></CmpListingFinancialInfoDisplay>
+                <CmpListingFinancialInfoDisplay Label="Year Established" Value="@ListingDTO.YearEstablished?.ToString()" Enum="@ListingDTO.ShowYearEstablished_Int" ToolTip="Indicates the year this company was established."></CmpListingFinancialInfoDisplay>
+                </tbody>
+            </table>
+        }
+    </div>
+    @if (ShowButtons == true)
+    {
+        <div class="text-center">
+            <button class="btn btn-sm btn-primary col-md-5"><i class="fas fa-print fa-fw"></i> Print</button>
+            <button class="btn btn-sm btn-primary col-md-5"><i class="fas fa-share-alt fa-fw"></i> Share</button>
+        </div>
+        <div class="text-center">
+            @if(ListingDTO.EntityOid == LoggedInUserOid) {
+                <button class="btn btn-sm btn-primary col-md-11" style=" margin-top: 4px; width: 245px;"@onclick="NavigateToListingSetup"><i class="fas fa-share-alt fa-fw" ></i>Edit</button>
+            }
+        </div>
+    }
+</div>

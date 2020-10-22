@@ -1,0 +1,188 @@
+﻿<div class="identity-card-content pt-1">
+    <hr class="mb-1 mt-0" style="border-top: 1px solid var(--primary-blue);">
+    <div class="container profile-sticky-header">
+        <div class="row m-auto">
+            <div class="col-md-2 pr-0 pl-1 broker-img-cate">
+                <img src="@((!string.IsNullOrEmpty(IdentityCardDTO.Avatar)) ? @IdentityCardDTO.Avatar : "/images/user.png")">
+                @if (IdentityCardDTO.IsElite == true) {
+                    <div style="position:absolute; bottom:  6px;">
+                        <div class="broker-name">
+                            <a class="global-green-button" style="padding: 3px; color: white;">Elite Broker</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-9 pl-0 my-auto">
+                <div class="broker-text-wrap-first">
+                    <h4 style="color:var(--primary-blue)" class="global-overflow-hidden bizhub-cursor-pointer m-0">@IdentityCardDTO.DisplayName</h4>
+                    @if (!string.IsNullOrEmpty(IdentityCardDTO.TagLine)) {
+                        <p class="first global-overflow-hidden bizhub-cursor-pointer m-0">@IdentityCardDTO.TagLine</p>
+                    }
+                    <p class="second global-overflow-hidden bizhub-cursor-pointer m-0">@IdentityCardDTO.CompanyName</p>
+                    <p class="second"> @IdentityCardDTO.CityStateFormatted</p>
+                </div>
+        </div>
+        <div class="col-md-1 p-0 text-right">
+            <button class="btn btn-sm btn-transparent" @onclick="BlazoredModal.Cancel">
+                <i class="fa fa-times text-secondary"></i>
+            </button>
+        </div>
+    </div>
+    <hr class="my-1" style="border-top: 1px solid var(--primary-blue);">
+</div>
+<div class="row m-auto">
+    <div class="col-lg-12 px-4">
+        <div class="text-wrapper-first">
+            <h5 class="m-auto bizhub-underline">About</h5>
+            <p class="contact-gray-text">@((MarkupString)IdentityCardDTO.AboutMe)</p>
+        </div>
+        <div class="row">
+            @if (IdentityCardDTO.Urls.Count > 0) {
+                <div class="about-wrapper col-md-3">
+                    <h5 class="m-auto bizhub-underline">Links</h5>
+                    @foreach (var kvUrl in IdentityCardDTO.Urls) {
+                        <a class="bizhub-underline bizhub-hyperlink" href="@kvUrl.Value" target="_blank">@kvUrl.Name</a>
+                    }
+                </div>
+            }
+            <div class="about-wrapper col-md-3">
+                <h5 class="m-auto  bizhub-underline">Contact Information</h5>
+                @if (IdentityCardDTO.Phone != null) {
+                    <p class="contact-gray-text"><span class="bizhub-underline ">Phone:</span> @IdentityCardDTO.Phone</p>
+                }
+                @if (IdentityCardDTO.Email != null) {
+                    <p class="contact-gray-text"><span class="bizhub-underline ">Email:</span> @IdentityCardDTO.Email</p>
+                    @*                     <h6 class="col-md-12 bizhub-align-center bizhub-underline pt-2 m-0" style="color: var(--primary-blue)">Email</h6> *@
+                    @*                     <p class="contact-gray-text">@IdentityCardDTO.Email</p> *@
+                }
+                @if (!String.IsNullOrEmpty(IdentityCardDTO.Address1)) {
+                    <p class="contact-gray-text"><span class="bizhub-underline ">Mailing Address:</span> @IdentityCardDTO.Address1 @IdentityCardDTO.City, @IdentityCardDTO.State @IdentityCardDTO.Zip</p>
+                    @*                     <h6 class="col-md-12 bizhub-align-center bizhub-underline pt-2 m-0" style="color: var(--primary-blue)">Mailing Address</h6> *@
+                    @*                     <p class="contact-gray-text">@IdentityCardDTO.Address1</p> *@
+                    @*                     <p class="contact-gray-text">@IdentityCardDTO.City, @IdentityCardDTO.State @IdentityCardDTO.Zip</p> *@
+                }
+            </div>
+            <div class="about-wrapper col-md-3">
+                @if (IdentityCardDTO.LicensedIn != null) {
+                    <h5 class="m-auto  bizhub-underline">Licensed In</h5>
+                    <p class="contact-gray-text">@IdentityCardDTO.LicensedIn</p>
+                }
+            </div>
+            <div class="about-wrapper col-md-3">
+                @if (IdentityCardDTO.AreasServed != null) {
+                    <h5 class="m-auto  bizhub-underline">Areas Served</h5>
+                    <p class="contact-gray-text">@IdentityCardDTO.AreasServed</p>
+                }
+            </div>
+        </div>
+
+        @* <div class="bizhub-align-center mt-4 mb-2"> *@
+        @*     <button class="btn btn-msg btn-sm py-1 px-3">Send Message</button> *@
+        @* </div> *@
+    </div>
+</div>
+<div class="modal-footer category-modal-footer py-2">
+    <button class="btn btn-sm btn-secondary col-md-2" @onclick="BlazoredModal.Cancel">Ok</button>
+    @if (!@IsLoggedInUser) {
+        <button class="btn btn-sm btn-secondary" @onclick="ShowContactBrokerModal">Request Contact</button>
+    }
+</div>
+
+
+
+</div>
+
+
+
+
+
+@* <div class="container p-0" style="background: white;"> *@
+@*     <div class="row"> *@
+@*         <div class="text-right col-md-12"> *@
+@*             <button class="btn btn-sm btn-transparent" style="color: gray;"> *@
+@*                 <i class="fa fa-times"></i> *@
+@*             </button> *@
+@*         </div> *@
+@*     </div> *@
+@*     <hr class="mb-1 mt-0" style="border-top: 1px solid var(--primary-blue);"> *@
+@*     <div class="row"> *@
+@*         <div class="row m-auto"> *@
+@*             <div class="col-md-4"> *@
+@*                 @if (IdentityInfo.Avatar != null) *@
+@*                 { *@
+@* $1$                             <img src="@IdentityInfo.Avatar" style="width:40%;"> #1# *@
+@*                     <img src="/images/user.png"> *@
+@*                 } *@
+@*                 else *@
+@*                 { *@
+@*                     <img src="/images/user.png"> *@
+@*                 } *@
+@*             </div> *@
+@*             <div class="col-md-8 my-auto"> *@
+@*                 <h2 class="san-serif-font" style="color: #25609a;">@IdentityInfo.FirstName @IdentityInfo.LastName</h2> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@*     <hr class="my-1" style="border-top: 1px solid var(--primary-blue);"> *@
+<!--start-->
+@*     <div class="row"> *@
+@*         <div class="col-lg-10 mx-auto p-0"> *@
+@* *@
+@*             <div class="text-wrapper-first"> *@
+@*                 @if (@IdentityInfo.Oid == @IdentityInfo.EntityOid_Master) { *@
+@*                     <h1 class="san-serif-font">@IdentityInfo.CompanyName</h1> *@
+@*                 } *@
+@*                 @if (@IdentityInfo.CompanyName == null) { *@
+@*                     <h1 class="san-serif-font">@IdentityInfo.FirstName @IdentityInfo.LastName</h1> *@
+@*                 } *@
+@* *@
+@*                 @if (@IdentityInfo.CompanyName != null) { *@
+@*                     <h1 class="san-serif-font">@IdentityInfo.FirstName @IdentityInfo.LastName</h1> *@
+@*                     <h6 class="m-auto bizhub-align-center" style="color: var(--primary-blue)"><span class="bizhub-underline">Company: </span>@IdentityInfo.CompanyName</h6> *@
+@*                 } *@
+@*                 <label class="san-serif-font col-md-12 bizhub-align-center m-0 contact-gray-text">@IdentityInfo.Title</label> *@
+@* *@
+@*             </div> *@
+@*             @if (IdentityInfo.Urls.Count > 0) *@
+@*             { *@
+@*                 <div class="about-wrapper"> *@
+@*                     <h6 class="m-auto bizhub-align-center bizhub-underline" style="color: var(--primary-blue)">Links</h6> *@
+@*                     @foreach (var kvUrl in IdentityInfo.Urls) { *@
+@*                         <a class="bizhub-align-center bizhub-underline bizhub-hyperlink" href="@kvUrl.Value" target="_blank">@kvUrl.Value</a> *@
+@*                     } *@
+@*                 </div> *@
+@*             } *@
+@*             <div class="about-wrapper"> *@
+@*                 <h6 class="m-auto bizhub-align-center bizhub-underline" style="color:var(--primary-blue)">Contact Information</h6> *@
+@*                 @if (IdentityInfo.Phone != null) *@
+@*                 { *@
+@*                     <p class="contact-gray-text"><span class="bizhub-underline ">Phone:</span> @IdentityInfo.Phone</p> *@
+@*                 } *@
+@*                 @if (IdentityInfo.Email != null) *@
+@*                 { *@
+@*                     <h6 class="col-md-12 bizhub-align-center bizhub-underline pt-2 m-0" style="color: var(--primary-blue)">Email</h6> *@
+@*                     <p class="contact-gray-text">@IdentityInfo.Email</p> *@
+@*                 } *@
+@*                 @if (!String.IsNullOrEmpty(IdentityInfo.Address1)) *@
+@*                 { *@
+@*                     <h6 class="col-md-12 bizhub-align-center bizhub-underline pt-2 m-0" style="color: var(--primary-blue)">Mailing Address</h6> *@
+@*                     <p class="contact-gray-text">@IdentityInfo.Address1</p> *@
+@*                     <p class="contact-gray-text">@IdentityInfo.City, @IdentityInfo.State @IdentityInfo.Zip</p> *@
+@*                 } *@
+@*             </div> *@
+@*             <div class="bizhub-align-center mt-4 mb-2"> *@
+@*                 <button class="btn btn-msg btn-sm py-1 px-3">Send Message</button> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+<!--end-->
+@* </div> *@
+
+
+
+
+
+
+@*     </div> *@
+@* </div> *@
+

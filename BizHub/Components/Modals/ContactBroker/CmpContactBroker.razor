@@ -1,0 +1,98 @@
+<div class="contact-card-content pt-1">
+    <hr class="mb-1 mt-0" style="border-top: 1px solid var(--primary-blue);">
+    <div class="row m-auto">
+        <div class="col-md-2 pr-0 pl-1 broker-img-cate">
+            <img src="@((!string.IsNullOrEmpty(@BrokerCardDTO.Avatar)) ? @BrokerCardDTO.Avatar : "/images/user.png")">
+            @if (BrokerCardDTO.IsElite == true) {
+                <div style="position:absolute; bottom:  6px;">
+                    <div class="broker-name">
+                        <a class="global-green-button" style="padding: 3px; color: white;">Elite Broker</a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-9 pl-0 my-auto">
+            <div class="broker-text-wrap-first">
+                <h4 id="displayName" class="global-overflow-hidden bizhub-cursor-pointer m-0">@BrokerCardDTO.DisplayName</h4>
+                <p id="tagLine" class="first global-overflow-hidden bizhub-cursor-pointer m-0">@BrokerCardDTO.TagLine</p>
+                <p class="second">@BrokerCardDTO.CompanyName</p>
+                <p class="second">@BrokerCardDTO.City, @BrokerCardDTO.State</p>
+            </div>
+        </div>
+        <div class="col-md-1 p-0 text-right">
+            <button class="btn btn-sm btn-transparent" @onclick="BlazoredModal.Cancel">
+                <i class="fa fa-times text-secondary"></i>
+            </button>
+        </div>
+    </div>
+    <hr class="my-1" style="border-top: 1px solid var(--primary-blue);">
+    @if (ListingDTO != null) {
+        <div class="row m-auto">
+            <div class="col-lg-12 px-1 text-center">
+                <div>
+                    <p class="my-1">Please contact me regarding:</p>
+                    <h5 class="global-overflow-hidden my-1" style="color: var(--primary-blue)">@ListingDTO.CompanyName</h5>
+                    <label class="mb-0">@ListingDTO.City, @ListingDTO.State</label>
+                </div>
+                <hr class="my-1" style="border-top: 1px solid var(--primary-blue);">
+            </div>
+        </div>
+    }
+    <div class="row mt-2">
+        <div class="col-lg-10 mx-auto">
+            <div class="contact-forms text-center">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-left"><b>Full Name</b></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="First Name" @bind-value="@Request.FirstName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-left"><b>Last Name</b></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Full Name" @bind-value="@Request.LastName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-left"><b>Your Phone</b></label>
+                    <div class="col-sm-9">
+                        <SfMaskedTextBox CssClass="valid-syncfusion-input" Mask="000-000-0000" @bind-value="@Request.Phone"></SfMaskedTextBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-left"><b>Your Email</b></label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" placeholder="Your Email" @bind-value="@Request.EntityEmail_From">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label text-left"><b>Preferred Method Of Contact</b></label>
+                    <div class="col-sm-6 pl-0">
+                        <FSRadioButtons Items="@CONACT_RADIO_BUTTONS" BoundValue="1" IsVerticalDisplay="false"></FSRadioButtons>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="seller-noti">
+                <p><b>Message to Seller</b></p>
+                <textarea class="form-control" rows="5" placeholder="Optional Message to seller" @bind="@Request.Message"></textarea>
+                <div class="notification-detail">
+                    <input type="checkbox" @onchange="@((e)=> onCheckSelected(e))" checked="@Request.Is401KReferral">
+                    <small>&nbsp; Please send me information on how I can use my IRA/401K to purchase a business.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer contact-modal-footer py-2 row mx-auto">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-sm btn-secondary" @onclick="BlazoredModal.Cancel">Cancel</button>
+            <button class="btn btn-sm btn-primary" @onclick="SendContact">Contact Broker</button>
+        </div>
+        <div class="col-md-12 text-center">
+            <small>By clicking the button, you agree to BizHub's <a style="color:var(--hyperlink-blue)">Terms of Use</a> and <a style="color:var(--hyperlink-blue)">Privacy Policy</a></small>
+        </div>
+    </div>
+</div>

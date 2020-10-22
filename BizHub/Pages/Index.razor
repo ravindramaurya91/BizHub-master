@@ -1,0 +1,37 @@
+﻿@page "/Foo"
+
+@inject IJSRuntime JS
+
+<h1>Convert HTML to PDF document in Blazor using Syncfusion .NET Core library</h1>
+
+<button class="btn btn-primary" @onclick="ConvertHTMLToPDF">Convert HTML to PDF</button>
+
+@code {
+
+    public void ConvertHTMLToPDF() {
+
+        //Initialize HTML to PDF converter
+        HtmlToPdfConverter htmlConverter = new HtmlToPdfConverter();
+        WebKitConverterSettings settings = new WebKitConverterSettings();
+        //Set WebKit path
+        settings.WebKitPath = Startup.ContentRootPath + @"\QtBinariesWindows\";
+        //Assign WebKit settings to HTML converter
+        htmlConverter.ConverterSettings = settings;
+        //Convert HTML to PDF.
+        PdfDocument document = htmlConverter.Convert("https://www.google.com");
+
+        using (Stream stream = new MemoryStream()) {
+            stream.Position = 0;
+            document.Save(stream);
+            document.Close(true);
+            JS.SaveAs("HTMLToPDF.pdf", ((MemoryStream)stream).ToArray());
+        }
+
+        //MemoryStream stream = new MemoryStream();
+        // stream.Position = 0;
+        //Save and close the document instance.
+        //document.Save(stream);
+        //document.Close(true);
+    }
+
+}

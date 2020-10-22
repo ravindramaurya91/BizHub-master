@@ -1,0 +1,34 @@
+﻿<div class="container-fluid p-0">
+    <section class="p-3 p-lg-5 d-flex flex-column listing-management">
+        <div class="my-auto">
+            <div id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach(ListingDTO_Short oListing in Listings) {
+                    <div class="card">
+                        <div class="card-header" role="tab">
+                            <div class="mb-0 row">
+                                <div class="col-12 no-padding accordion-head">
+                                    <div class="title">
+                                        @if (!oListing.IsExpanded) {
+                                            <i class="fas fa-caret-right" @onclick="@(() => ToggleExpanded(oListing))"></i>
+                                        } else {
+                                            <i class="fas fa-caret-down" @onclick="@(() => ToggleExpanded(oListing))"></i>
+                                        }
+                                        <h3>@oListing.CompanyName</h3>
+                                        <span>@oListing.BuyerCount</span>
+                                    </div>
+                                <button type="button" @onclick="OpenAddBuyerModal" class="btn btn-light border border-dark float-right py-0">Add Buyer</button>
+                            </div>
+                        </div>
+                    </div>
+                    @if (oListing.IsExpanded) {
+                    <CmpListingManagementList></CmpListingManagementList>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+
+
+
+</div>

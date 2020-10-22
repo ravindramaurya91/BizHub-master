@@ -1,0 +1,63 @@
+﻿
+<div class="col-lg-5 col-sm-12">
+    <div class="contact-user-info">
+        @* <div> *@
+        @* <h3>Contact Information</h3> *@
+        @* </div> *@
+        <h4 class="pb-4" style="color: #4678aa; margin-bottom: .3rem;">Contact Information</h4>
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><b>Screen Name</b></label>
+                <div class="col-sm-9">
+                    <input type="text" class="global-box-height form-control" placeholder="" @bind-value="UserProfileDTO.DisplayName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><b>First Name</b></label>
+                <div class="col-sm-9">
+                    <input type="text" class="global-box-height form-control" placeholder="" @bind-value="UserProfileDTO.FirstName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><b>Last Name</b></label>
+                <div class="col-sm-9">
+                    <input type="text" class="global-box-height form-control" placeholder="" @bind-value="UserProfileDTO.LastName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><b>Country</b></label>
+                <div class="col-sm-9">
+                    <select class="global-box-height form-control" @bind="UserProfileDTO.Country">
+                        <option value="default">select</option>
+                        <option value="USA">USA</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><b>Zip/Postal Code</b></label>
+                <div class="col-sm-9">
+                    <input type="text" class="global-box-height form-control" placeholder="" @bind-value="UserProfileDTO.Zip">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><b>Email</b></label>
+                <div class="col-sm-9">
+                    <input type="email" class="global-box-height form-control" placeholder="" @bind-value="UserProfileDTO.Email">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label"><b>Phone Number</b></label>
+                <div class="col-sm-9">
+                    <SfMaskedTextBox CssClass="valid-syncfusion-input" Mask="000-000-0000" @bind-value="UserProfileDTO.Phone"></SfMaskedTextBox>
+                    @* <input type="text" class="global-box-height form-control" placeholder="" @bind-value="UserProfileDTO.Phone"> *@
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public IdentityCardDTO UserProfileDTO { get; set; }
+
+}

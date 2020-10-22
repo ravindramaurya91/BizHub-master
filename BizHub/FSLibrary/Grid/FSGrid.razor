@@ -1,0 +1,125 @@
+﻿@inject Microsoft.AspNetCore.Components.NavigationManager UriHelper
+
+<span> Test </span>
+<div class="col-lg-12 control-section">
+    <div class="content-wrapper">
+        <div class="row">
+            <SfSpinner @ref="SpinnerObj" Target="#container"></SfSpinner>
+            <div class="e-dddata">
+                <SfDropDownList TItem="DDData" TValue="string" PopupHeight="230px" Width="240px" Index=0 DataSource="@DLData">
+                    <DropDownListEvents TValue="string" ValueChange="Changedata"></DropDownListEvents>
+                    <DropDownListFieldSettings Text="Text" Value="Value"></DropDownListFieldSettings>
+                </SfDropDownList>
+            </div>
+            <div id="container">
+                <SfGrid DataSource="@GridData" AllowPaging="true" AllowSorting="true" AllowGrouping="true" AllowFiltering="true">
+                    <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu"></GridFilterSettings>
+                    <GridPageSettings PageSize="15"></GridPageSettings>
+                    <GridSelectionSettings CheckboxOnly="true" PersistSelection="true" Type="SelectionType.Multiple"></GridSelectionSettings>
+                    <GridColumns>
+                        <GridColumn Type="ColumnType.CheckBox" AllowFiltering="false" AllowSorting="false" Width="60"></GridColumn>
+                        <GridColumn Field="@nameof(OverviewData.Id)" HeaderText="Employee ID" IsPrimaryKey="true" Width="130"></GridColumn>
+                        <GridColumn Field="@nameof(OverviewData.Name)" HeaderText="Employee Name" Width="200" ClipMode="ClipMode.EllipsisWithTooltip">
+                            <Template>
+                                @{
+                                var employee = (context as OverviewData);
+                                <div>
+                                    <div class="empimg">
+                                        @if (employee.Designation == "Manager") {
+                                            <span class="e-userimg sf-icon-Male"></span>
+                                        } else {
+                                            <span class="e-userimg sf-icon-FeMale"></span>
+                                        }
+                                    </div>
+                                    <span id="Emptext">@employee.ReportingPerson</span>
+                                </div>
+                                }
+                            </Template>
+                        </GridColumn>
+                        @* <GridColumn Field=@nameof(OverviewData.Designation) HeaderText="Designation" Width="170" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.CheckBox })" ClipMode="ClipMode.EllipsisWithTooltip"></GridColumn>
+        <GridColumn Field=@nameof(OverviewData.Mail) HeaderText="Mail" Width="230" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.Menu })"></GridColumn>
+        <GridColumn Field=@nameof(OverviewData.Location) HeaderText="Location" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.CheckBox })" Width="140">
+            <Template>
+                @{
+                    var location = (context as OverviewData);
+                    <div class="loc">
+                        <img src="@UriHelper.ToAbsoluteUri($"images/Grid/Map.png")" class="e-image" alt=@location.Location />
+                        <span id="locationtext">@location.Location</span>
+                    </div>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Field=@nameof(OverviewData.Status) HeaderText="Status" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.CheckBox })" Width="150">
+            <Template>
+                @{
+                    var employee = (context as OverviewData);
+                    if (employee.Status == "Active") {
+                        <div class="statustemp e-activecolor">
+                            <span class="statustxt e-activecolor">@employee.Status</span>
+                        </div>
+                    } else {
+                        <div class="statustemp e-inactivecolor">
+                            <span class="statustxt e-inactivecolor">@employee.Status</span>
+                        </div>
+                    }
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Field=@nameof(OverviewData.Trustworthiness) HeaderText="Trustworthiness" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.CheckBox })" Width="160">
+            <Template>
+                @{
+                    var trust = (context as OverviewData);
+                    <div class="trust">
+                        <img style="width: 31px; height: 24px" src="@UriHelper.ToAbsoluteUri($"images/Grid/{trust.Trustworthiness}.png")" />
+                        <span id="Trusttext">@trust.Trustworthiness</span>
+                    </div>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Field=@nameof(OverviewData.Rating) HeaderText="Rating" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.CheckBox })" AllowFiltering="false" AllowSorting="false" Width="180">
+            <Template>
+                @{
+                    var rate = (context as OverviewData);
+                    <div class="rate">
+                        <div class="rating">
+                            @for (var i = 0; i < 5; i++) {
+                                if (i < rate.Rating) {
+                                    <span class="star checked"></span>
+                                } else {
+                                    <span class="star"></span>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Field=@nameof(OverviewData.Software) HeaderText="Software Proficiency" AllowFiltering="false" AllowSorting="false" Width="180">
+            <Template>
+                @{
+                    var employee = (context as OverviewData);
+                    @if (employee.Status == "Inactive") {
+                        <div id="myProgress" class="pbar">
+                            <div id="myBar" style="width:@employee.Software%" class="bar progressdisable">
+                                <div id="label" class="barlabel">@employee.Software%</div>
+                            </div>
+                        </div>
+                    }
+                    @if (employee.Status == "Active") {
+                        <div id="myProgress" class="pbar">
+                            <div id="myBar" style="width:@employee.Software%" class="bar">
+                                <div id="label" class="barlabel">@employee.Software%</div>
+                            </div>
+                        </div>
+                    }
+                }
+            </Template>
+        </GridColumn>
+                        <GridColumn Field=CurrentSalary HeaderText="Current Salary" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.Menu })" Format="C2" TextAlign="TextAlign.Right" Width="160"></GridColumn>
+                        <GridColumn Field=Address HeaderText="Address" FilterSettings="@(new FilterSettings { Type = Syncfusion.Blazor.Grids.FilterType.Menu })" Width="240" ClipMode="ClipMode.EllipsisWithTooltip"></GridColumn>*@
+                    </GridColumns>
+</SfGrid>
+            </div>
+        </div>
+    </div>
+</div>

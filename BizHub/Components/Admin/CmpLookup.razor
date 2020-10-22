@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="col-md-2 px-0 border">
+        <div class="card">
+            <div class="card-header">
+                Lookup  Name
+            </div>
+            <div class="card-body px-0">
+                <ul class="p-0 m-0 list-unstyled">
+                    @foreach(LookupDefinition oDef in Definitions) {
+                        <li class="px-5"><a @onclick="@(()=>DefinitionClick(oDef))">@oDef.LookupName</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 px-0 border">
+        <div class="card">
+            <div class="card-header">
+                Values
+            </div>
+            <div class="card-body px-0">
+                <ul class="p-0 m-0 list-unstyled">
+                    @foreach(Lookup oLookup in Lookups) {
+                        <li class="px-5"><a @onclick="@(()=>LookupClick(oLookup))">@oLookup.Value</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <CmpLookupValue_Edit Controller="Controller"></CmpLookupValue_Edit>
+</div>
+

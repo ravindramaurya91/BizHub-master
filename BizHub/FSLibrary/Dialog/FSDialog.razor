@@ -1,0 +1,18 @@
+﻿@*<SfDialog @ref="SFD"  Width="@Options.Width" Target="#FSDialog" ShowCloseIcon="false" @bind-Visible="@BindVisible" MinHeight="90">
+    <DialogTemplates>
+        <Content>
+            <div class="col-md-12 text-center mb-3">
+                <i class="fas dialog-icon-styles @Options.IconCss"></i>
+                <div class="col-md-12 dialog-header-styles">@((MarkupString) Options.Header)</div>
+            </div>
+            <div class="col-md-12 text-center" style="font-size: 16px;">
+                @((MarkupString) Options.Content)
+            </div>
+        </Content>
+    </DialogTemplates>
+    <DialogButtons>
+        @foreach (FSModalButton oButton in Options.Buttons) {
+            <DialogButton Content="@oButton.Name" IsPrimary="@oButton.IsPrimary" CssClass="@oButton.CSS" OnClick="@(() => ButtonClick(oButton.Name))"/>
+        }
+    </DialogButtons>
+</SfDialog>*@

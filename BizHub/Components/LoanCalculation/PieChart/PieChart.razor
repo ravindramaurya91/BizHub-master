@@ -1,0 +1,18 @@
+﻿<div class="row">
+    <div class="col-lg-8 control-section">
+        <div class="control-section">
+            <SfAccumulationChart @ref="@ChartRef" Title="" EnableSmartLabels="true" UseGroupingSeparator="true">
+                <AccumulationChartLegendSettings Visible="false"/>
+                <AccumulationChartEvents TooltipRender="TooltipRender" />
+                <AccumulationChartTooltipSettings Enable="true" />
+                <AccumulationChartSeriesCollection>
+                    <AccumulationChartSeries Name="Total" DataSource="@ChartData" XName="Name" YName="Total" Explode="true"
+                                             Radius="@OuterRadius" StartAngle="@StartAngle" EndAngle="@EndAngle"
+                                             PointColorMapping="Color" InnerRadius="0%" ExplodeIndex="@ExplodeIndex" ExplodeOffset="@ExplodeRadius">
+                        <AccumulationDataLabelSettings Visible="true" Name="Percentage"/>
+                    </AccumulationChartSeries>
+                </AccumulationChartSeriesCollection>
+            </SfAccumulationChart>
+        </div>
+    </div>
+</div>

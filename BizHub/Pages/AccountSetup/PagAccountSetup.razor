@@ -1,0 +1,98 @@
+﻿@page "/Account-Setup"
+@page "/Account-Setup/{CurrentMenu:long}"
+
+<div class="container-fluid">
+    <div class="row">
+        <SfSplitter Height="100%" Width="100%">
+            <SplitterPanes>
+                <SplitterPane Size="300px">
+                    <ContentTemplate>
+                        <div class="col-md-12 p-0">
+                            <CmpAccountMenu ActiveMenu="CurrentMenu" MenuItemSelected="SelectMenuItem" />
+                        </div>
+                    </ContentTemplate>
+                </SplitterPane>
+                <SplitterPane>
+                    <ContentTemplate>
+                        <div class="col-md-12 pr-0">
+                            @if (CurrentMenu == 1)
+                            {
+                                <CmpUserDashboard />
+                            }
+                            @if (CurrentMenu == 2)
+                            {
+                                <CmpUserProfile />
+                            }
+                            @if (CurrentMenu == 3)
+                            {
+                                <CmpMyListings />
+                            }
+                            @if (CurrentMenu == 4)
+                            {
+                                <CmpUserPayments />
+                            }
+                            @if (CurrentMenu == 5)
+                            {
+                                <CmpOrganizations PageController="Controller" Controller="OrganizationController" />
+                            }
+                            @if (CurrentMenu == 6)
+                            {
+                                <CmpChatMessageMenu Controller="Controller"></CmpChatMessageMenu>
+                             
+                                // NavController.NavigateTo("Message-Center");
+                            }
+                            @if (CurrentMenu == 7)
+                            {
+                            }
+                            @if (CurrentMenu == 8)
+                            {
+                            }
+                        </div>
+                    </ContentTemplate>
+                </SplitterPane>
+            </SplitterPanes>
+        </SfSplitter>
+
+
+
+
+        @*         <div class="col-md-2"> *@
+        @* NavController.NavigateTo("Message-Center"); *@
+        @*             <CmpAccountMenu ActiveMenu="CurrentMenu" MenuItemSelected="SelectMenuItem"/> *@
+        @*         </div> *@
+        @*         <div class="col-md-10 pr-4"> *@
+        @*             @if (CurrentMenu == 1) *@
+        @*             { *@
+        @*                 <CmpUserDashboard/> *@
+        @*             } *@
+        @*             @if (CurrentMenu == 2) *@
+        @*             { *@
+        @*                 <CmpUserProfile/> *@
+        @*             } *@
+        @*             @if (CurrentMenu == 3) *@
+        @*             { *@
+        @*                 <CmpMyListings/> *@
+        @*             } *@
+        @*             @if (CurrentMenu == 4) *@
+        @*             { *@
+        @*                 <CmpUserPayments/> *@
+        @*             } *@
+        @*             @if (CurrentMenu == 5) *@
+        @*             { *@
+        @*                 <CmpOrganizations PageController="Controller" Controller="OrganizationController"/> *@
+        @*             } *@
+        @*             @if (CurrentMenu == 6) *@
+        @*             { *@
+        @*                 <BizHub.Components.ListingManagement.CmpListingManagement/> *@
+        @*             } *@
+        @*             @if (CurrentMenu == 7) *@
+        @*             { *@
+        @*             } *@
+        @*             @if (CurrentMenu == 8) *@
+        @*             { *@
+        @*             } *@
+        @*         </div> *@
+    </div>
+</div>
+
+

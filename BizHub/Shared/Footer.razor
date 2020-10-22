@@ -1,0 +1,27 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="row bizhub-footer">
+    <div class="col-md-5 bizhub-align-center mt-4">
+        <a class="col-md-4 mr-5 text-blue" href="#">About</a>
+        <a class="col-md-4 mr-5 text-blue" href="#">Terms Of Use</a>
+        <a class="col-md-4 mr-5 text-blue" href="#">Privacy Statement</a>
+    </div>
+    <div class="col-md-2 bizhub-align-center py-3" @onclick="NavigateHome">
+        <img src="/images/horizontalLogo.png" class="mt-2" style="width:50%"/>
+    </div>
+    <div class="col-md-5 bizhub-align-center mt-4">
+        <a class="col-md-4 mr-5 text-blue" href="#">Careers</a>
+                <a class="col-md-4 mr-5 text-blue" href="#">Contact Us</a>
+    </div>
+    
+    
+    
+</div>
+
+@code {
+    
+    public void NavigateHome() {
+        NavigationManager.NavigateTo("/");
+    }
+
+}

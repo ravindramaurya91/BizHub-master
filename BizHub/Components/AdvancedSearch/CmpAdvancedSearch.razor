@@ -1,0 +1,190 @@
+﻿<div class="container p-0" style="position: sticky; top: 60px;">
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="container-fluid">
+                @if (IsShowSortBy == true) {
+                    <div class="row py-2">
+                        <div class="col-md-3 mt-1">
+                            <label>Sort By: </label>
+                        </div>
+                        <div class="col-md-9">
+                            <FSSelect Items="@SORT_BY_OPTIONS" BoundValue="@CurrentSortBy" OnSelect="@OnSortByChanged"></FSSelect>
+                        </div>
+                    </div>
+                }
+                @if (IsShowRecipientTitle == true) {
+                    <div class="row py-2">
+                        <div class="col-md-3 mt-1">
+                            <label>Criteria Name: </label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" @bind-value="@SearchCriteriaDisplay.Name" class="form-control global-box-height" placeholder="Criteria Name">
+                        </div>
+                    </div>
+                }
+                <div class="row pt-2" style="background: #eaeaea;">
+                    <div class="col-md-12 text-center">
+                        @if (IsShowRecipientTitle == true) {
+                            <h5 style=" color: var(--primary-blue);">Recipient Criteria</h5>
+                        } else {
+                            <h5 style=" color: var(--primary-blue);">Search Criteria</h5>
+                        }
+                    </div>
+                </div>
+                @if (string.IsNullOrEmpty(SearchCriteriaDisplay.ZipCode)) {
+                    <div class="row text-right">
+                        <span class="col-md-12 text-danger">A Zip Code is required for all searches</span>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(SearchCriteriaDisplay.ZipCode) && !IsZipCodeValid) {
+                    <div class="row text-right">
+                        <span class="col-md-12  text-danger">Invalid Zip Code</span>
+                    </div>
+                }
+                <div class="row m-auto pt-3 pb-0">
+                    <div class="col-md-2 px-0 text-center">
+                        <label class="global-blue-text">Zip:</label>
+                    </div>
+                    <input type="text"  @bind="@SearchCriteriaDisplay.ZipCode" @bind:event="oninput"
+                           class="@(((string.IsNullOrEmpty(SearchCriteriaDisplay.ZipCode)) || (!IsZipCodeValid)) ? "invalid-text-error" : "") col-md-3 form-control global-box-height" placeholder="Zip Code">
+                    <div class="col-md-4 px-0 text-center">
+                        <label class="global-blue-text">Search Radius:</label>
+                    </div>
+                    <div class="col-md-3 p-0">
+                        <FSSelect Items="@ZipCodes" BoundValue="@SearchCriteriaDisplay.SearchRadius.ToString()" OnSelect="@OnSearchRadiusChanged"></FSSelect>
+                    </div>
+                </div>
+                <div class="row m-auto pt-2">
+                    <div class="col-md-5 pl-0 global-blue-text">Business Category</div>
+                    <input  type="text" class="col-md-6 pr-2 form-control global-box-height" placeholder="@BusinessCategories.Count selected">
+                    <button @onclick="OpenBusinessCategoriesModal" class="btn btn-sm btn-outline-primary col-md-1" style="height: 30px;">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </button>
+                </div>
+
+                <hr style="border: 1px solid #e0e7f0">
+                <!--PRICING START-->
+
+                <div class="row m-auto pb-2">
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">Listing Price</label>
+                    </div>
+                    <label class="col-md-2 pr-0">From</label>
+                    <input  type="text" class=" col-md-3 form-control global-box-height" placeholder="Min" @bind="@ListingPrice_From" @bind:event="oninput">
+                    <div class="col-md-1 p-0 text-center">
+                        <label>To</label>
+                    </div>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Max" @bind="@ListingPrice_To" @bind:event="oninput">
+                </div>
+                <div class="row m-auto pb-2">
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">Revenue</label>
+                    </div>
+                    <label class="col-md-2 pr-0">From</label>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Min" @bind="@GrossRevenue_From" @bind:event="oninput">
+                    <div class="col-md-1 p-0 text-center">
+                        <label>To</label>
+                    </div>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Max" @bind="@GrossRevenue_To" @bind:event="oninput">
+                </div>
+                <div class="row m-auto pb-2">
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">Cash Flow</label>
+                    </div>
+                    <label class="col-md-2 pr-0">From</label>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Min" @bind="@CashFlow_From" @bind:event="oninput">
+                    <div class="col-md-1 p-0 text-center">
+                        <label>To</label>
+                    </div>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Max" @bind="@CashFlow_To" @bind:event="oninput">
+                </div>
+                <div class="row m-auto pb-2">
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">EBITDA</label>
+                    </div>
+                    <label class="col-md-2 pr-0">From</label>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Min" @bind="@EBITDA_From" @bind:event="oninput">
+                    <div class="col-md-1 p-0 text-center">
+                        <label>To</label>
+                    </div>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Max" @bind="@EBITDA_To" @bind:event="oninput">
+                </div>
+                <div class="row m-auto pb-2">
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">Down Payment</label>
+                    </div>
+                    <label class="col-md-2 pr-0">From</label>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Min" @bind="@MinimumDownPayment_From" @bind:event="oninput">
+                    <div class="col-md-1 p-0 text-center">
+                        <label>To</label>
+                    </div>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Max" @bind="@MinimumDownPayment_To" @bind:event="oninput">
+                </div>
+                <div class="row m-auto pb-2">
+                    <!--TODO: add and bind to square footage-->
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">Square Footage</label>
+                    </div>
+                    <label class="col-md-2 pr-0">From</label>
+                    <input  class="col-md-3 form-control" placeholder="Min" style="width: 100%;" @bind="@TotalSqFt_From" @bind:event="oninput">
+                    <div class="col-md-1 p-0 text-center">
+                        <label>To</label>
+                    </div>
+                    <input  class="col-md-3 form-control" placeholder="Max" style="width: 100%;" @bind="@TotalSqFt_To" @bind:event="oninput">
+                </div>
+                <div class="row m-auto">
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">Employee Count</label>
+                    </div>
+                    <label class="col-md-2 pr-0">From</label>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Min" @bind="@EmployeeCount_From" @bind:event="oninput">
+                    <div class="col-md-1 p-0 text-center">
+                        <label>To</label>
+                    </div>
+                    <input  type="text" class="col-md-3 form-control global-box-height" placeholder="Max" @bind="@EmployeeCount_To" @bind:event="oninput">
+                </div>
+                <!--PRICING END-->
+                <hr class="mt-1" style="border: 1px solid #e0e7f0">
+                <!--CHECKBOXES START-->
+                <div class="row m-auto">
+                    <div class="col-md-3 px-0">
+                        <label class="global-blue-text">Attributes</label>
+                    </div>
+                </div>
+                <div class="row m-auto">
+                    <div class="@(IsAlignAttributes == true ? "col-md-5 offset-1 text-left" : "col-md-6") px-0">
+                        <input  type="checkbox" name="check" @bind="@SearchCriteriaDisplay.IsSbaPreApproved">
+                        <label class="advanced-search-checkbox-font">SBA Pre-Approved</label>
+                        <br>
+                        <input  type="checkbox" name="check" @bind="@SearchCriteriaDisplay.IsSellerFinanace">
+                        <label class="advanced-search-checkbox-font">Seller Finance Available</label>
+                        <br>
+                        <input  type="checkbox" name="check" @bind="@SearchCriteriaDisplay.IsAbsenteeOwner">
+                        <label class="advanced-search-checkbox-font">Absentee Owner</label>
+                    </div>
+                    <div class="@(IsAlignAttributes == true ? "text-left" : "") col-md-6 px-0">
+                        <input  type="checkbox" name="check" @bind="@SearchCriteriaDisplay.IsFranchise">
+                        <label class="advanced-search-checkbox-font">Is Franchise</label><br>
+                        <input  type="checkbox" name="check" @bind="@SearchCriteriaDisplay.IsRelocatable">
+                        <label class="advanced-search-checkbox-font">Relocatable</label><br>
+                        <!--TODO: create and bind attribute for is real estate available-->
+                        <input  type="checkbox" name="check" @bind="@SearchCriteriaDisplay.IsRealEstateAvailable">
+                        <label class="advanced-search-checkbox-font">Is Real Estate Available </label>
+                    </div>
+                </div>
+                <!--CHECKBOXES END-->
+                @if (IsShowFooterButtons == true) {
+                    <div class="row advanced-search-sidebar py-2">
+                        <div class="col-md-6">
+                            <button class="btn btn-sm btn-outline-secondary mt-2" @onclick="InitiateNewSearch">Clear Search</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button @onclick="RunSearch" disabled="@IsRunSearchButtonDisabled" class="btn btn-sm btn-primary mt-2">Run Search</button>
+                        </div>
+                        @* <button @onclick="SaveSearch" class="btn btn-sm btn-outline-primary col-md-3 px-0 offset-1 mr-2 mt-2">Save Search</button> *@
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿@page "/ListingDetail/{Oid:long}"
+ 
+<CmpBrokerCard BrokerDTO="BrokerCard"></CmpBrokerCard>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 mx-auto">
+            <div class="row">
+                <div class="col-md-8">
+                    <CmpListingDetail ListingDTO="ListingDTO"></CmpListingDetail>
+                </div>
+                <div class="col-md-4">
+                    <CmpListingSidebar ListingDTO="ListingDTO" ShowButtons="true"></CmpListingSidebar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<CmpSimilarBusinessListing />

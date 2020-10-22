@@ -1,0 +1,86 @@
+﻿<div class="profie-blogs">
+    <div class="tab-content" id="nav-tabContent">
+        <div id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 profile-section">
+                        <div class="">
+                            <div class="search-icons">
+                                <p>
+                                    <i class="fas fa-search fa-fw"></i>
+                                    <span @onclick="@(() => NavigateToNewPage("Saved-Search"))" class="head text-underline bizhub-cursor-pointer">Saved Searches</span>
+                                    <span class="head" style="font-size: 20px;"> (@AccountDTO.SavedSearchCriteria.Count) </span>
+                                    @* <a @onclick="NavigateToSavedSearches"> - @AccountDTO.TotalSearchDetailNewListings View Searches</a> *@
+                                </p>
+                                <p class="search-text">Quickly find the businesses with the filtered searches you previously saved</p>
+                            </div>
+
+                            <div class="search-icons padd-30">
+                                <p>
+                                    <i class="far fa-heart"></i>
+                                    <span @onclick="@(() => NavigateToNewPage("Favorited-Listings"))" class="head text-underline bizhub-cursor-pointer">Favorited Listings </span>
+                                    <span class="head" style="font-size: 20px;"> (@AccountDTO.FavoritedListings.Count) </span>
+                                    @* <a> - View Listings</a> *@
+                                </p>
+                                <p class="Saved-text">Find the listings that you have Favorited here</p>
+                            </div>
+                            <div class="Mylist">
+                                <p>
+                                    <i class="fas fa-home"></i>
+                                    <span @onclick="@(() => NavigateToNewPage("Listing-Management"))" class="head text-underline bizhub-cursor-pointer"> My Listings</span>
+                                    <span class="head" style="font-size: 20px;"> (@ListingViewStatsCardDTOs.Count) </span>
+                                    @*                                     <span class="text-first">- @_myListingsController.ListingViewStatsCardDTOs.Count *@
+                                    @*                                         @if (@_myListingsController.ListingViewStatsCardDTOs.Count == 1) *@
+                                    @*                                         { *@
+                                    @*                                             <span>Listing</span> *@
+                                    @*                                         } *@
+                                    @*                                         @if (@_myListingsController.ListingViewStatsCardDTOs.Count > 1) *@
+                                    @*                                         { *@
+                                    @*                                             <span>Listings</span> *@
+                                    @*                                         } *@
+                                    @*                                     </span> *@
+                                </p>
+                                <button @onclick="@(() => NavigateToNewPage("Listing-Setup"))" class="btn btn-sm btn-outline-primary py-0 ml-5" style=" max-height: 22px; font-size: 12px;">
+                                    Create New Listing
+                                </button>
+                            </div>
+                            <div class="mylist-table">
+                                <table class="table">
+                                    <tr>
+                                        <th>Listing Name</th>
+                                        <th>Views</th>
+                                        <th>Clicks</th>
+                                        <th>Favorited</th>
+                                    </tr>
+                                    <tbody>
+                                        @foreach (ListingViewStatsCardDTO stat in ListingViewStatsCardDTOs) {
+                                            <tr>
+                                                <td @onclick="@(() => NavigateToNewPage("ListingDetail/" + stat.ListingOid))" class="bizhub-cursor-pointer">@stat.CompanyName</td>
+                                                <td>@stat.Views<sup> +@stat.ViewsIncrease</sup></td>
+                                                <td>@stat.Clicks<sup>  +@stat.ClicksIncrease</sup></td>
+                                                <td>@stat.Favorited<sup> +@stat.FavoritedIncrease</sup></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="manage-notification">
+                                <p><i class="far fa-bell"></i><span class="text-manage">Manage Notification</span></p>
+                                <p class="noti">Notify Me When:</p>
+                                <div class="checkbox-details">
+                                    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                    <label for="vehicle1"> A Saved Listing has a price change</label><br>
+                                    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                    <label for="vehicle2"> A Saved Listing has a price change in detail</label><br>
+                                    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                    <label for="vehicle3"> A Saved Search has new result</label><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

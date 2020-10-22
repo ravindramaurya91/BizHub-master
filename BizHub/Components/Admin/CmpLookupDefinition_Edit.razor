@@ -1,0 +1,45 @@
+﻿@if (ActiveLookupDefinition != null) {
+    <div class="col-md-9 px-0 border">
+        <div class="lookup-form-wrp p-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <label class="col-md-5 text-right font-weight-bold">Lookup Name</label>
+                        <input class="col-md-7 mb-4" @bind-value="@ActiveLookupDefinition.LookupName" type="text">
+                    </div>
+                    <div class="row">
+                        <label class="col-md-5 text-right font-weight-bold">UDF 1</label>
+                        <input class="col-md-7 mb-2" @bind-value="@ActiveLookupDefinition.UDF1" type="text">
+                    </div>
+                    <div class="row">
+                        <label class="col-md-5 text-right font-weight-bold">UDF 2</label>
+                        <input class="col-md-7 mb-2" @bind-value="@ActiveLookupDefinition.UDF2" type="text">
+                    </div>
+                    <div class="row">
+                        <label class="col-md-5 text-right font-weight-bold">UDF 3</label>
+                        <input class="col-md-7 mb-2" @bind-value="@ActiveLookupDefinition.UDF3" type="text">
+                    </div>
+                    <div class="row">
+                        <label class="col-md-5 text-right font-weight-bold">UDF 4</label>
+                        <input class="col-md-7 mb-4" @bind-value="@ActiveLookupDefinition.UDF4" type="text">
+                    </div>
+                </div>
+                <div class="col-md-6 pl-5">
+                    <div class="row">
+                        <input type="checkbox" class="col-md-1 mt-2">
+                        <label class="col-md-11 font-weight-bold">Is Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <label class="col-md-2 text-right font-weight-bold">Definition</label>
+                        <textarea class="col-md-10" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,45 @@
+﻿@page "/Loan-Calculator"
+@page "/Loan-Calculator/{CurrentMenu:long}"
+
+<div class="container-fluid">
+    <div class="row">
+        <SfSplitter Height="100%" Width="100%">
+            <SplitterPanes>
+                <SplitterPane Size="300px">
+                    <ContentTemplate>
+                        <div class="col-md-12 p-0">
+                            <CmpLoanMenu ActiveMenu="CurrentMenu" MenuItemSelected="SelectMenuItem" Controller="Controller"/>
+                        </div>
+                    </ContentTemplate>
+                </SplitterPane>
+                <SplitterPane>
+                    <ContentTemplate>
+                        <div class="col-md-12 pr-0">
+                           @if (CurrentMenu == 1)
+                               {<CmpLoanCalc_Payment Controller="Controller"/>}
+                               @if (CurrentMenu == 2)
+                               {<CmpLoanCalc_EarlyPayoff Controller="Controller"/>}
+                               @if (CurrentMenu == 3)
+                               {<CmpLoanCalc_Tenure Controller="Controller"/>}
+                               @if (CurrentMenu == 4)
+                               {<CmpLoanCalc_Research Controller="Controller"/>}
+                        </div>
+                    </ContentTemplate>
+                </SplitterPane>
+            </SplitterPanes>
+        </SfSplitter>
+@*         <div class="col-md-2"> *@
+@*             <CmpLoanMenu ActiveMenu="CurrentMenu" MenuItemSelected="SelectMenuItem" Controller="Controller"/> *@
+@*         </div> *@
+@*         <div class="col-md-10 pr-4"> *@
+@*             @if (CurrentMenu == 1) *@
+@*             {<CmpLoanCalc_Payment Controller="Controller"/>} *@
+@*             @if (CurrentMenu == 2) *@
+@*             {<CmpLoanCalc_EarlyPayoff Controller="Controller"/>} *@
+@*             @if (CurrentMenu == 3) *@
+@*             {<CmpLoanCalc_Tenure Controller="Controller"/>} *@
+@*             @if (CurrentMenu == 4) *@
+@*             {<CmpLoanCalc_Research Controller="Controller"/>} *@
+@*         </div> *@
+    </div>
+</div>

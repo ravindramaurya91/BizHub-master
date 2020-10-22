@@ -1,0 +1,37 @@
+﻿@page "/Email-Center"
+@page "/Email-Center/{CurrentMenu:long}"
+
+<div class="container-fluid">
+    <div class="row">
+        <AuthorizeView>
+            <Authorized>
+                <SfSplitter Height="100%" Width="100%">
+                    <SplitterPanes>
+                        <SplitterPane Size="300px">
+                            <ContentTemplate>
+                                <div class="col-md-12 p-0">
+                                    <CmpEmailCenterMenu ActiveMenu="CurrentMenu" MenuItemSelected="SelectMenuItem" Controller="Controller"/>
+                                </div>
+                            </ContentTemplate>
+                        </SplitterPane>
+                        <SplitterPane>
+                            <ContentTemplate>
+                                <div class="col-md-12 pr-0">
+                                    @if (CurrentMenu == 1)
+                                    {<CmpEmailTemplatesGrid Controller="Controller"/>}
+                                    @if (CurrentMenu == 2)
+                                    {<CmpCampaignsGrid Controller="Controller"/>}
+                                    @if (CurrentMenu == 3)
+                                    {<CmpRecipientListGrid Controller="Controller"/>}
+                                </div>
+                            </ContentTemplate>
+                        </SplitterPane>
+                    </SplitterPanes>
+                </SfSplitter>
+            </Authorized>
+            <NotAuthorized>
+                You must log in to see this content
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>

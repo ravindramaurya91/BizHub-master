@@ -1,0 +1,184 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BizHub
+{
+    public class TODOList
+    {
+
+    Home Page(/):
+		--Auto set to 25 -Steven --When entering a ZipCode in the text box, should we also be adding the radius distance selector too?
+		All buttons on the footer take you back to the home page instead of their necessary pages.
+		If you click on the 'Buy' Page and without inputting a Zip Code, pressing the BizHub logo to return to the homepage takes you back to the home page but then pops up the warning dialog letting you know that you need to input a zip code to proceed with the search.
+		--Typing in the Zip Code into the text box and clicking enter does not run the search. Should it? or should we require them to select the magnifying glass.
+		Clicking on the Registration buttons takes you to a page that says 'You must log in to see this content', it also takes you to the URL of '/Notifications/1'
+
+
+	Account Dashboard Page(/Account-Setup):
+		DashBoardTab(/1):
+			--Clicking onto the Organization Tab creates an issue where you are no longer able to use the Top Right navigation menu.
+			Clicking on any of the 'Manage Notifications' items does not save anything or change anything to the object. it does the visual change but refreshing the page shows nothing was saved.
+			Are we exposing the 'Contact Request' portion of the MyListings data or are we only displaying that on the 'MyListings' Page?
+	
+		ProfileTab(/2):
+			Still unable to upload a profile picture.
+			--Still unable to upload URLs to the page.
+			--Is ZipCode supposed to be on Left justified or right?
+			--The "Preview Your Profile" button does not do anything.
+			--The "Cancel" Button does not restore the original information.
+			
+		MyListingsTab(/3):
+			--Clicking anywhere on the "Expand All" or "Collapse All" Line will treat it as if you clicked the button.
+			--After opening all of the listings, the "Expand All" Button is still shown when it should be "Collapse All"
+			Clicking on View Contact Requests takes you to home screen.
+			Typing anything into the "keyword search" stops the app
+			--Add a button to each listing that allows you to Edit. This edit button will take you back to the wizard where you can update the listing. If this is an incomplete listing, clicking the edit button should take you to the Listing Wizard page you were last on.
+			Potentially create a section that has all the incomplete setups, or create a filter option that allows you to filter the ones that are either completed or not.
+	
+		PaymentsTab(/4):
+			This page is all hard coded information. (skip until after demo)
+	
+		OrganizationTab(/5):
+			Dad and Melissa Work on this page
+		
+		MessageCenterTab(/6):
+			This Page has nothing on it.
+		
+		ResearchTab(/7):
+			This Page has nothing on it.
+		
+		PreferencesTab(/8):
+			This Page has nothing on it.
+		
+	
+	Saved Searches Page(/Saved-Search):
+		--When clicking the "Notify Me" toggle, it toggles all of the Saved Search toggles.
+		--Are the Tabs Editable or selectable on this page? if not, should the cursor change to a pointer when hovering over a tab?
+		-- This is an issue with the listings page -Steven --When clicking the "View Listings" button, there is a point where we are taken to the Listings Page but the Search Criteria does not populate for a reasonable amount of time.
+
+	Favorited Searches Page(/Favorited-Listings):
+	    bind keyword search and sort filters at top to return actual data
+		-- When you click a heart it does not instantly update the page, but it does change in the database.
+		If you click the heart and then switch to the opposite view of the listings, you still see the unfavorited listing but the Heart is displayed correctly.
+	
+	Email Center Page(/Email-Center):
+			
+		TemplatesTab(/2):
+
+			DONE --- Now shows the objects that should be in the Campaigns Tab
+			DONE -- The Edit and Delete buttons are not showing the correct graphics.
+			When adding a new Email Template, the drop down box using "Sales/Solicitation", etc... is not in its final spot.
+			
+		CampaignsTab(/3):
+			DONE --- This Page is no longer displaying anything.
+			DONE --- The Picture of the Email logo is not being displayed.
+			Selecting "Create New Campaign" button does not do anything.
+			Clicking the Edit and Delete button do not show functionality.
+			Unable to view individual campaign layouts.
+		
+		RecipientsListsTab(/4):
+			DONE --- This Page is a direct copy of the PaymentsTab from the AccountDashboard Page.
+			
+		SavedTargetsTab(/5):
+			DONE --- This Page has nothing on it.
+
+	Available Service(/Available-Services):
+		This Page has nothing on it.
+			
+	Listings Page(/Listings):
+	    When search criteria chosen and searched on, refreshing the page breaks the app
+	    MELISSA - rework zipcode modal to look more modern
+		SearchCriteria on the left of the page does not scale to the length of the screen.
+		When you click the "Clear" button on the SearchCriteria, You are required to enter a zip code, however, after doing so it does not update the page to allow access to the rest of the Search Box and the "Run Search" Button.
+		The Hearts are able to be toggled but they do not update in real time.
+		In the Tile View, the hearts are not displayed correctly, nor are they able to be toggled.
+		After a search if you refresh the page it breaks the app.
+		When trying to edit the "Search Name" i am not able to select the green check arrow to confirm the naming.
+		Refreshing the page after you run the search breaks the page.
+		When saving a SearchCriteria the button does not seem to do anything. Should there be a prompt stating that you need to either input a SearchCriteria name in the field above? and if you have already put a name, should we recieve a confirmation that the SearchCriteria has been saved?
+		When updating the Search Name, clicking the green check box does not return the name to its normal state.
+		The green button on the left of the page that closes the search criteria is in an awkward spot that isnt quite lined up in the correct space.
+		The From and To boxes in the search criteria do not convert the value to a dollar amount.
+		Zip code is not consistantly passed into the search page when navigating to it.
+		When entering a distance number, the tag updates at the top but once you run the search it reverts back to its original 25 value.
+		If the businesses Gross Profit is over a million dollars it starts to overlap over the heart.
+
+	
+	Listing Detail Page(/ListingDetail):
+		DONE ---- "Print button" is showing but the "Share Button" is not.
+		Clicking the "Share" button does not do anything.
+		Clicking the "Print" Button does not do anything.
+		The Question Marks do not display any information when mousing over them.
+		Underneath the Ad# the paragraph beneath is fluff data. What should be here?
+		Clicking on the "Insurance Agencies for Sale", "Other Services Businesses for Sale", and "All Businesses" take you back to the home page.
+		Similar Listings does not work properly.
+		Clicking "Terms and Conditions" in the last paragraph, does nothing.
+		When not logged in as the Agent for the listing, the "Contact Broker" button does not appear on the BrokerCard.
+		Need to replace the Placeholder of "Fancy Icon" for the Financial infomation with an actual icon.
+		There is no spot currently to update or edit the 'Support & Training' Section of the Details page.
+		Business Description needs to be updated to allow the html values to be used instead of written out as a string.
+
+	
+	Listing Setup Page(/Listing-Setup):
+		When not logged in, The error moessage is displayed as text under the header. Should this be a modal popup error?
+		Clicking the "Add" button for business categories does not pop up a modal allowing me to select categories.
+		On the "Real Estates" radio buttons, the descriptors need to be rewritten for better readability
+		Still unable to upload a main photo for an ad.
+		Still unable to upload multiple photos for the ad gallery.
+		After clicking "Publish Ad" on the final page the ad is saved to the database but i am not navigated away from the screen.
+		When saving the new listing, the Lookup Table does not have the correct values for the lkpStateOid, lkpCountyOid, and lkpCityOid in the database.
+		The invalid column colors are still shown when there is a selection in the "Country" Selection box.
+		Selecting 'Save & Exit' on the first page takes you back to your MyListings Page and then displays the error stating what is required to proceed. 
+		Advertisement Section:
+			Error Messages will appear the first time but after clicking out of them and trying again the box does not appear.
+		Business Info Section:
+			Run a check on the "Contact Email" that checks to make sure that the email given is a registered user on the app.
+		Financial Info Section:
+			The minimum down payment box as well as the finance percentage takes in the number and makes it in the thousands of percentage.
+			EBITDA does not get converted into a dollar amount within the box like the other boxes.
+			The Radio buttons for 'IsFinanceAvailable' do not allow you to select between them.
+			
+	Agent Finder Page(/Agent-Finder):
+		After inputing a state and county and running the search, if you then delete the county out of the selection and try to run the search again you receive the error for RegionNodeController.SelectedCountyOids.Count as "Object reference not set to an instance of an object."
+		The EliteBroker img has two different colors of green on it.
+		Receiving a 'Request Failed' on the county dropdown box when trying to select one.
+
+	Funding Page(/Financial-Info):
+		There is nothing at this address.
+	
+	Help Page(/Help):
+		There is nothing at this address.
+	
+	Loan Calculator Page(/Loan-Calc):
+		The calculators do not actually calculate any values when filling in their input boxes.
+		DONE -- amortization grid should have totals at bottom. 
+		    same grid needs to be numbered on left hand side
+		DONE --- calculate should be able to be clicked multiple times and recalculate instead of refreshing page
+		DONE --- create disclaimer
+		DONE --- inputs should not touch icons on right. Line up icons to match on left side
+		DONE --- yr/mo should have cursor pointer
+		DONE --- take out "mobile browser statistics"
+		chart should have % signs on end. 
+		    get rid of "Name" and hr tag underneath
+	
+	Resource Center Page(?):
+		Clicking on the tab in the header for this page does not do anything or take you anywhere.
+	
+	Blog Page(?):
+		Clicking on the tab in the header for this page does not do anything or take you anywhere.
+	
+	Notification Center Page:
+		The Notifications Dashboard is the same as the AccountDashboard.
+
+	LoanSetup(/Loan-Calculator): 
+		Early Payoff Calculator(/2):
+			This page does not have any content.
+		Loan Tenure Calculator(/3):
+			This page does not have any content.
+		Research(/4):
+			This page does not have any content.
+
+    }
+}

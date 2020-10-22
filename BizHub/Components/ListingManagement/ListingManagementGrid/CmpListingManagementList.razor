@@ -1,0 +1,14 @@
+﻿<div class="card-block col-12">
+    <div class="bg-white table-wrp">
+        <table class="table table-borderless">
+            <thead class="bg-secondary text-dark">
+                <CmpListingManagementGridHeader></CmpListingManagementGridHeader>
+            </thead>
+            <tbody>
+                @foreach (ListingManagement_BuyerInfoDTO oDTO in ListingGrid) {
+                    <CmpListingManagementGridObj ListingBuyerDetail="@oDTO"></CmpListingManagementGridObj>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

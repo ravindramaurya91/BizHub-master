@@ -1,0 +1,32 @@
+﻿@page "/OnBoard"
+@page "/OnBoard/{ActivePage:int}"
+@using BizHub.Components.OnBoard
+
+<div class="container-fluid text-center">
+    <div class="radio-info-wrp my-4">
+
+        @if (ActivePage == 1)
+        {
+            <h4>Welcome to BizHub</h4>
+            <h1 class="mb-3">Let's get you started</h1>
+            <div class="rc-wrp">
+                <div class="radio-control">
+                    <FSRadioButtons Items="@ONBOARD_RADIO_BUTTONS" BoundValue="@RadioButtonSelection"
+                                    OnSelect="UpdateRadioButtonSelection" VerticalSpacing="3"></FSRadioButtons>
+                </div>
+            </div>
+            @if (RadioButtonSelection.Equals("1")) { <CmpOnboard_Personalinfo Controller="Controller" IsSubmitted="@IsSubmitted"></CmpOnboard_Personalinfo>}
+            @if (RadioButtonSelection.Equals("2")) { <CmpOnboard_Companyinfo Controller="Controller" IsSubmitted="@IsSubmitted" Title="Personal Information"></CmpOnboard_Companyinfo>} //Same Component as 3, Different Title
+            @if (RadioButtonSelection.Equals("3")) { <CmpOnboard_Companyinfo Controller="Controller" IsSubmitted="@IsSubmitted" Title="Administrator"></CmpOnboard_Companyinfo>} //Same Component as 2, Different Title
+        }
+
+        @if (ActivePage == 2) { <CmpOnBoardSecondPage Controller="Controller" HasMultipleRegions="@HasMultipleRegions" HasMultipleOffices="@HasMultipleOffices"></CmpOnBoardSecondPage>}
+        @if (ActivePage == 3) { <CmpOnBoardCreditCardPage Controller="Controller"></CmpOnBoardCreditCardPage>}
+
+        @*Place a footer here and put the buttons which appear at the bottom of the page in the footer
+            If you need an example take a look at the "CmpListingSetupButtons" on the PagListingSetup.razor
+        *@
+        <CmpFooterButtonComponent RadioButtonSelection="@RadioButtonSelection" BackClick="BackClick" ActivePage="@ActivePage" SaveAndExit="SaveAndExit"></CmpFooterButtonComponent>
+        @*<Footercomponent Onclick="Buttonclicked"></Footercomponent>*@
+    </div>
+</div>

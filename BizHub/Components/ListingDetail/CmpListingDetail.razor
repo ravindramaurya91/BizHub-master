@@ -1,0 +1,124 @@
+﻿@* <div class="container"> *@
+@*     <div class="row"> *@
+@*         <div class="col-lg-11 mx-auto"> *@
+            <div class="row">
+                <div class="col-md-10 col-sm-10">
+                    <div class="list-main-wrap">
+                        <h2>@ListingDTO.AdTitle</h2>
+                        <h3>@ListingDTO.AdTagLine</h3>
+                    </div>
+                </div>
+                 <div class="col-md-2 col-sm-2"> 
+                     <div class="cigar-icon-sec text-right"> 
+                         @*<i class="@((ListingDTO.IsFavorite != null) && (ListingDTO.IsFavorite == true) ? "fas fa-heart":"far fa-heart") heart-red fa-2x bizhub-cursor-pointer" @onclick="ListingDTO.ToggleIsFavorite"></i>*@ 
+                          @*@if ((ListingDTO != null) && (ListingDTO.IsFavorite == true)) 
+                          { 
+                              <i class="fas fa-heart heart-red fa-2x" @onclick="ListingDTO.ToggleIsFavorite"></i> 
+                          } 
+                          else 
+                          { 
+                              <i class="far fa-heart heart-red fa-2x" @onclick="ListingDTO.ToggleIsFavorite"></i> 
+                          }*@ 
+                     </div> 
+                 </div> 
+            </div>
+            <!--start-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cigar-img-wrap">
+                        @if (ListingDTO.AdPhoto != null) {
+                            <img src="@ListingDTO.AdPhoto" class="img-fluid" alt="images">
+                        } else {
+                            <img src="/images/cigar-img.jpg" class="img-fluid" alt="images">
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--end-->
+            <!--description details-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="shortdesc">
+                        <h3>Business Description</h3>
+                        <p>@((MarkupString)ListingDTO.AdDescription)</p>
+
+                    </div>
+                    <div class="details-information-section">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="shortdesc">
+                                    <h3>Detailed Information</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row info-detail">
+                            <div class="col-md-3">
+                                <div class="shortdesc">
+                                    <p>Facility Description:</p>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="shortdesc">
+                                    <p>@ListingDTO.AdFacilityDescription</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row info-detail">
+                            <div class="col-md-3">
+                                <div class="shortdesc">
+                                    <p>Reason For Selling: </p>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="shortdesc">
+                                    <p>
+                                        @ListingDTO.AdReasonForSelling
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row info-detail">
+                            <div class="col-md-3">
+                                <div class="shortdesc">
+                                    <p>Support & Training: </p>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="shortdesc">
+                                    <p>
+                                        @ListingDTO.AdSupportAndTraining
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <!--end-->
+            <!--ads start-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="advertisement">
+                        <h3>Ad#: @ListingDTO.Oid</h3>
+                        <p>
+                            We are looking for someone to buy a well established small agency with office. The office is located in Newport Beach, CA.We are looking for someone to buy a well established small agency with office. The office is located in Newport Beach, CA.
+                            We are looking for someone to buy a well established small agency with office. <a class="terms">Terms Of Conditions</a>
+                            
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            @if (ListingDTO.ShowCity_Int == 1) {
+            <div class="row info-detail">
+                <div class="col-md-5">
+                    <div class="shortdesc">
+                        <p>Location: The office is located in @ListingDTO.City,@ListingDTO.State. </p>
+                    </div>
+                </div>
+            </div>}
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+

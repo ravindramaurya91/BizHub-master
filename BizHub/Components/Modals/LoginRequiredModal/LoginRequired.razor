@@ -1,0 +1,17 @@
+<SfDialog Width="450" ShowCloseIcon="false" @bind-Visible="@BindVisible" MinHeight="90">
+    <DialogTemplates>
+        <Content>
+            <div class="col-md-12 text-center mb-3">
+                <i class="fas dialog-icon-styles fa-exclamation"></i>
+                <div class="col-md-12 dialog-header-styles">Login Required</div>
+            </div>
+            <div class="col-md-12 text-center" style="font-size: 16px;">
+                You must be a logged in user to setup a listing. Would you like to log in?
+            </div>
+        </Content>
+    </DialogTemplates>
+    <DialogButtons>
+        <DialogButton Content="Log In" IsPrimary="true" OnClick="NavigateToLogin"></DialogButton>
+        <DialogButton Content="Cancel" IsPrimary="false" OnClick="CancelModal"></DialogButton>
+    </DialogButtons>
+</SfDialog>

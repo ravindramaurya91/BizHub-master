@@ -1,0 +1,84 @@
+﻿<h3 class="ob-info-title mt-4"><p>Company Information</p></h3>
+<div class="row ob-info-form">
+    <div class="col-md-12 col-lg-12">
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">Company Name</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.CompanyName) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.CompanyName">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">Address 1</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.CompanyAddress1) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.CompanyAddress1">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">Address 2</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.CompanyAddress2) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.CompanyAddress2">
+                </div>
+            </div>
+        </div>
+        @*<div class="row mx-auto mb-3">
+                <label class="col-md-4 text-right">City</label>
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" />
+                    </div>
+                </div>
+            </div>*@
+        <div class="row mx-auto mb-3">
+            @*<label class="col-md-4 text-right">State</label>
+                <div class="col-md-3">
+                    <select>
+                        <option>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>*@
+            <label class="col-md-4 text-right">Zip Code</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.CompanyZip) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.CompanyZip">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h3 class="ob-info-title mt-4"><p>Administrator</p></h3>
+<div class="row ob-info-form">
+    <div class="col-md-12 col-lg-12">
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">First Name</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.FirstName) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.FirstName">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">Last Name</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.LastName) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.LastName">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">Zip Code</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.Zip) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.Zip">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+
+}

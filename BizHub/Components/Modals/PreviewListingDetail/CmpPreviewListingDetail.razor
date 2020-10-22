@@ -1,0 +1,15 @@
+<div class="preview-modal pt-1">
+    <div class="container profile-sticky-header">
+        <div class="row m-auto">
+            <div class="col-md-8">
+                <CmpListingDetail ListingDTO="PreviewListingDTO"></CmpListingDetail>
+            </div>
+            <div class="col-md-4">
+                <CmpListingSidebar ListingDTO="PreviewListingDTO" ShowButtons="false"></CmpListingSidebar>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer category-modal-footer py-2">
+    <button class="btn btn-sm btn-secondary col-md-2" @onclick="BlazoredModal.Cancel">Ok</button>
+</div>

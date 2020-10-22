@@ -1,0 +1,38 @@
+﻿@if (ActivePage == 1)
+{
+    @if (RadioButtonSelection.Equals("1"))
+    {
+        <div class="row mx-auto mt-4">
+            <button style="border-radius: 0px 0px 4px 4px;" @onclick="@(() => SaveAndExit.InvokeAsync(true))" class="btn btn-sm btn-success col-md-12">Save</button>
+        </div>
+    }
+    @if (RadioButtonSelection.Equals("2"))
+    {
+        <div class="row mx-auto mt-4">
+            <button style="border-radius: 0px 0px 4px 4px;" b @onclick="@(() => SaveAndExit.InvokeAsync(true))" class="btn btn-sm btn-success col-md-12">Continue</button>
+        </div>
+    }
+    @if (RadioButtonSelection.Equals("3"))
+    {
+        <div class="row mx-auto mt-4">
+            <button style="border-radius: 0px 0px 4px 4px;" @onclick="@(() => SaveAndExit.InvokeAsync(true))" class="btn btn-sm btn-success col-md-12">Continue</button>
+        </div>
+    }
+}
+@if (ActivePage == 2)
+{
+    <div class="row mx-auto justify-content-center mt-4">
+        <button style="border-radius: 0px 0px 4px 4px;" @onclick="@(() => BackClick.InvokeAsync(ActivePage - 1))" class="btn btn-sm btn-outline-success mr-2 col-md-5">Back</button>
+        <button style="border-radius: 0px 0px 4px 4px;" @onclick="@(() => SaveAndExit.InvokeAsync(true))" class="btn btn-sm btn-success col-md-5">Continue</button>
+    </div>
+}
+@if (ActivePage == 3)
+{
+    <div class="row mx-auto justify-content-md-center mt-4">
+        <button style="border-radius: 0px 0px 4px 4px;" @onclick="@(() => BackClick.InvokeAsync(ActivePage -1))" class="btn btn-sm btn-outline-success mr-2 col-md-5">Back</button>
+        <button style="border-radius: 0px 0px 4px 4px;" @onclick="@(() => SaveAndExit.InvokeAsync(true))" class="btn btn-sm btn-success col-md-5">Save</button>
+    </div>
+}
+@code {
+
+}

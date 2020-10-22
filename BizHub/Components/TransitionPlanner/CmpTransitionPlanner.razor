@@ -1,0 +1,77 @@
+﻿<div class="container">
+
+    <div class="transition-planner">
+        <table class="table table-bordered mb-0">
+            <thead>
+                <tr class="bg-e6">
+                    <th scope="col" class="text-secondary text-center">Status</th>
+                    <th scope="col" class="text-secondary text-center">Date</th>
+                    <th scope="col" class="text-secondary">Step</th>
+                    <th scope="col" class="text-secondary text-center">Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Sequences.Count(); i++)
+                {
+                    var Cur = i;
+                    var accordion = string.Format("accordion{0}", i.ToString());
+                    string collapse = string.Format("collapse{0}", i.ToString());
+                    <tr class="bg-f2">
+                        <td class="text-center completed status">
+                            @if (Sequences[Cur].Children.Count() != 0)
+                            {
+                                <a class="accordion-toggle arrow collapsed bg-f2" id="accordion1" data-toggle="collapse" data-parent="#@accordion" href="#@collapse"><i class="fas fa-caret-right"></i></a>
+                            }
+                            <a @onclick="@(()=>OpenStatus(Sequences[Cur]))" class="check"><i class="fas fa-check-circle"></i></a>
+                            @if (Sequences[Cur].IsSelected)
+                            {
+                                <CmpTransitionPlannerStatus></CmpTransitionPlannerStatus>
+                            }
+                        </td>
+                        <td class="text-secondary text-center">@Sequences[Cur].DateCompleted</td>
+                        <td class="text-secondary">@Sequences[Cur].Name</td>
+                        <td class="text-center info"><a href="@Sequences[Cur].InfoUrl"><i class="fas fa-info-circle"></i></a></td>
+                    </tr>
+                    @if (Sequences[Cur].Children.Count() != 0)
+                    {
+                        <tr id="@collapse" class="collapse in p-3 child-collapse">
+                            <td colspan="4">
+                                <div class="row mb-2">
+                                    <div class="col-3 text-right br-rit"><span>Status</span></div>
+                                    <div class="col-3 text-center br-rit"><span>Date</span></div>
+                                    <div class="col-3 text-center br-rit"><span>Name</span></div>
+                                    <div class="col-3 text-center"><span>Info</span></div>
+                                </div>
+                                @foreach (IHierarchy item in Sequences[Cur].Children)
+                                {
+                                    <div class="row mb-2">
+                                        <div class="col-3 text-right br-rit">
+                                            <a @onclick="@(()=>OpenChildStatus(item))" class="check">
+                                                <i class="fas fa-check-circle"></i>
+                                            </a>
+                                            @if (item.IsSelected)
+                                            {
+                                                <CmpTransitionPlannerStatus></CmpTransitionPlannerStatus>
+                                            }
+                                        </div>
+                                        <div class="col-3 text-center br-rit"><span>9/12/2020</span></div>
+                                        <div class="col-3 text-center br-rit"><span>@item.Name</span></div>
+                                        <div class="col-3 text-center">
+                                            <span class="info">
+                                                <i class="fas fa-info-circle"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

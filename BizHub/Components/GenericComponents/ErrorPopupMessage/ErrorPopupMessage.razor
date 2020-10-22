@@ -1,0 +1,19 @@
+@using Syncfusion.Blazor.Popups
+@using BeforeOpenEventArgs = Syncfusion.Blazor.Popups.BeforeOpenEventArgs
+
+
+<SfDialog @bind-Visible="@ShowVisibility" Target="#target" Width="450px">
+    <DialogTemplates>
+        <Header>
+            @Title
+        </Header>
+        <Content>
+            @Message
+        </Content>
+    </DialogTemplates>
+    @* <DialogEvents Closed="@DialogClose"></DialogEvents> *@
+    <DialogButtons>
+        <DialogButton Content="Ok" IsPrimary="true" OnClick="@HideDialog" />
+    </DialogButtons>
+</SfDialog>
+

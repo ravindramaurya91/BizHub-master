@@ -1,0 +1,21 @@
+﻿@if (IsSingleUpload) {
+<div class="col-lg-12 control-section">
+    <div>
+        <SfUploader ID="UploadFiles" DropArea=".control-fluid" Multiple="false">
+            <UploaderButtonsProps Browse="Upload"></UploaderButtonsProps>
+            <UploaderEvents ValueChange="OnChange"  OnRemove="OnFileRemove"></UploaderEvents>
+            <UploaderAsyncSettings SaveUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save" RemoveUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove"></UploaderAsyncSettings>
+        </SfUploader>
+    </div>
+</div>
+}
+
+@if (!IsSingleUpload) {
+<div class="col-lg-12 control-section">
+    <div>
+        <SfUploader ID="UploadFiles" DropArea=".control-fluid" MaxFileSize=104857600 Multiple="true">
+            <UploaderAsyncSettings SaveUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save" RemoveUrl="https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove" ChunkSize=500000></UploaderAsyncSettings>
+        </SfUploader>
+    </div>
+</div>
+}

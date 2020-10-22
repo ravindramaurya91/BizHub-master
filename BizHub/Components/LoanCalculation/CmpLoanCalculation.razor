@@ -1,0 +1,494 @@
+﻿<section class="page-title p-2">
+    <div class="container">
+        <div class=" row saved-searches-title">
+            <div class="title col-md-3 pr-0 text-right">
+                <h2 class="">Loan Calculator</h2>
+            </div>
+            <div class="col-md-9 text-left pl-0 mt-2">
+                <small class="col-md-6" style="font-size: 20px;">
+                     -  Modify the values and click the "Calculate" button to use
+                </small>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container">
+<div class="row">
+<div class="col-lg-8 mx-auto">
+
+<!--FIRST CALC START-->
+<div class="row">
+    <div class="col-md-12 amort-loan pl-0">
+        <h3>Amortized Loan: Compounded Monthly</h3>
+        <hr class="my-2">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 pl-0">
+        <div class="loan-section pb-0">
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Loan Amount</label>
+                <input type="text" placeholder="$10000" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Term</label>
+                <input type="text" placeholder="Months" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            @* <div class="row mb-2 mx-auto"> *@
+            @*     <label class="col-md-4 px-0"> *@
+            @*         &nbsp; *@
+            @*     </label> *@
+            @*     <input type="text" placeholder="Months" id="loan_amt" class="col-md-8 form-control"> *@
+            @* </div> *@
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Interest Rate</label>
+                <input type="text" placeholder="%" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row">
+                <button style="border-radius: 0px 0px 4px 4px;" class="btn btn-sm btn-success col-md-12">Calculate</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-box">
+                    <h4>Results:</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Monthly Payment</label>
+            </div>
+            <div class="col-md-6 text-right">
+                <strong>$1,110,21</strong>
+            </div>
+            <div class="col-md-6">
+                <label>Total of 120 Payments</label>
+            </div>
+            <div class="col-md-6 text-right">
+                <strong>$133,244.60</strong>
+            </div>
+            <div class="col-md-6">
+                <label>Total Interest </label>
+            </div>
+            <div class="col-md-6 text-right">
+                <strong>$33,224.60</strong>
+            </div>
+            <div class="col-md-12 text-center">
+                <a href="#" class="view-table">View Amortization Schedule</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--FIRST CALC END-->
+
+
+<!--SECOND CALC START-->
+<div class="row">
+    <div class="col-md-12 amort-loan pl-0">
+        <h3>Amortized Loan: Paying Back a Fixed Amount Periodically</h3>
+        <hr class="my-2">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 pl-0">
+        <div class="loan-section pb-0">
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Loan Amount</label>
+                <input type="text" placeholder="$10000" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Term</label>
+                <input type="text" placeholder="Months" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Interest Rate</label>
+                <input type="text" placeholder="%" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Compound</label>
+                <select class="col-md-8 form-control">
+                    <option value="Monthly (JAN)">Monthly (JAN)</option> 
+                    <option value="Monthly (FEB)">Monthly (FEB)</option>
+                    <option value="Monthly (MAR)">Monthly (MAR)</option>
+                    <option value="Monthly (APR)">Monthly (APR)</option>
+                    <option value="Monthly (MAY)">Monthly (MAY)</option>
+                    <option value="Monthly (JUN)">Monthly (JUN)</option>
+                    <option value="Monthly (JLY)">Monthly (JLY)</option>
+                    <option value="Monthly (AUG)">Monthly (AUG)</option>
+                    <option value="Monthly (SEP)">Monthly (SEP)</option>
+                    <option value="Monthly (OCT)">Monthly (OCT)</option>
+                    <option value="Monthly (NOV)">Monthly (NOV)</option>
+                    <option value="Monthly (DEC)">Monthly (DEC)</option>
+                </select>
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Pay Back</label>
+                <select class="col-md-8 form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+            <div class="row">
+                <button style="border-radius: 0px 0px 4px 4px;" class="btn btn-sm btn-success col-md-12">Calculate</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-box">
+                    <h4>Results:</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="row">
+                    <div class="col-md-6">
+                        <label>Monthly Payment</label>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <strong>$1,110,21</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Total of 120 Payments</label>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <strong>$133,244.60</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Total Interest </label>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <strong>$33,224.60</strong>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <a href="#" class="view-table">View Amortization Schedule</a>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+</div>
+<!--SECOND CALC END-->
+
+<!--THIRD CALC START-->
+<div class="row">
+    <div class="col-md-12 amort-loan pl-0">
+        <h3>Deferred Payment Loan: Paying Back Lump Sum Due at Maturity</h3>
+        <hr class="my-2">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 pl-0">
+        <div class="loan-section pb-0">
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Loan Amount</label>
+                <input type="text" placeholder="$10000" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Term</label>
+                <input type="text" placeholder="Months" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Interest Rate</label>
+                <input type="text" placeholder="%" id="loan_amt" class="col-md-8 form-control">
+            </div>
+            <div class="row mb-2 mx-auto">
+                <label class="col-md-4 px-0">Compound</label>
+                <select class="col-md-8 form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+            <div class="row">
+                <button style="border-radius: 0px 0px 4px 4px;" class="btn btn-sm btn-success col-md-12">Calculate</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="green-box">
+                    <h4>Results:</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                        <div class="col-md-6">
+                            <label>Amount Due at Loan Maturity</label>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <strong>$1,110,21</strong>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Total Interest </label>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <strong>$33,224.60</strong>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <a href="#" class="view-table">View Amortization Schedule</a>
+                        </div>
+                    </div>
+        </div>
+
+    </div>
+</div>
+<!--THIRD CALC END-->
+
+
+@* <!--start--> *@
+@* <div class="row"> *@
+@*     <div class="col-md-12 amort-loan pl-0"> *@
+@*         <h3>Amortized Loan: Paying Back a Fixed Amount Periodically</h3> *@
+@*     </div> *@
+@* </div> *@
+@* <!--end--> *@
+@* <!--third--> *@
+@* <div class="row"> *@
+@*     <div class="col-md-6 col-sm-12 pl-0"> *@
+@*         <!--start--> *@
+@*         <div class="loan-section"> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label>Loan Amount</label><input type="text" placeholder="$10000" id="loan_amt"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label>Long Term</label><input type="text" placeholder="years" id="longterm"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label></label><input type="text" placeholder="months" id="loan_mth"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections interest-rate"> *@
+@*                     <i class="fas fa-percent"></i> *@
+@*                     <label>Interest Rate</label><input type="text" id="loan_mth"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label>Compound</label> *@
+@*                     <select> *@
+@*                         <option value="Monthly (JAN)">Monthly (JAN)</option> *@
+@*                         <option value="Monthly (FEB)">Monthly (FEB)</option> *@
+@*                         <option value="Monthly (MAR)">Monthly (MAR)</option> *@
+@*                         <option value="Monthly (APR)">Monthly (APR)</option> *@
+@*                         <option value="Monthly (MAY)">Monthly (MAY)</option> *@
+@*                         <option value="Monthly (JUN)">Monthly (JUN)</option> *@
+@*                         <option value="Monthly (JLY)">Monthly (JLY)</option> *@
+@*                         <option value="Monthly (AUG)">Monthly (AUG)</option> *@
+@*                         <option value="Monthly (SEP)">Monthly (SEP)</option> *@
+@*                         <option value="Monthly (OCT)">Monthly (OCT)</option> *@
+@*                         <option value="Monthly (NOV)">Monthly (NOV)</option> *@
+@*                         <option value="Monthly (DEC)">Monthly (DEC)</option> *@
+@*                     </select> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label>Pay Back</label> *@
+@*                     <select> *@
+@*                         <option value="Every Month">Every Month</option> *@
+@*                         <option value="3 Month">3 Month</option> *@
+@*                     </select> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row"> *@
+@*                 <div class="col-md-12"> *@
+@*                     <div class="text-center loan-btn-wrap"> *@
+@*                         <a href="#" class="loan-btn">Calculate <i class="far fa-caret-square-right"></i></a> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*         <!--end--> *@
+@* *@
+@*     </div> *@
+@*     <div class="col-md-6 col-sm-12"> *@
+@*         <!--start--> *@
+@*         <div class="row"> *@
+@*             <div class="col-md-12"> *@
+@*                 <div class="green-box"> *@
+@*                     <h4>Results:</h4> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*         <!--end--> *@
+@*         <!--start--> *@
+@*         <div class="row"> *@
+@*             <div class="col-md-12 loan-pay"> *@
+@*                 <table class="table table-borderless "> *@
+@*                     <tbody> *@
+@*                     <tr> *@
+@*                         <td style="width:50%;"> *@
+@*                             <p>Payment Every Month</p> *@
+@*                         </td> *@
+@*                         <td> *@
+@*                             <p> *@
+@*                                 <span>$1,110,21</span> *@
+@*                             </p> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                     <tr> *@
+@*                         <td> *@
+@*                             <p>Total of 120 Payments</p> *@
+@*                         </td> *@
+@*                         <td> *@
+@*                             <p> *@
+@*                                 <span>$133,244.60</span> *@
+@*                             </p> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                     <tr> *@
+@*                         <td> *@
+@*                             <p>Total Interest </p> *@
+@*                         </td> *@
+@*                         <td> *@
+@*                             <p> *@
+@*                                 <span>$33,224.60</span> *@
+@*                             </p> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                     <tr> *@
+@*                         <td colspan="2" class="text-center"> *@
+@*                             <a href="#" class="view-table">View Amortization Schedule</a> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                     </tbody> *@
+@*                 </table> *@
+@*                 <div id="chartContainer" style="height: 150px; width: 100%;"></div> *@
+@*             </div> *@
+@* *@
+@*         </div> *@
+@*         <!--end--> *@
+@*     </div> *@
+@* </div> *@
+@* <!--end--> *@
+<!--start-->
+@* <div class="row"> *@
+@*     <div class="col-md-12 amort-loan pl-0"> *@
+@*         <h3>Deferred Payment Loan: Paying Back Lump Sum Due at Maturity</h3> *@
+@*     </div> *@
+@* </div> *@
+<!--end-->
+@* <div class="row"> *@
+@*     <div class="col-md-6  pl-0"> *@
+@*         <!--start--> *@
+@*         <div class="loan-section"> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label>Loan Amount</label><input type="text" placeholder="$10000" id="loan_amt"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label>Long Term</label><input type="text" placeholder="years" id="longterm"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label></label><input type="text" placeholder="months" id="loan_mth"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections interest-rate"> *@
+@*                     <i class="fas fa-percent"></i> *@
+@*                     <label>Interest Rate</label><input type="text" id="loan_mth"> *@
+@*                 </div> *@
+@*             </div> *@
+@*             <div class="row mb-2"> *@
+@*                 <div class="col-md-12 loan-sections"> *@
+@*                     <label>Compound</label> *@
+@*                     <select> *@
+@*                         <option value="Monthly (JAN)">Annually (APR)</option> *@
+@* *@
+@*                     </select> *@
+@*                 </div> *@
+@*             </div> *@
+@* *@
+@*             <div class="row"> *@
+@*                 <div class="col-md-12"> *@
+@*                     <div class="text-center loan-btn-wrap"> *@
+@*                         <a href="#" class="loan-btn">Calculate <i class="far fa-caret-square-right"></i></a> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*         <!--end--> *@
+@* *@
+@*     </div> *@
+@*     <div class="col-md-6"> *@
+@*         <!--start--> *@
+@*         <div class="row"> *@
+@*             <div class="col-md-12"> *@
+@*                 <div class="green-box"> *@
+@*                     <h4>Results:</h4> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*         <!--end--> *@
+@*         <!--start--> *@
+@*         <div class="row"> *@
+@*             <div class="col-md-12 loan-pay"> *@
+@*                 <table class="table table-borderless "> *@
+@*                     <tbody> *@
+@*                     <tr> *@
+@*                         <td style="width:60%;"> *@
+@*                             <p>Amount Due at Loan Maturity</p> *@
+@*                         </td> *@
+@*                         <td> *@
+@*                             <p> *@
+@*                                 <span>$179,084.77</span> *@
+@*                             </p> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                     <tr> *@
+@*                         <td> *@
+@*                             <p>Total Interest</p> *@
+@*                         </td> *@
+@*                         <td> *@
+@*                             <p> *@
+@*                                 <span>$79,084.77</span> *@
+@*                             </p> *@
+@*                         </td> *@
+@*                     </tr> *@
+@* *@
+@*                     <tr> *@
+@*                         <td colspan="2" class="text-center"> *@
+@*                             <a href="#" class="view-table">View Schedule Table</a> *@
+@*                         </td> *@
+@*                     </tr> *@
+@*                     </tbody> *@
+@*                 </table> *@
+@*                 <div id="chartContainerone" style="height: 125px; width: 100%;"></div> *@
+@*             </div> *@
+@* *@
+@*         </div> *@
+@* *@
+@*         <!--end--> *@
+@*     </div> *@
+@* </div> *@
+<!--end-->
+</div>
+</div>
+</div>
+
+@code {
+
+}

@@ -1,0 +1,30 @@
+@inject BizHubUser LoggedInUser
+
+<div class="list-group" id="list-tab" role="tablist">
+    <div class="profile">
+        <i class="fas fa-user-circle fa-2x fa-fw"></i>@LoggedInUser.DisplayName
+    </div>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 1 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(1))">
+        <i class="fas fa-user fa-fw"></i> Notifications Dashboard
+    </a>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 2 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(2))">
+        <i class="fas fa-envelope fa-fw"></i> Templates
+    </a>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 3 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(3))">
+        <i class="fas fa-comments"></i> Campaigns
+    </a>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 4 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(4))">
+        <i class="far fa-list-alt"></i> Recipient Lists
+    </a>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 5 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(5))">
+        <i class="fas fa-bullseye"></i> Saved Targets
+    </a>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<int> MenuItemSelected { get; set; }
+
+    [Parameter]
+    public long ActiveMenu { get; set; }
+}

@@ -1,0 +1,195 @@
+<div class="col-lg-12 control-section pt-5">
+    <div class="content-wrapper">
+        <div class="row organization-header">
+            <div class="col-md-2">
+                <img class="email-center-icon mb-0" src="/Images/organization-icon.png">
+            </div>
+            <div class="col-md-10 pt-4 pl-0">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>Tri-Valley Business Advidors</h3>
+                    </div>
+                    <div class="col-md-4 pt-3">
+                        <input type="checkbox">
+                        <label> Has Multiple Offices &nbsp;</label>
+                        <input type="checkbox">
+                        <label>Has Multiple Regions</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row email-template-border">
+            <div class="col-md-2 pr-0 offset-1 py-2 text-right">
+                <label>Company Website</label>
+            </div>
+            <div class="col-md-3 py-2">
+                <input type="text" class="form-control global-box-height">
+            </div>
+            <div class="col-md-2 py-2 pr-0 text-right">
+                <label>Number of Regions</label>
+            </div>
+            <div class="col-md-2 py-2">
+                <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="double?" Value=10></SfNumericTextBox>
+                @* <input type="number" class="form-control global-box-height"> *@
+            </div>
+            <div class="col-md-12 pt-1" style="background: #ececec;">
+                <div class="row">
+                    <div class="col-md-1 p-0 mx-2 my-auto">
+                        <label>Region Name</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control global-box-height">
+                    </div>
+                    <div class="col-md-3 text-right my-auto">
+                        <label>Number of Offices <small>(in this region)</small></label>
+                    </div>
+                    <div class="col-md-2">
+                        <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="double?" Value=10></SfNumericTextBox>
+                        @* <input type=" number" class="form-control global-box-height"> *@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12"><div class="row">
+                    <div class="col-md-4 offset-1  pr-0"><hr style="
+                border-top: 2px solid #acc2d8;
+                /* color: black; */
+            " class="m-3"></div>
+                    <div class="col-md-2 mt-1" style="
+                color: #acc2d8;
+                font-style: italic;
+            ">Region 1 Office Setup</div>
+                    <div class="col-md-4 pl-0"><hr style="
+                border-top: 2px solid #acc2d8;
+                /* color: black; */
+            " class="m-3"></div>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-2">
+                    <label>Office Name</label>
+                    <input type="text" class="form-control global-box-height">
+                </div>
+                <div class="col-md-2">
+                    <label>Street Address</label>
+                    <input type="text" class="form-control global-box-height">
+                </div>
+                <div class="col-md-2">
+                    <label>Zip Code</label>
+                    <input type="text" class="form-control global-box-height">
+                </div>
+                <div class="col-md-2">
+                    <label>Phone Number</label>
+                    <input type="text" class="form-control global-box-height">
+                </div>
+                <div class="col-md-2">
+                    <label>Fax Number</label>
+                    <input type="text" class="form-control global-box-height">
+                </div>
+                <div class="col-md-2 mt-4 pt-1">
+                    <button class="btn btn-sm btn-outline-secondary">Add Users</button>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                
+        @*         <SfGrid DataSource="@Users" Toolbar="@(new List<string>() { "Add", "Edit", "Delete", "Update", "Cancel" })" AllowPaging="true"> *@
+        @*             <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true"></GridEditSettings> *@
+        @*             <GridColumns> *@
+        @*                 <GridColumn Field=@nameof(object.Email) HeaderText="Order ID" IsPrimaryKey="true" ValidationRules="@(new ValidationRules{ Required=true, Number=true})" TextAlign="TextAlign.Right" Width="140"></GridColumn> *@
+        @*                 <GridColumn Field=@nameof(object.FirstName) HeaderText="Customer Name" ValidationRules="@(new ValidationRules{ Required=true})" Width="150"> *@
+        @*                     <EditTemplate> *@
+        @*                         <SfAutoComplete TItem="OrdersDetails" TValue="string" ID="CustomerID" @bind-Value="@((context as object).CustomerID)" DataSource="@GridData"> *@
+        @*                             <AutoCompleteFieldSettings Value="CustomerID"></AutoCompleteFieldSettings> *@
+        @*                         </SfAutoComplete> *@
+        @*                     </EditTemplate> *@
+        @*                 </GridColumn> *@
+        @*                 <GridColumn Field=@nameof(OrdersDetails.Freight) HeaderText="Freight" ValidationRules="@(new ValidationRules{ Required=true, Range = new double[]{1, 1000}})" EditType="EditType.NumericEdit" Format="C2" TextAlign="TextAlign.Right" Width="140"></GridColumn> *@
+        @*                 <GridColumn Field=@nameof(OrdersDetails.OrderDate) HeaderText="Order Date" EditType="EditType.DatePickerEdit" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="160"></GridColumn> *@
+        @*                 <GridColumn Field=@nameof(OrdersDetails.ShipCountry) HeaderText="Ship Country" EditType="EditType.DropDownEdit" Width="150"></GridColumn> *@
+        @*             </GridColumns> *@
+        @*         </SfGrid> *@
+                
+                
+                
+                
+              
+
+
+                @* <table class="table"> *@
+                @*   <thead> *@
+                @*   <tr> *@
+                @*       <th>Users</th> *@
+                @*       <th scope="col" style="font-weight:400">Email</th> *@
+                @*       <th scope="col" style="font-weight:400">First Name</th> *@
+                @*       <th scope="col" style="font-weight:400">Last Name</th> *@
+                @*       <th scope="col" style="font-weight:400">Role</th> *@
+                @*       <th scope="col" style="font-weight:400">Phone</th> *@
+                @*       <th scope="col" style="font-weight:400">Is Admin</th> *@
+                @*       <th scope="col" style="font-weight:400">Is Active</th> *@
+                @*       <th scope="col"></th> *@
+                @*   </tr> *@
+                @*   </thead> *@
+                @*   <tbody> *@
+                @*   <tr> *@
+                @*       <td></td> *@
+                @*       <td><input type="text" class="form-control global-box-height"></td> *@
+                @*       <td><input type="text" class="form-control global-box-height"></td> *@
+                @*       <td><input type="text" class="form-control global-box-height"></td> *@
+                @*       <td> *@
+                @*           <select class="form-control"> *@
+                @*               <option>1</option> *@
+                @*           </select> *@
+                @*       </td> *@
+                @*       <td><input type="number" class="form-control global-box-height"></td> *@
+                @*       <td> *@
+                @*           <input type="checkbox"> *@
+                @*       </td> *@
+                @*       <td><input type="checkbox"></td> *@
+                @*       <td> *@
+                @*           <button class="btn btn-sm btn-transparent"><i class="fa fa-times text-danger"></i></button> *@
+                @*       </td> *@
+                @*   </tr> *@
+                @*   </tbody> *@
+                @* </table> *@
+            </div>
+
+
+            @* <table class="table"> *@
+                            @*   <thead> *@
+                            @*   <tr> *@
+                            @*       <th>Users</th> *@
+                            @*       <th scope="col" style="font-weight:400">Email</th> *@
+                            @*       <th scope="col" style="font-weight:400">First Name</th> *@
+                            @*       <th scope="col" style="font-weight:400">Last Name</th> *@
+                            @*       <th scope="col" style="font-weight:400">Role</th> *@
+                            @*       <th scope="col" style="font-weight:400">Phone</th> *@
+                            @*       <th scope="col" style="font-weight:400">Is Admin</th> *@
+                            @*       <th scope="col" style="font-weight:400">Is Active</th> *@
+                            @*       <th scope="col"></th> *@
+                            @*   </tr> *@
+                            @*   </thead> *@
+                            @*   <tbody> *@
+                            @*   <tr> *@
+                            @*       <td></td> *@
+                            @*       <td><input type="text" class="form-control global-box-height"></td> *@
+                            @*       <td><input type="text" class="form-control global-box-height"></td> *@
+                            @*       <td><input type="text" class="form-control global-box-height"></td> *@
+                            @*       <td> *@
+                            @*           <select class="form-control"> *@
+                            @*               <option>1</option> *@
+                            @*           </select> *@
+                            @*       </td> *@
+                            @*       <td><input type="number" class="form-control global-box-height"></td> *@
+                            @*       <td> *@
+                            @*           <input type="checkbox"> *@
+                            @*       </td> *@
+                            @*       <td><input type="checkbox"></td> *@
+                            @*       <td> *@
+                            @*           <button class="btn btn-sm btn-transparent"><i class="fa fa-times text-danger"></i></button> *@
+                            @*       </td> *@
+                            @*   </tr> *@
+                            @*   </tbody> *@
+                            @* </table> *@
+                       
+        </div>
+    </div>
+</div>

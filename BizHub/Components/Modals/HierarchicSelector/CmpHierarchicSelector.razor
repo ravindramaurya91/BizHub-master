@@ -1,0 +1,57 @@
+<div class="large-modal-content pt-2 pl-0 pr-0 pb-0">
+    <div class="row mb-1 mx-auto">
+        <div class="col-md-11 p-0">
+            <h3 class=" pl-0 my-auto modal-header-styles">@ModalHeader</h3>
+            @if (!string.IsNullOrEmpty(@ModalSubHeader)) {
+                <small>@ModalSubHeader</small>
+            }
+            @if (IsShowSelectAll) {
+                 <div class="row m-auto"> 
+                     <div class="col-md-12 text-left"> 
+                         <input type="checkbox" @onchange="SelectAll" checked="@IsAllSelected"> 
+                            <label class="m-0">Select All</label> 
+                     </div> 
+                 </div> 
+            }
+        </div>
+        <div class="col-md-1 p-0">
+            <button class="btn btn-sm btn-transparent" @onclick="BlazoredModal.Cancel">
+                <i class="fa fa-times text-secondary"></i>
+            </button>
+        </div>
+    </div>
+    <hr class="mt-0 mb-2">
+    @foreach (IHierarchy item in Items) {
+        <div class="row m-auto">
+            <div class="col-md-12 text-left">
+                @if (IsShowParentCheckBox) {
+                    <input type="checkbox" @onchange="@((e)=> onCheckSelected(e, item))" checked="@item.IsSelected">
+                }
+                <label>@item.Value</label>
+                @if (@item.Children.Count > 0) {
+                    <a class="bizhub-cursor-pointer" style="float: right; color:gray;" @onclick="@(() =>ToggleExpandedView(@item))">
+                        @if (@item.IsExpanded) {
+                            <span>Hide Options</span>
+                        } else {
+                            <span>Show More Options</span>
+                        }
+                        <i class="fas @(@item.IsExpanded ? "fa-chevron-up" : "fa-chevron-down")"></i>
+                    </a>
+                }
+            </div>
+            @if ((@item.Children.Count > 0) && (@item.IsExpanded)) {
+                @foreach (IHierarchy child in item.Children) {
+                    <div class="col-md-4 text-left pl-5">
+                        <input type="checkbox" @onchange="@((e)=> onCheckSelected(e, child))" checked="@child.IsSelected">
+                        <label class="category-overflow">@child.Value</label>
+                    </div>
+                }
+            }
+        </div>
+        <hr class="m-1">
+    }
+    <div class="modal-footer category-modal-footer py-2">
+        <button class="btn btn-sm btn-secondary" @onclick="BlazoredModal.Cancel">Cancel</button>
+        <button class="btn btn-sm btn-secondary" @onclick="SaveChanges">Done</button>
+    </div>
+</div>

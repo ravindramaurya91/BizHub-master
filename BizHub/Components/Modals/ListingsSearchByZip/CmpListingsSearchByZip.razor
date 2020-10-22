@@ -1,0 +1,26 @@
+<div class="p-2" style=" text-align: center; background: white;">
+    <div class="row mb-2 mx-auto">
+        <div class="col-md-12 text-center pr-0">
+            <h3 class=" pl-0 my-auto" style="color:var(--primary-blue);text-align: center;">Begin Your Search</h3>
+        </div>
+    </div>
+    <hr class="my-2">
+    <p>Enter a zip code and radius to begin</p>
+    <div class="row p-2">
+        <div class="col-md-3 p-0">
+            Search Radius:
+        </div>
+        <div class="col-md-3">
+            <FSSelect Items="@ZipCodeDistances" OnSelect="@OnSearchRadiusChanged"></FSSelect>
+        </div>
+        <div class="col-md-3 p-0">
+            Zip:
+        </div>
+        <div class="col-md-3 pl-0">
+            <input class=" form-control global-box-height" type="text" placeholder="Zip Code" @bind="@ZipCode" @bind:event="oninput" @onkeydown="CheckForZipCodeEnter">
+        </div>
+    </div>
+    <div class="modal-footer row m-auto pt-2 pb-0 pr-0" style="">
+        <button class="btn btn-sm btn-primary" @onclick="OnSearchSelected">OK</button>
+    </div>
+</div>

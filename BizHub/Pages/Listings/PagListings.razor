@@ -1,0 +1,74 @@
+﻿@page "/Listings"
+@page "/Listings/{SCString}"
+
+<div class="page-wrapper content pt-0">
+    <div class="row" style="background: #cfcfd0;min-height: 4px;"></div>
+    @if (IsLoading) {
+        <CmpLoadingSpinner></CmpLoadingSpinner>
+    } else {
+        <div class="row">
+            @if (IsShowingSearchFilter) {
+                <div class="col-md-3 pr-0" style="border-right: 2px solid var(--border-gray)">
+                    <div class="col-md-1 text-center py-1 px-0 listing-filter-widget" @onclick="FlipFilterShown">
+                        <i class="fa fa-angle-double-left"></i>
+                    </div>
+                    <CmpAdvancedSearch  Controller="@Controller.AdvancedSearchController" IsRunSearchButtonDisabled="@IsRunSearchButtonDisabled" IsZipCodeValid="@IsZipCodeValid" TotalListingsCount="@QueryResponse.ItemCount"
+                                     eSaveSearchRequested="SaveSearch" eSearchSelected="SearchSelected" eSortBySelected="SortBySelected"  eNewSearchSelected="InitiateNewSearch">
+                    </CmpAdvancedSearch>
+                </div>
+            } else {
+                <div class="col-md-1 text-center py-1 closed-listing-filter-widget" @onclick="FlipFilterShown" style=" width: 4%;">
+                    <i class="fa fa-angle-double-right"></i>
+                </div>
+            }
+
+            <div class=" @(IsShowingSearchFilter ? "col-md-9":"col-md-12")  pl-0">
+                <CmpSearchHeader SearchCriteriaDisplay="SearchCriteriaDisplay" IsRunSearchButtonDisabled="IsRunSearchButtonDisabled" eSearchSelected="SearchSelected " eSaveSearchRequested="SaveSearch"></CmpSearchHeader>
+                <div class="row search-border m-0 mb-4" style="width: 100%;">
+                    <div class="col-md-9 offset-1 pr-0">
+                        @foreach (DisplayTag oTag in SearchCriteriaDisplay.SearchTags) {
+                            <Tag DisplayTag="oTag" eRemoveTag="RemoveTag"></Tag>
+                        }
+                    </div>
+
+                    <div class="col-md-2 my-2" style="text-align: right;">
+                        <label class="mr-2">View As: </label>
+                        <button @onclick="@(() => ListingViewSelection(Constants.LISTINGS_VIEW_STYLE_TILE))" data-toggle="tooltip" data-placement="top" title="TILE VIEW" class="@(ListingDisplaySetting == Constants.LISTINGS_VIEW_STYLE_TILE ? "btn-primary" : "btn-outline-primary") btn btn-sm px-1 pb-0 pt-1 mr-2">
+                            <i class="fas fa-th" style="font-size: 20px;"></i>
+                        </button>
+                        <button @onclick="@(() => ListingViewSelection(Constants.LISTINGS_VIEW_STYLE_LIST))" data-toggle="tooltip" data-placement="top" title="LIST VIEW" class="btn btn-sm @(ListingDisplaySetting == Constants.LISTINGS_VIEW_STYLE_LIST ? "btn-primary" : "btn-outline-primary") px-1 pb-0 pt-1">
+                            <i class="fas fa-list" style="font-size: 20px;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                @if (Listings != null && Listings.Count > 0) {
+                    <div class="container-fluid">
+                        @if (ListingDisplaySetting.Equals(Constants.LISTINGS_VIEW_STYLE_LIST)) {
+                            @foreach (ListingDTO oListing in Listings) {
+                                <CmpListing ListingDTO="@oListing" Controller="@Controller"></CmpListing>
+                            }
+                        } else if (ListingDisplaySetting.Equals(Constants.LISTINGS_VIEW_STYLE_TILE)) {
+                            <div class="row m-auto">
+                                @foreach (ListingDTO oListing in Listings) {
+                                    <div class="col-md-3 mb-3 px-2" style="height:100%; min-width: 360px;">
+                                        <TileListing ListingDTO="@oListing" Controller="@Controller"></TileListing>
+                                    </div>
+                                }
+                            </div>
+                        } else {
+                            @foreach (ListingDTO oListing in Listings) {
+                                <CmpListing ListingDTO="@oListing" Controller="@Controller"></CmpListing>
+                            }
+                        }
+                    </div>
+                } else {
+                    <div class="col-md-12 text-center pt-5">
+                        <i class="fas fa-exclamation col-md-12" style=" font-size: 9rem; color: #b5b3b3;"></i>
+                        <label class="mt-3" style="color:gray;">No Listings Match Current Description</label>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

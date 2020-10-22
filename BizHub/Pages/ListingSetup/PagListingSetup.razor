@@ -1,0 +1,53 @@
+﻿@page "/Listing-Setup"
+@page "/Listing-Setup/{ListingOid:long}"
+@page "/Listing-Setup/{ListingOid:long}/{UrlCurrentStep:long}"
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <AuthorizeView>
+            <Authorized>
+                @if (IsLoading) {
+                    <CmpLoadingSpinner></CmpLoadingSpinner>
+                } else {
+                    <div class="row">
+                        <div class="col-md-9 mx-auto bizhub-align-center py-3 my-3">
+                            <CmpListingSetupArrows CurrentStep="CurrentStep" ArrowSelected="ArrowSelected"></CmpListingSetupArrows>
+                        </div>
+                    </div>
+                    
+                    @if (CurrentStep == 1) {
+                        <CmpListingSetupBusiness ListingDTO="CreateListingDTO" Controller="Controller"/>
+                    }
+                    @if (CurrentStep == 2) {
+                        <CmpListingSetupFinancial ListingDTO="CreateListingDTO" Controller="Controller" />
+                    }
+                    @if (CurrentStep == 3) {
+                        <CmpListingSetupAdInfo ListingDTO="CreateListingDTO" Controller="Controller"/>
+                    }
+                    <CmpListingSetupButtons CurrentStep="CurrentStep" SaveAndExit="SaveAndExit" ArrowSelected="ArrowSelected" CompleteListing="CompleteListing" />
+                }
+            </Authorized>
+            <NotAuthorized>
+                <div class="row pt-5">
+                    <div class="col-md-12">
+                        <div class="col-md-12 text-center mb-3">
+                            <i class="fas dialog-icon-styles fa-exclamation" style="color:var(--warning)"></i>
+                            <div class="col-md-12 dialog-header-styles">Login Required</div>
+                        </div>
+                        <div class="col-md-12 text-center" style="font-size: 16px;">
+                            You must be a logged in user to setup a listing. Would you like to log in?
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center pt-3">
+                        <button class="btn btn-sm btn-secondary" @onclick="@(() => NavToNewPage("Cancel"))">Cancel</button>
+                        <a href="Identity/Account/Login" class="btn btn-sm btn-primary">Log In</a>
+                    </div>
+                </div>
+                @* You must have an account to publish a listing to BizHub. Login or create an account *@
+                @* <a class="mr-5 mt-2 register-link login-links" href="Identity/Account/Register">Register</a> *@
+                @* <a class="mt-2 sign-in-link login-links" href="Identity/Account/Login">Sign In</a> *@
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>
+

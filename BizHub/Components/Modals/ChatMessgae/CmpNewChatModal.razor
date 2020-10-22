@@ -1,0 +1,57 @@
+﻿<div class="chat-popup">
+    <div class="overlay">
+        <div class="popup mx-auto bg-white">
+            <span class="close" @onclick="BlazoredModal.Cancel">&times;</span>
+            <div class="headind_srch">
+                <div class="recent_heading text-center p-2">
+                    <h4>@ModalHeader</h4>
+                </div>
+                <div class="srch_bar">
+                    <div class="stylish-input-group p-2">
+                        <input type="text" class="search-bar" @bind="@ChatUsersObj.Name" @oninput="@((ui) => Search((string)ui.Value))" placeholder="Search">
+                        <span class="input-group-addon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <p class="suggetion m-0 pt-3">suggested</p>
+            <div class="inbox_chat p-3">
+                @foreach (ChatUsers obj in CHAT_USERS)
+                {
+                    <div class="chat_list">
+                        <div class="chat_people">
+                            <div class="chat_img">
+                                <img src="@obj.Image">
+                                @switch (obj.Status.ToUpper())
+                                {
+                                    case "ONLINE":
+                                        <span class="online_icon"></span>
+                                        break;
+                                    case "INACTIVE":
+                                        <span class="online_icon online_icon_inactive"></span>
+                                        break;
+                                    case "ACTIVE":
+                                        <span class="online_icon online_ago"></span>
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            </div>
+                            <div class="chat_ib">
+                                <h5>@((MarkupString)obj.Name)</h5>
+                                <p>
+                                    @obj.History
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

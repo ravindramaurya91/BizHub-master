@@ -1,0 +1,27 @@
+@page "/Notifications"
+@page "/Notifications/{CurrentMenu:long}"
+@inject Microsoft.AspNetCore.Components.NavigationManager NavManager
+@inject BizHubUser LoggedInUser
+
+
+<div class="container-fluid">
+    <div class="row">
+        <AuthorizeView>
+            <Authorized>
+                <div class="col-md-2">
+                    <CmpNotificationsMenu ActiveMenu="CurrentMenu" MenuItemSelected="SelectMenuItem" />
+                </div>
+                <div class="col-md-10 pr-4">
+                    @if (CurrentMenu == 1) {<CmpUserDashboard />}
+                    @if (CurrentMenu == 2) {<CmpEmailTemplatesGrid />}
+                    @if (CurrentMenu == 3) {<CmpCampaignsGrid />}
+                    @if (CurrentMenu == 4) {<CmpUserPayments />}
+                    @if (CurrentMenu == 5) {<CmpUserPayments />}
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                You must log in to see this content
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@if (IsVerticalDisplay) {
+    <div class="radio-control">
+        @foreach (FSVisualItem Item in Items) {
+        <div class="row @AssignVerticalSpacing">
+            <FSRadioButton Items="new List<FSVisualItem> { Item }" IsSmall="@IsSmall" BoundValue="@BoundValue" IsLabelRightOfButton="@IsLabelRightOfButton" OnSelect="On_Select"></FSRadioButton>
+            @if (!string.IsNullOrEmpty(Item.ToolTipContent)) {
+                <SfTooltip Target="#target" Content="@Item.ToolTipContent">
+                    <i id="target" class="fas fa-question-circle"></i>
+                </SfTooltip>
+            }
+        </div>
+        }
+    </div>
+}
+
+@if (!IsVerticalDisplay) {
+    <div class="d-flex" style="justify-content: space-between;margin-top:5px;">
+        @foreach (FSVisualItem Item in Items) {
+        <div class="form-check form-check-inline @AssignHorizontalSpacing">
+            <FSRadioButton Items="new List<FSVisualItem> { Item }" IsSmall="@IsSmall" BoundValue="@BoundValue" IsLabelRightOfButton="@IsLabelRightOfButton" OnSelect="On_Select"></FSRadioButton>
+            @if (!string.IsNullOrEmpty(Item.ToolTipContent)) {
+                <SfTooltip Target="#target" Content="@Item.ToolTipContent">
+                    <i id="target" class="fas fa-question-circle"></i>
+                </SfTooltip>
+            }
+        </div>
+        }
+    </div>
+}

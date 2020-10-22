@@ -1,0 +1,24 @@
+﻿<tr>
+    <td scope="row" class="text-capitalize font-italic">@ListingBuyerDetail.BuyerName</td>
+    <td class="text-primary" @onclick="@(() => ViewContact(ListingBuyerDetail.BuyerOid))"><i class="fa fa-info-circle bizhub-cursor-pointer"></i></td>
+    <td><i @onclick="@(() => EmailBuyer(ListingBuyerDetail))" class="fa fa-envelope bizhub-cursor-pointer"></i></td>
+    <td><i class="fa fa-file-alt"></i></td>
+    <td><i class="fa fa-comment-alt-dots"></i></td>
+    <td>@ListingBuyerDetail.BuyerPhone</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="text-capitalize">@ListingBuyerDetail.AgentName</td>
+    <td>@ListingBuyerDetail.AgentPhone</td>
+    <td class="text-primary" @onclick="@(() => ViewContact(ListingBuyerDetail.AgentOid))"><i class="fa fa-info-circle bizhub-cursor-pointer"></i></td>
+    <td><i class="fa fa-envelope"></i></td>
+    <td><i class="fa fa-file-alt"></i></td>
+    <td><i class="fa fa-comment-alt-dots"></i></td>
+</tr>
+
+@code {
+
+}

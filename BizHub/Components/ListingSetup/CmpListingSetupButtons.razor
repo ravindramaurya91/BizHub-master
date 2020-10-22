@@ -1,0 +1,75 @@
+﻿<div class="form-group row">
+    <div class="col-md-12 p-0">
+        <div class="col-sm-6 m-auto">
+            
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    @if (CurrentStep > 1)
+                    {
+                        <button @onclick="@(() => ArrowSelected.InvokeAsync((CurrentStep - 1)))" class="btn btn-sm btn-outline-secondary"><i class="fa fa-chevron-left"></i> Previous Step</button>
+                    }
+                    <button @onclick="@(() => SaveAndExit.InvokeAsync(true))" class="btn btn-outline-success btn-sm">Save & Exit</button>
+                    @if (CurrentStep < 3)
+                    {
+                        <button @onclick="@(() => ArrowSelected.InvokeAsync((CurrentStep + 1)))" class="btn btn-sm btn-primary">Next Step <i class="fa fa-chevron-right"></i></button>
+                    }
+                    else
+                    {
+                        <button @onclick="@(() => CompleteListing.InvokeAsync(true))" class="btn btn-sm btn-primary">Publish Listing <i class="fa fa-chevron-right"></i></button>
+                    }
+                </div>
+            </div>
+            
+            
+            
+            
+            
+@*             <div class="row"> *@
+@*                 @if (CurrentStep > 1) *@
+@*                 { *@
+@*                     <div class="col-sm-4 pr-0"> *@
+@*                         <div class="text-center"> *@
+@*                             <a class=" btn-back p-0" @onclick="@(() => ArrowSelected.InvokeAsync((CurrentStep - 1)))">Previous Step</a> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 } *@
+@*                 <div class="col-sm-8 pl-0"> *@
+@*                     <div class="text-center"> *@
+@*                         @if (CurrentStep < 3) *@
+@*                         { *@
+@*                             <a class=" btn-tri p-0" @onclick="@(() => ArrowSelected.InvokeAsync((CurrentStep + 1)))">Next Step</a> *@
+@*                         } *@
+@*                         else *@
+@*                         { *@
+@*                             <a class=" btn-tri p-0" @onclick="@(() => CompleteListing.InvokeAsync(true))">Publish Listing</a> *@
+@*                         } *@
+@*                     </div> *@
+@*                 </div> *@
+@*                 <div class="col-sm-12 pr-0"> *@
+@*                     <div class="text-center"> *@
+@*                         <a class=" btn-back btn-tri p-0" @onclick="@(() => SaveAndExit.InvokeAsync(true))">Save and Exit</a> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+        </div>
+    </div>
+</div>
+
+@code {
+
+    #region Parameters
+    [Parameter]
+    public Int64 CurrentStep { get; set; }
+
+    [Parameter]
+    public EventCallback<Int64> ArrowSelected { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> SaveAndExit { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> CompleteListing { get; set; }
+    
+
+    #endregion (Parameters)
+}

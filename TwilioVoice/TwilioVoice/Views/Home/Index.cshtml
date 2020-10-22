@@ -1,0 +1,13 @@
+﻿
+@{ ViewData["Title"] = "Twilio Voice Call"; }
+
+<div class="text-center">
+    <label>Number:</label>
+    <input type="text" id="txtphnNumber" placeholder="Phone Number" />
+    <button type="button" onclick="callCustomer()">Call</button>
+    <button type="button" onclick="hangUp()">Hang Up</button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//media.twiliocdn.com/sdk/js/client/v1.8/twilio.min.js"></script>
+<script src="~/js/site.js"></script>

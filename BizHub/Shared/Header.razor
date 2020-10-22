@@ -1,0 +1,122 @@
+﻿
+<div class="topbar navbar-padding background-white">
+    <nav>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+
+                <!--IPAD VIEW START-->
+                <div class=" col-md-2 bizhub-ipad-view">
+                    <div class="dropdown show">
+                        <a class="btn btn-transparent navbar-button" href="#" role="button" id="menuDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                            <SfMenu Items="@menuItems">
+                                <MenuEvents ItemSelected="ItemClicked"></MenuEvents>
+                            </SfMenu>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 bizhub-navbar-image bizhub-align-center text-center bizhub-cursor-pointer pb-2 bizhub-ipad-view" @onclick="@(() => NavigateToNewPage(""))">
+                    <img src="/images/horizontalLogo.png" />
+                </div>
+                <AuthorizeView>
+                    <Authorized>
+                        <div class=" col-md-2 bizhub-ipad-view" style="text-align: right;">
+                            <div class="dropdown show">
+                                <a class="btn btn-transparent navbar-button" href="#" role="button" id="menuDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-lg-inline text-gray-600 medium">
+                                        @SessionMgr.Instance.User.DisplayName &nbsp;<i class="fas fa-caret-down"></i>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                                    @foreach (MenuItem oItem in UserDropDownItems) {
+                                        <a class="dropdown-item bizhub-cursor-pointer" @onclick="@(() => NavigateToNewPage(oItem.Id))">@oItem.Text</a>
+                                    }
+                                    <form class="logout-btn bizhub-cursor-pointer" method="post" action="Identity/Account/Logout">
+                                        <button type="Submit" class="dropdown-item bizhub-cursor-pointer">Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </Authorized>
+                    <NotAuthorized>
+                        <div class="col-md-2 bizhub-ipad-view">
+                            <a class="mt-2 float-right" style="color:var(--primary-blue)" href="Identity/Account/Login">Sign In</a>
+                            <a class="mt-2 mr-4 float-right" style="color:var(--primary-blue)" href="Identity/Account/Register">Register</a>
+                        </div>
+                    </NotAuthorized>
+                </AuthorizeView>
+                <!--IPAD VIEW END-->
+                <!--DESKTOP VIEW-->
+                <div class="col-md-4 bizhub-navbar-image  pb-2 bizhub-full-navbar" style="text-align:right;">
+                    <img class="bizhub-cursor-pointer" @onclick="@(() => NavigateToNewPage(""))" src="/images/horizontalLogo.png" />
+                </div>
+                <div class="col-md-5 bizhub-full-navbar">
+                    <div class="row">
+                        <SfMenu Items="@menuItems" >
+                            <MenuEvents ItemSelected="ItemClicked" ></MenuEvents>
+                        </SfMenu>
+                    </div>
+                </div>
+                <!--DEKTOP VIEW BLUE SECTION-->
+                <div class="col-md-3 bizhub-full-navbar pr-0" style="position: absolute; top: 0; right: 0;">
+                    <nav class="navbar navbar-expand">
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto user-dropdown">
+                            <div class="topbar-divider d-none d-sm-block"></div>
+                            <AuthorizeView>
+                                <Authorized>
+                                    <li class="nav-item dropdown no-arrow">
+                                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+@*                                             @if (@SessionMgr.Instance.User.Avatar != null) *@
+@*                                             { *@
+@*                                                 <img src="@SessionMgr.Instance.User.Avatar" class="rounded img-fluid" style="width:25px;height:auto; margin-right:10px"> *@
+@*                                             } *@
+@*                                             else *@
+@*                                             { *@
+@*                                                 <img src="/images/user.jpg" class="rounded img-fluid" style="width:25px;height:auto; margin-right:10px"> *@
+@*                                             } *@
+                                            <img src="/images/user.jpg" class="rounded img-fluid" style="width:25px;height:auto; margin-right:10px">
+                                            <span class="mr-2 d-lg-inline text-gray-600 medium">@SessionMgr.Instance.User.DisplayName</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                            @foreach (MenuItem oItem in UserDropDownItems) {
+                                                <a class="dropdown-item bizhub-cursor-pointer" @onclick="@(() => NavigateToNewPage(oItem.Id))">@oItem.Text</a>
+                                            }
+                                            <form class="logout-btn bizhub-cursor-pointer" method="post" action="Identity/Account/Logout">
+                                                <button type="Submit" class="dropdown-item bizhub-cursor-pointer">Logout</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </Authorized>
+                                <NotAuthorized>
+                                    <a class="mr-5 mt-2 register-link login-links" href="Identity/Account/Register">Register</a>
+                                    <a class="mt-2 sign-in-link login-links" href="Identity/Account/Login">Sign In</a>
+                                </NotAuthorized>
+                            </AuthorizeView>
+                        </ul>
+                    </nav>
+                </div>
+                <!--END BLUE SECTION-->
+            </div>
+        </div>
+    </nav>
+</div>
+<!--GRAY HEADER BAR-->
+<div class="row gray-sub-header">
+    <div class="col-md-6 m-auto" style="padding-left: 100px;">
+        <div class="row">
+            <label class="sub-header-links col-md-2 my-2 bizhub-cursor-pointer text-center" @onclick="@(() => NavigateToNewPage("Message-Center"))">Message Center</label>
+            <label class="sub-header-links col-md-2 my-2 bizhub-cursor-pointer text-center" @onclick="@(() => NavigateToNewPage("Email-Center"))">Email Center</label>
+            <label class="sub-header-links col-md-2 my-2 bizhub-cursor-pointer text-center" @onclick="@(() => NavigateToNewPage("Loan-Calculator"))">Loan Calculator</label>
+            @*<label class="sub-header-links col-md-2 my-2 bizhub-cursor-pointer" @onclick="@(() => NavigateToNewPage("OnBoard"))">OnBoard</label>*@
+            <label class="sub-header-links col-md-2 my-2 bizhub-cursor-pointer text-center" @onclick="@(() => NavigateToNewPage("OnBoard"))">Resource Center</label>
+            <label class="col-md-1 my-2 bizhub-cursor-pointer" style="text-align: left; font-size: 12px;" @onclick="@(() => NavigateToNewPage("Buyer-Profile"))">Blog</label>
+            <input class="col-md-3 my-1 form-control" placeholder="Search Listing ID" @bind="@ListingId" @bind:event="oninput" @onkeydown="CheckForListingIdEnter">
+            <button class="btn btn-transparent listing-search-icon" @onclick="NavigateTOListingDetailsPage">
+                <i class="fas fa-search" style="color:#036aff;"></i>
+            </button>
+        </div>
+    </div>
+</div>

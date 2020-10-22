@@ -1,0 +1,47 @@
+<div class="create-contact-modal" style="background-color: white">
+    <div class="col-md-12">
+        <div style="padding-top: 10px;">
+            
+            <div class="row mb-2">
+                <div class="col-md-11 text-left">
+                    <h3 class=" pl-0 my-auto" style="color:var(--primary-blue);">Create Contact</h3>
+                </div>
+                <div class="col-md-1 p-0 text-right">
+                    <button class="btn btn-sm btn-transparent" @onclick="BlazoredModal.Cancel">
+                        <i class="fa fa-times text-secondary"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="my-2">
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <label class="col-md-3"><b>First Name:*</b></label>
+                        <div class="col-md-9">
+                            <input type="text" class="@((IsSubmitted) && (String.IsNullOrEmpty(Contact.FirstName)) ? "invalid-text-error" : "") form-control" style="height:34px;" @bind-value="Contact.FirstName">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <label class="col-md-3"><b>Last Name:*</b></label>
+                        <div class="col-md-9">
+                            <input type="text" class=" @((IsSubmitted) && (String.IsNullOrEmpty(Contact.LastName)) ? "invalid-text-error" : "") form-control" style="height:34px;" @bind-value="Contact.LastName">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <label class="col-md-3"><b>Email:*</b></label>
+                        <div class="col-md-9">
+                            <input type="text" class="@((IsSubmitted) && (String.IsNullOrEmpty(Contact.Email)) ? "invalid-text-error" : "") form-control" style="height:34px;" @bind-value="Contact.Email">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-md-3"><b>Phone:</b></label>
+                        @* <SfNumericTextBox CssClass="valid-syncfusion-input col-md-9 contact-phone" TValue="decimal?" Format="$ ###,###,###.##"></SfNumericTextBox> *@
+                        <SfMaskedTextBox CssClass="valid-syncfusion-input col-md-9 contact-phone" Mask="000-000-0000" @bind-value="Contact.Phone"></SfMaskedTextBox>
+                    </div>
+                </div>
+            <div class="modal-footer contact-modal-footer py-2 row mt-5">
+                <button class="btn btn-sm btn-outline-secondary" @onclick="Cancel">Cancel</button>
+                <button class="btn btn-sm btn-primary" @onclick="CreateContact">Create Contact</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+﻿<h3 class="lpc-title">Loan Payment Calculator</h3>
+<div class="payment-calc-wrp">
+    <div class="row m-auto">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="py-2">
+                        <div class="row mx-auto my-1">
+                            <label class="col-md-6 text-right pl-0">Loan Amount</label>
+                            <div class="col-md-3 text-ip">
+                                <div class="input-group flex-inputbox">
+                                    <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="double" Format="###,###,###.##" @bind-value=@LoanCalcRequest.LoanAmount ShowSpinButton=false></SfNumericTextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="loan-calc-signs bizhub-cursor-pointer" data-toggle="tooltip" data-placement="top" title="Enter the Loan Amount">$</span>
+                            </div>
+                        </div>
+                        <div class="row mx-auto my-1">
+                            <label class="col-md-6 text-right pl-0">Interest Rate</label>
+                            <div class="col-md-3 text-ip">
+                                <div class="input-group flex-inputbox">
+                                    <SfNumericTextBox CssClass="valid-syncfusion-input global-box-height" TValue="double" Format="###,###,###.##" @bind-value=@LoanCalcRequest.InterestRate ShowSpinButton=false></SfNumericTextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="loan-calc-signs bizhub-cursor-pointer" data-toggle="tooltip" data-placement="top" title="Enter Interest Rate">%</span>
+                            </div>
+                        </div>
+                        <div class="row mx-auto my-1">
+                            <label class="col-md-6 text-right pl-0">Loan Tenure</label>
+                            <div class="col-md-3 text-ip">
+                                <div class="input-group flex-inputbox">
+                                    @if (TenureDurationType == Constants.TENURE_DURATION_TYPE_YEAR) {
+                                        <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="double" Format="#########.##" @bind-value=@LoanCalcRequest.LoanYears ShowSpinButton=false></SfNumericTextBox>
+                                    } else {
+                                        <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="double" Format="###########"  @bind-value=@LoanCalcRequest.LoanMonths ShowSpinButton=false></SfNumericTextBox>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-3 input-group-append">
+                                <span style="max-height:25px;" class="bizhub-cursor-pointer loan-calc-signs bizhub-cursor-pointer col-md-6 px-1 @((TenureDurationType == Constants.TENURE_DURATION_TYPE_YEAR) ? "global-green-button white-text" : "")"
+                                        @onclick="@(() => TenureDurationType = Constants.TENURE_DURATION_TYPE_YEAR)">Yr</span>
+                                <span style="max-height:25px;" class="bizhub-cursor-pointer loan-calc-signs bizhub-cursor-pointer col-md-6 @((TenureDurationType == Constants.TENURE_DURATION_TYPE_MONTH) ? "global-green-button white-text" : "") "
+                                        @onclick="@(() => TenureDurationType = Constants.TENURE_DURATION_TYPE_MONTH)">Mo</span>
+                            </div>
+                        </div>
+                        <div class="row mx-auto my-1">
+                            <label class="col-md-6 text-right pl-0">Loan Points Charged</label>
+                            <div class="col-md-3 text-ip">
+                                <div class="input-group flex-inputbox">
+                                    <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="double" Format="###,###,###.##" @bind-value=@LoanCalcRequest.Points ShowSpinButton=false></SfNumericTextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="loan-calc-signs bizhub-cursor-pointer" data-toggle="tooltip" data-placement="top" title="Enter any points charged  for the loan as a % (this fee will be calculated as a percentage of the loan amount and will be taken out of the loan proceeds)">Pts</span>
+                            </div>
+                        </div>
+                        <div class="row mx-auto my-1">
+                            <label class="col-md-6  pr-0">Origination Fees Charged</label>
+                            <div class="col-md-3 text-ip">
+                                <div class="input-group flex-inputbox">
+                                <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="double" Format="###,###,###.##" @bind-value=@LoanCalcRequest.Fees ShowSpinButton=false></SfNumericTextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="loan-calc-signs bizhub-cursor-pointer" data-toggle="tooltip" data-placement="top" title="Enter any additional bank fees as a dollar amount (this fee will be a flat amount to be taken out of the loan proceeds)">$</span>
+                            </div>
+                        </div>
+                        <div class="row mx-auto mt-1">
+                            <button disabled="@IsCalculating" style="border-radius: 0px 0px 4px 4px; background-color: var(--primary-green); color: white;" class="btn btn-sm  col-md-12" @onclick="CalculateLoanPayment">Calculate</button>
+                            @if (IsShowLoanResult) {
+                                <div class="col-md-12 pie-disc px-0 pt-3">
+                                    <label class="col-md-12 text-left text-center" style="color:#ababab;"> **These calculations are for estimation purposes only.  Your bank or financial institution may have additional considerations in their final loan cost.</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Results Section START-->
+        <div class="col-md-4 mx-5 pt-2">
+            @if (IsShowLoanResult) {
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="green-box">
+                            <h4>Results:</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-auto">
+                    <div class="col-md-8 col-sm-6">
+                        <label>Loan Amount</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right">
+                        <strong>$@String.Format("{0:n}", ResultDTO.LoanResult.LoanAmount)</strong>
+                    </div>
+                    <div class="col-md-8 col-sm-6">
+                        <label>Points and Fees</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right">
+                        <strong>$@String.Format("{0:n}", ResultDTO.LoanResult.TotalPointsAndFees)</strong>
+                    </div>
+                    <div class="col-md-8 col-sm-6">
+                        <label>Funds Reveived</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right">
+                        <strong>$@String.Format("{0:n}", ResultDTO.LoanResult.FundedAmount)</strong>
+                    </div>
+                    <div class="col-md-8 col-sm-6">
+                        <label>Monthly Payment</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right">
+                        <strong>$@String.Format("{0:n}", ResultDTO.LoanResult.MonthlyPayment)</strong>
+                    </div>
+                    <div class="col-md-8 col-sm-6">
+                        <label class="mb-0">Total of @ResultDTO.LoanResult.NumberOfPayments Payments</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right">
+                        <strong>$@String.Format("{0:n}", ResultDTO.LoanResult.TotalPaid)</strong>
+                    </div>
+                    <div class="col-md-8 col-sm-6">
+                        <label>Total Interest Paid </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right">
+                        <strong>$@String.Format("{0:n}", ResultDTO.LoanResult.TotalInterestPaid)</strong>
+                    </div>
+                    <div class="col-md-8 col-sm-6">
+                        <label>Actual APR&nbsp;(%)</label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right">
+                        <strong>@String.Format("{0:0.00}", ResultDTO.LoanResult.APR)</strong>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        @if (!IsShowAmortizationGrid) {
+                            <a class="view-table bizhub-cursor-pointer text-primary font-italic" @onclick="@(() => ToggleShowAmortizationGrid(true))">View Amortization Schedule</a>
+                        } else {
+                            <a class="view-table bizhub-cursor-pointer text-primary font-italic" @onclick="@(() => ToggleShowAmortizationGrid(false))">Hide Amortization Schedule</a>
+                        }
+                    </div>
+                </div>
+
+            }
+        </div>
+        <!--Results Section END-->
+        <!--Pie Chart START-->
+        <div class="col-md-3 px-0">
+            <div class="row">
+                <div class="col-md-12">
+                    <PieChart Controller="@Controller"></PieChart>
+                </div>
+            </div>
+        </div>
+        <!--Pie CHart END-->
+        <!--GRID START-->
+        @if (IsShowAmortizationGrid) {
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="row m-auto">
+                    <AmortizationGrid Result="@ResultDTO.LoanResult" GridOptions="@GridOptions"></AmortizationGrid>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        }
+        <!--GRID END-->
+
+    </div>
+</div>

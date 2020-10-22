@@ -1,0 +1,71 @@
+<div class=" email-template-modal" style="background-color: white">
+    <div class="col-md-12">
+        <div style="padding-top: 10px;">
+
+            <div class="row mb-2">
+                <div class="col-md-11 text-left">
+                    <h3 class=" pl-0 my-auto" style="color:var(--primary-blue);">Email</h3>
+                </div>
+                <div class="col-md-1 p-0 text-right">
+                    <button class="btn btn-sm btn-transparent" @onclick="BlazoredModal.Cancel">
+                        <i class="fa fa-times text-secondary"></i>
+                    </button>
+                </div>
+            </div>
+            <hr class="my-2">
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-md-1"><b>To:</b></label>
+                        <div class="col-md-11">
+                            <div class="row">
+                                @foreach (DisplayTag oTag in Tags_To) {
+                                    <Tag DisplayTag="oTag" eRemoveTag="RemoveTag"></Tag>
+                                }
+                                <div style="overflow: hidden; padding-right: .5em;">
+                                    <input type="text" class="form-control input-email" style="height:34px;border-right: none;border-left: none;border-top: none;" 
+                                           @onkeydown="@(e => AddressInputKeyUp(e, 1))" @bind="InputString_To" @bind:event="oninput">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-1" style="width: 100%;">
+                    </div>
+                    <div class="row mt-1">
+                        <label class="col-md-1"><b>Cc:</b></label>
+                        <div class="col-md-11">
+                            <div class="row">
+                                @foreach (DisplayTag oTag in Tags_Cc) {
+                                    <Tag DisplayTag="oTag" eRemoveTag="RemoveTag"></Tag>
+                                }
+                                <div style="overflow: hidden; padding-right: .5em;">
+                                    <input type="text" class="form-control input-email" style="height:34px;border-right: none;border-left: none;border-top: none;" 
+                                           @onkeydown="@(e => AddressInputKeyUp(e, 2))" @bind="InputString_Cc" @bind:event="oninput">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-1" style="width: 100%;">
+                    </div>
+                    <div class="row mt-1">
+                        <label class="col-md-2"><b>Subject:</b></label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" style="height:34px;" @bind-value="Email.Subject">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <label class="col-md-3"><b>Attachments (0)</b></label>
+                        <div class="col-md-9 text-right">
+                            <button class="btn btn-sm btn-outline-primary">Add Attachment</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  mx-auto">
+                    @* <span> *@
+                    <FSRichTextEditor CustomCss="contact-email" BoundValue="@Email.HtmlMessage"></FSRichTextEditor>
+                    @* </span> *@
+                </div>
+            <div class="modal-footer contact-modal-footer py-2 row">
+                <button class="btn btn-sm btn-outline-secondary" @onclick="Cancel">Cancel</button>
+                <button class="btn btn-sm btn-primary" @onclick="Save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

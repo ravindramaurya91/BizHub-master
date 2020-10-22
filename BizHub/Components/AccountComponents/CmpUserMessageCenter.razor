@@ -1,0 +1,133 @@
+﻿@inject NavigationManager navigationManager
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <!--modal-->
+            <button id="myBtn">Open Best Business Broker Modal</button>
+            <!--This is where the Brokerage Card was-->
+            @*<ModBrokerageCard ProfileCard="@CardInfo"></ModBrokerageCard>*@
+        </div>
+    </div>
+</div>
+
+@*Start of Messaging*@
+<div class="top-row px-4">
+    @if (chatting) {
+        <p>You are connected as <b>@username</b> </p>
+        <button class="btn btn-sm btn-warning ml-md-auto" @onclick="@DisconnectAsync">Disconnect</button>
+    }
+</div>
+
+<div class="content px-4">
+    <h1>Blazor SignalR Chat Sample</h1>
+    @if (!chatting) {
+        <h2>Chat</h2>
+
+        <p>Enter your name to start chatting</p>
+
+        <input type="text" maxlength="32" @bind="@username" />
+        <button @onclick="@Chat"><span class="oi oi-chat" aria-hidden="true"></span>Chat!</button>
+        @if (message != null) {
+            <div class="invalid-feedback">@message</div>
+            <small id="emailHelp" class="form-text text-muted">@message</small>
+        }
+    }
+
+    @if (chatting) {
+        <div id="scrollbox">
+            @foreach (var item in messages) {
+                <div class="@item.CSS">
+                    <div class="user">@item.Username</div>
+                    <div class="user">@item.Body</div>
+
+                </div>
+            }
+            <hr />
+            <textarea class="input-lg" placeholder="Type Comments" @bind="@newMessage"></textarea>
+            <button class="btn" @onclick="@SendAsync">Send</button>
+        </div>
+    }
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9 mx-auto">
+            <!--modal-->
+            <br />
+            <button id="myBtnAgent">Open Agent Modal</button>
+            <div id="myModalAgent" class="modalbroker">
+                <div class="modal-contentbroker">
+                    <span class="closeAgent">&times;</span>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="img-wrap-card-broker text-center">
+                                    <img src="@CardInfo.Avatar">
+                                    <div class="icons-view">
+                                        <i class="fas fa-camera "></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--start-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-wrapper-first">
+                                    <h1>@CardInfo.DisplayName</h1>
+                                    <h3>@CardInfo.Title</h3>
+                                </div>
+                                <div class="about-wrapper">
+                                    <h3>About</h3>
+                                    <p>@CardInfo.AboutMe</p>
+
+                                </div>
+                                <div class="about-wrapper">
+                                    <h3>Websites</h3>
+                                    @foreach (var vUrl in CardInfo.Urls) {
+                                        <a href="@vUrl" target="_blank">@vUrl</a>
+                                    }
+                                </div>
+                                <div class="about-wrapper">
+                                    <h3>Contact Information</h3>
+                                    <p>@CardInfo.Phone</p>
+                                    <p>@CardInfo.Email</p>
+                                </div>
+                                <div class="btn-wrapper">
+                                    <a class="btn-msg">Send Message</a>
+                                </div>
+                            </div>
+                            <!--end-->
+                        </div>
+                    </div>
+                </div>
+                <!--end-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Inject]
+    protected IJSRuntime JsRuntime { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) {
+        if (firstRender) {
+            JsRuntime.InvokeVoidAsync("BrokerPopupModal");
+            JsRuntime.InvokeVoidAsync("AgentPopupModal");
+            JsRuntime.InvokeVoidAsync("MenuBusinessType");
+        }
+
+    }
+
+    private IdentityCardDTO _cardInfo = new IdentityCardDTO();
+
+
+    public IdentityCardDTO CardInfo { get => _cardInfo; set => _cardInfo = value; }
+
+}
+
+

@@ -1,0 +1,111 @@
+﻿@using Syncfusion.Blazor.Inputs
+
+<div class="row">
+    <div class="col-md-9 mx-auto">
+        <div class="business">
+            <div class="business-head">
+                <h2 class="my-auto" style="font-family: sans-serif;">Financial Information</h2>
+            </div>
+        </div>
+
+        <div class="alert alert-danger" id="financialErrorAlert" style="display:none" role="alert">
+            Please fill all required field!
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Asking Price &nbsp;<span style="color:#3b70a4"> *</span></b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="@((IsSubmitted) && ((ListingDTO.ListingPrice <= 0) || (ListingDTO.ListingPrice == null)) ? "invalid-syncfusion-input" : "valid-syncfusion-input")" TValue="decimal?" Format="$ ###,###,###.##" @bind-value="ListingDTO.ListingPrice"></SfNumericTextBox>
+                @* <input currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }" type="number" id="txtAskingPrice" class="@((ListingDTO.ListingPrice <= 0) || (ListingDTO.ListingPrice == null) ? "invalid-text-error" : "") form-control" placeholder="" @bind-value="ListingDTO.ListingPrice"> *@
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Gross Revenue &nbsp;<span style="color:#3b70a4"> *</span></b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="@((IsSubmitted) && ((ListingDTO.GrossRevenue <= 0) || (ListingDTO.GrossRevenue == null)) ? "invalid-syncfusion-input" : "valid-syncfusion-input")" TValue="decimal?" Format="$ ###,###,###.##" @bind-value=@ListingDTO.GrossRevenue></SfNumericTextBox>
+                @* <input type="number" id="txtGrossRevenue" class="@((ListingDTO.GrossRevenue <= 0) || (ListingDTO.GrossRevenue == null) ? "invalid-text-error" : "") form-control" placeholder=""@bind-value="ListingDTO.GrossRevenue"> *@
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Cash Flow &nbsp;<span style="color:#3b70a4"> *</span></b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="@((IsSubmitted) && ((ListingDTO.CashFlow <= 0) || (ListingDTO.CashFlow == null)) ? "invalid-syncfusion-input" : "valid-syncfusion-input")" TValue="decimal?" Format="$ ###,###,###.##" @bind-value=@ListingDTO.CashFlow></SfNumericTextBox>
+                @* <input type="number" id="txtCashFlow" class="@((ListingDTO.CashFlow <= 0) || (ListingDTO.CashFlow == null) ? "invalid-text-error" : "") form-control" placeholder=""@bind-value="ListingDTO.CashFlow"> *@
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>EBITDA</b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="@((IsSubmitted) && ((ListingDTO.EBITDA <= 0) || (ListingDTO.EBITDA == null)) ? "invalid-syncfusion-input" : "valid-syncfusion-input")" TValue="decimal?" Format="$ ###,###,###.##" @bind-value=@ListingDTO.EBITDA></SfNumericTextBox>
+                @*<input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.EBITDA">*@
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Inventory</b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="@((IsSubmitted) && ((ListingDTO.Inventory <= 0) || (ListingDTO.Inventory == null)) ? "invalid-syncfusion-input" : "valid-syncfusion-input")" TValue="decimal?" Format="$ ###,###,###.##" @bind-value=@ListingDTO.Inventory></SfNumericTextBox>
+                @*<input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.Inventory">*@
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>F. F. & E.</b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="@((IsSubmitted) && ((ListingDTO.FFandE <= 0) || (ListingDTO.FFandE == null)) ? "invalid-syncfusion-input" : "valid-syncfusion-input")" TValue="decimal?" Format="$ ###,###,###.##" @bind-value=@ListingDTO.FFandE></SfNumericTextBox>
+                @*<input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.FFandE">*@
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Value of Real Estate</b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="@((IsSubmitted) && ((ListingDTO.RealEstateValue <= 0) || (ListingDTO.RealEstateValue == null)) ? "invalid-syncfusion-input" : "valid-syncfusion-input")" TValue="decimal?" Format="$ ###,###,###.##" @bind-value=@ListingDTO.RealEstateValue></SfNumericTextBox>
+                @*<input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.RealEstateValue">*@
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Seller willing to Finance &nbsp;<span style="color:#3b70a4"> *</span></b></label>
+            <div class="col-sm-1">
+                <div class="d-flex" style="margin-top:5px;">
+                    <div class="form-check form-check-inline">
+                        <FSRadioButtons Items="@SELLER_FINANCED_RADIO_BUTTONS" BoundValue="@ListingDTO.IsSellerFinanace.ToString().ToLower()"
+                                        IsVerticalDisplay="false" OnSelect="ChangeIsSellerFinance"></FSRadioButtons>
+                    </div>
+                </div>
+            </div>
+            @if (ListingDTO.IsSellerFinanace == true) {
+                <label class="col-sm-2 col-form-label text-right" style="margin-left:50px;"><b>Up to</b></label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.SellerFinanceUpTo">
+                </div>
+                <div class="col-sm-1">
+                    <p class="conf" style="margin-left:-30px;">%</p>
+                </div>
+                <div class="col-sm-3"></div>
+             }
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Minimum Down Payment</b></label>
+            <div class="col-sm-7">
+                <SfNumericTextBox CssClass="valid-syncfusion-input" TValue="decimal?" Format="p2" Value=@ListingDTO.MinimumDownPayment></SfNumericTextBox>
+                @* <input type="text" class="form-control" placeholder=""@bind-value="ListingDTO.MinimumDownPayment"> *@
+            </div>
+            @* <div class="col-sm-2"> *@
+            @*     <p class="conf" style="margin-left:-30px;">%</p> *@
+            @* </div> *@
+        </div>
+    </div>
+</div>
+

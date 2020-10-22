@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>5Stones Class Layout</Title>
+            <Author>Lee Grover</Author>
+            <Description>Create a FS preferred Class Layout adding the main regions</Description>
+            <Shortcut>cl</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+				#region Fields
+				#endregion (Fields)
+				
+				#region Constructor
+				#endregion (Constructor)
+				
+				#region Methods
+				#endregion (Methods)
+				
+				#region Properties
+				#endregion (Properties)
+				]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>5Stones Class Layout (Full)</Title>
+            <Author>Lee Grover</Author>
+            <Description>Create a Full FS preferred Class Layout adding the main regions</Description>
+            <Shortcut>clfull</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+				#region Events
+				#endregion (Events)
+				
+				#region Enums
+				#endregion (Enums)
+				
+				#region Fields
+				#endregion (Fields)
+				
+				#region Constructor
+				#endregion (Constructor)
+				
+				#region Methods
+				
+				#region Events
+				#endregion (Events)				
+				
+				#endregion (Methods)
+				
+				#region Properties
+				#endregion (Properties)
+				]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Regions Block</Title>
+            <Author>Lee Grover</Author>
+            <Description>Create a regions block</Description>
+            <Shortcut>reg</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+				#region $RegionName$
+	$end$
+				#endregion ($RegionName$)
+				]]>
+            </Code>
+			<Declarations>
+				<Literal>
+					<ID>RegionName</ID>
+					<Default>Region Name</Default>
+					<ToolTip>The name of the region you are creating</ToolTip>
+				</Literal>
+
+			</Declarations>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Method Signature - with return</Title>
+            <Author>Lee Grover</Author>
+            <Description>Create a method block with a return</Description>
+            <Shortcut>mb</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+				$Scope$ $ReturnType$ $MethodName$($ParamType$ $ParamName$){
+				    $ReturnType$ oReturn = default($ReturnType$);
+					$end$
+					return oReturn;
+				}
+				]]>
+            </Code>
+			<Declarations>
+				<Literal>
+					<ID>Scope</ID>
+					<Default>public</Default>
+					<ToolTip>The scope of the method</ToolTip>
+				</Literal>
+				<Literal>
+					<ID>ReturnType</ID>
+					<Default>object</Default>
+					<ToolTip>Method return type (void if no return)</ToolTip>
+				</Literal>
+				<Literal>
+					<ID>MethodName</ID>
+					<Default>MethodName</Default>
+					<ToolTip>The name of the method</ToolTip>
+				</Literal>
+				<Literal>
+					<ID>ParamType</ID>
+					<Default>string</Default>
+					<ToolTip>Type of parameter</ToolTip>
+				</Literal>
+				<Literal>
+					<ID>ParamName</ID>
+					<Default>tsParameter</Default>
+					<ToolTip>Parameter name</ToolTip>
+				</Literal>
+			</Declarations>
+        </Snippet>
+    </CodeSnippet>
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Method Signature - with a BaseResponse return type</Title>
+            <Author>Lee Grover</Author>
+            <Description>Create a method block with a BaseResponse return type</Description>
+            <Shortcut>mbres</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+				$Scope$ BaseResponse $MethodName$($ParamType$ $ParamName$){
+				    BaseResponse oReturn = new BaseResponse();
+					$end$
+					return oReturn;
+				}
+				]]>
+            </Code>
+			<Declarations>
+				<Literal>
+					<ID>Scope</ID>
+					<Default>public</Default>
+					<ToolTip>The scope of the method</ToolTip>
+				</Literal>
+				<Literal>
+					<ID>MethodName</ID>
+					<Default>MethodName</Default>
+					<ToolTip>The name of the method</ToolTip>
+				</Literal>
+				<Literal>
+					<ID>ParamType</ID>
+					<Default>string</Default>
+					<ToolTip>Type of parameter</ToolTip>
+				</Literal>
+				<Literal>
+					<ID>ParamName</ID>
+					<Default>tsParameter</Default>
+					<ToolTip>Parameter name</ToolTip>
+				</Literal>
+			</Declarations>
+        </Snippet>
+    </CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Setup a typical Test Method block</Title>
+            <Author>Lee Grover</Author>
+            <Description>Create unit test framework</Description>
+            <Shortcut>tst</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+				[Test]
+				public void $UnitTestName$() {
+					try {
+				        $end$
+						Debug.WriteLine("");
+					} catch (Exception ex) {
+						Debug.WriteLine(ex.Message);
+					}
+				}
+				]]>
+            </Code>
+			<Declarations>
+				<Literal>
+					<ID>UnitTestName</ID>
+					<Default>public</Default>
+					<ToolTip>The Name of the method</ToolTip>
+				</Literal>
+			</Declarations>
+        </Snippet>
+    </CodeSnippet>
+	<CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Setup a scafold for a Singleton Class</Title>
+            <Author>Lee Grover</Author>
+            <Description>Create scafold for a Singleton Class</Description>
+            <Shortcut>singleton</Shortcut>
+        </Header>
+        <Snippet>
+            <Code Language="CSharp">
+                <![CDATA[
+#region Fields
+private static volatile $ClassName$ _$ClassName$ = null;
+private static object _syncRoot = new Object(); //for multi thread protection
+#endregion (Fields)
+
+#region Constructor
+public $ClassName$() {}
+
+private static $ClassName$ Get$ClassName$() {
+    // Return an object reference to GlobalUtilities
+    if (_$ClassName$ == null) {
+		lock (_syncRoot) {
+			_$ClassName$ = new $ClassName$();
+		}
+	}
+    return _$ClassName$;
+}
+#endregion (Constructor)
+
+#region Properties
+public static $ClassName$ Instance {
+	get {
+		if (_$ClassName$ == null) {
+			_$ClassName$ = Get$ClassName$();
+		}
+		return _$ClassName$;
+   }
+}
+#endregion (Properties)
+
+				]]>
+            </Code>
+			<Declarations>
+				<Literal>
+					<ID>ClassName</ID>
+					<Default>public</Default>
+					<ToolTip>The Name of the Singleton</ToolTip>
+				</Literal>
+			</Declarations>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

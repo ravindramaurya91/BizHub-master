@@ -1,0 +1,203 @@
+﻿<div class="row">
+    <div class="col-md-9 mx-auto">
+        <div class="business">
+            <div class="business-head">
+                <h4 class="my-auto" style="font-family: sans-serif;">Business Information</h4>
+            </div>
+        </div>
+
+        <div class="alert alert-danger" id="businessErrorAlert" style="display:none" role="alert">
+            Please fill all required fields!
+        </div>
+        <div class="row">
+            <label class="col-sm-3 col-form-label text-right"><b>Business Name &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-6">
+                <input type="text" class="@((IsSubmitted) && (String.IsNullOrEmpty(ListingDTO.CompanyName)) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="ListingDTO.CompanyName">
+                <div class="warning-information">
+                    <p class="conf">Confidential: <span style="color:#909090;">Business name will not be published to the website</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Country &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-3">
+                <!--When ready to access more than just USA change binding to listingDTO info -->
+                <select id="ddlCountry" class="@((IsSubmitted) && ((CountryOidValue == null) || (CountryOidValue <= 0)) ? "invalid-text-error" : "") form-control pt-1 height-30" @bind="@CountryOidValue">
+                    <option value="-1">Select One</option>
+                    <option value="1">USA</option>
+                </select>
+            </div>
+            <label class="col-sm-3 col-form-label text-right"><b>Zip Code &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-2">
+                <input type="text" id="txtZipCode" class="@((IsSubmitted) && (String.IsNullOrEmpty(ListingDTO.Zip)) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="ListingDTO.Zip">
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Street Address &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-6">
+                <input type="text" id="txtStreetAddress" class="@((IsSubmitted) && (String.IsNullOrEmpty(ListingDTO.Address)) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="ListingDTO.Address">
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Business Categories</b></label>
+            <div class="col-sm-5">
+                @foreach (DisplayTag tag in DisplayTags)
+                {
+                    <Tag DisplayTag="tag" eRemoveTag="RemoveCategory"></Tag>
+                }
+            </div>
+            <div class="col-sm-1 pl-0" style="margin-top:2px;">
+                <div class="add-button">
+                    <button @onclick="OpenBusinessCategoriesModal"  class="btn btn-sm btn-outline-primary" style="height: 30px;">
+                        Add
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        @* <div class="form-group row"> *@
+        @*     <label class="col-sm-3 col-form-label text-right"><b>Reason For Selling</b></label> *@
+        @*     <div class="col-sm-6"> *@
+        @*         <input type="text" class="form-control height-30" placeholder="" @bind-value="ListingDTO.AdReasonForSelling"> *@
+        @*     </div> *@
+        @*     <div class="col-sm-2"> *@
+        @*     </div> *@
+        @* </div> *@
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Facilities</b></label>
+            <div class="col-sm-7">
+                <div class="d-flex" style="justify-content: space-between;margin-top:5px;">
+                    <FSRadioButtons Items="@FACILITIES_RADIO_BUTTONS" BoundValue="@ListingDTO.FacilityOwned_Int.ToString()"
+                                    IsVerticalDisplay="false" OnSelect="ChangeFacilityOwned"></FSRadioButtons>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Real Estates</b></label>
+            <div class="col-sm-7">
+                <FSRadioButtons Items="@REAL_ESTATE_RADIO_BUTTONS" BoundValue="@ListingDTO.RealEstateIncluded_Int.ToString()" OnSelect="ChangeRealEstateIncluded"></FSRadioButtons>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        @if (IsShowRealEstateDetails) {
+            <div class="show-business-fields">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-right"><b>Number of Buildings </b></label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control height-30" placeholder="" @bind-value="ListingDTO.BuildingCount">
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-right"><b>Total Building Sq Ft</b></label>
+                    <div class="col-sm-3">
+                        <input type="text" id="txtTotalBuildingSF" class="form-control height-30" placeholder="" @bind-value="ListingDTO.TotalSqFt">
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-right"><b>Sq Ft Occupied By Your Business </b></label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control height-30" placeholder="" @bind-value="ListingDTO.OccupiedSqFt">
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-right"><b>Is Real Estate included in the asking price?</b></label>
+                    <div class="col-sm-8">
+                        <div class="d-flex">
+                            <FSRadioButtons Items="@REAL_ESTATE_INCLUDED_IN_PRICE_RADIO_BUTTONS" BoundValue="@ListingDTO.IsRealEstateInPrice.ToString().ToLower()"
+                                            IsVerticalDisplay="false" OnSelect="ChangeIsRealEstateInPrice"></FSRadioButtons>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        @* <div class="form-group row"> *@
+        @*     <label class="col-sm-3 col-form-label text-right"><b>Facility Description</b></label> *@
+        @*     <div class="col-sm-6"> *@
+        @*         <textarea class="form-control speciality" @bind="@ListingDTO.AdFacilityDescription"></textarea> *@
+        @*     </div> *@
+        @*     <div class="col-sm-3"> *@
+        @*     </div> *@
+        @* </div> *@
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9 mx-auto">
+        <div class="business">
+            <div class="business-head">
+                <h2>History and Marketing</h2>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Company Website</b></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Number of Employees </b></label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" @bind-value="ListingDTO.EmployeeCount">
+            </div>
+            <label class="col-sm-3 col-form-label text-right"><b>Year Established</b></label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.YearEstablished">
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Contact Email &nbsp;<span style="color:#3b70a4">*</span></b></label>
+            <div class="col-sm-7">
+                <input type="text" id="txtContactEmail" class="@((IsSubmitted) && (String.IsNullOrEmpty(ListingDTO.ContactEmail)) ? "invalid-text-error" : "") form-control" placeholder="" @bind-value="ListingDTO.ContactEmail">
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Contact Name</b></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.ContactName">
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"><b>Contact Phone</b></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="" @bind-value="ListingDTO.ContactPhone">
+            </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right"></label>
+            <div class="col-sm-3">
+                <input type="checkbox" @bind="ListingDTO.IsAbsenteeOwner">
+                <label for="option1"> Absentee Owner</label><br>
+                <input type="checkbox" @bind="ListingDTO.IsRelocatable">
+                <label for="option2"> Relocateable</label><br>
+            </div>
+            <div class="col-sm-3">
+                <input type="checkbox" @bind="ListingDTO.IsHomeBased">
+                <label for="option1"> Home-based</label><br>
+                <input type="checkbox" @bind="ListingDTO.IsFranchise">
+                <label for="option2">Established Franchise</label><br>
+            </div>
+            <div class="col-sm-3">
+            </div>
+        </div>
+    </div>
+</div>

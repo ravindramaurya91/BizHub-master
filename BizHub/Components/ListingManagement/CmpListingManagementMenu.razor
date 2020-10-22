@@ -1,0 +1,21 @@
+﻿<div class="list-group" id="list-tab" role="tablist">
+    <div class="profile">
+        <i class="fas fa-user-circle fa-2x fa-fw"></i>@SessionMgr.Instance.User.DisplayName
+    </div>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 1 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(1))">
+        <i class="fas fa-user fa-fw"></i> Listings Overview
+    </a>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 2 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(2))">
+        <i class="fas fa-user fa-fw"></i> Buyer Activity
+    </a>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 3 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(3))">
+        <i class="fas fa-envelope fa-fw"></i> Listing Stats
+    </a>
+    <a class="list-group-item list-group-item-action bizhub-cursor-pointer @(@ActiveMenu == 4 ? "active" : "")" @onclick="@(() => MenuItemSelected.InvokeAsync(4))">
+        <i class="fas fa-comments"></i> Edit Listings
+    </a>
+</div>
+
+
+
+

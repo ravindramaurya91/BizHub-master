@@ -1,0 +1,45 @@
+﻿<div class="trans-page-wrp">
+	<div class="container">
+		<div class="trans-page">
+			<header>
+				<div class="logo-wrp border border-dark border-top-0 border-right-0 border-left-0 w-100">
+					<img src="/images/bizhub-flogo.jpg" alt="" class="float-right">
+				</div>
+			</header>
+			<CIM Content="@Controller.ParagraphInfolist.Where(x=>x.PageNumber==1).ToList()"></CIM>
+			<footer>
+				<div class="d-flex justify-content-between border border-dark border-bottom-0 border-right-0 border-left-0 w-100">
+					<p>Transworld Business Advisors of Tri-Valley</p>
+					<p class="text-uppercase">confidential</p>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<div class="trans-page-wrp">
+	<div class="container">
+		<div class="trans-page">
+			<header>
+				<div class="logo-wrp border border-dark border-top-0 border-right-0 border-left-0 w-100">
+					<img src="/images/bizhub-flogo.jpg" alt="" class="float-right">
+				</div>
+			</header>
+			<CIM Content="@Controller.ParagraphInfolist.Where(x=>x.PageNumber==2).ToList()"></CIM>
+			<footer>
+				<div class="d-flex justify-content-between border border-dark border-bottom-0 border-right-0 border-left-0 w-100">
+					<p>Transworld Business Advisors of Tri-Valley</p>
+					<p class="text-uppercase">confidential</p>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+
+@code {
+
+}

@@ -1,0 +1,7 @@
+<button class="btn btn-sm btn-default mb-2 mr-2 " style="background: #f2f2f2;border: 1px solid #dadadb; border-radius:  5px; cursor: default;">
+    <strong class="" style="color: #346a9f;">@DisplayTag.Name</strong>
+    <span>@DisplayTag.Value</span>&nbsp;
+    @if (!IsHideRemoveButton) {
+        <i class="fas fa-times bizhub-cursor-pointer" style="color:#555555" @onclick="RemoveTag"></i>
+    }
+</button>

@@ -1,0 +1,33 @@
+﻿<h3 class="ob-info-title mt-4"><p>Personal Information</p></h3>
+<div class="row ob-info-form">
+    <div class="col-md-12 col-lg-12">
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">First Name</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.FirstName) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.FirstName">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">Last Name</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.LastName) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.LastName">
+                </div>
+            </div>
+        </div>
+        <div class="row mx-auto mb-3">
+            <label class="col-md-4 text-right">Zip Code</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="@(IsSubmitted && String.IsNullOrEmpty(Controller.Zip) ? "invalid-text-error" : "") form-control height-30" placeholder="" @bind-value="Controller.Zip">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

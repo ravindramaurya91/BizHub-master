@@ -1,0 +1,93 @@
+﻿<div class="row">
+    <!--Header section-->
+    <div class="col-md-12 pl-0">
+        <h4 class="pl-2" style="color: #5a5959;"><span @onclick="NavigateToListing" class="bizhub-cursor-pointer">@StatCardDTO.CompanyName</span></h4>
+    </div>
+    <div class="blue-table-border col-md-12 p-0 mb-4">
+        <div class="row m-auto" style="border-bottom: 1px solid gray;">
+            <div class="col-md-3 profit-head pr-0"><h4 class="ad-title-header pl-2 global-overflow-hidden"><span @onclick="NavigateToListing" class="bizhub-cursor-pointer">@StatCardDTO.AdTitle</span></h4></div>
+            <div class="col-md-2 profit-head text-right"><h5 class="profit-view">Views</h5></div>
+            <div class="col-md-2 profit-head text-right"><h5 class="profit-view">Clicks</h5></div>
+            <div class="col-md-2 profit-head text-right"><h5 class="profit-view">Favorited</h5></div>
+            <div class="col-md-2 profit-head text-right"><h5 class="profit-view">Contact Requests</h5> </div>
+            <div class="col-md-1 profit-head text-right">
+                @if (StatCardDTO.IsExpanded) {
+                    <i @onclick="ToggleExpanded" class="fas fa-caret-up bizhub-cursor-pointer"></i>
+                } else {
+                    <i @onclick="ToggleExpanded" class="fas fa-caret-down bizhub-cursor-pointer"></i>
+                }
+            </div>
+        </div>
+
+        <!--Body Section Closed-->
+        @if (!StatCardDTO.IsExpanded) {
+            <div class="row m-auto">
+                <div class="col-md-3">&nbsp;</div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.Views</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.Clicks</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.Favorited</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ContactRequests</span> </div>
+                <div class="col-md-1 text-right"></div>
+            </div>
+        }
+        <!--Body Section Opened-->
+        @if (StatCardDTO.IsExpanded) {
+            <div class="row m-auto table-border-bottom">
+                <div class="col-md-3"><label class="first-column-titles">Last 24 Hours</label></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ViewsLast24Hrs</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ClicksLast24Hrs</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.FavoritedLast24Hrs</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ContactRequestsLast24Hrs</span> </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row m-auto table-border-bottom">
+                <div class="col-md-3"><label class="first-column-titles">Last 7 Days</label></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ViewsLast7Days</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ClicksLast7Days</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.FavoritedLast7Days</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ContactRequestsLast7Days</span> </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row m-auto table-border-bottom">
+                <div class="col-md-3"><label class="first-column-titles">Last Month</label></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ViewsLastMonth</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ClicksLastMonth</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.FavoritedLastMonth</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ContactRequestsLastMonth</span> </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row m-auto table-border-bottom">
+                <div class="col-md-3"><label class="first-column-titles">Last 3 Months</label></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ViewsLast3Months</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ClicksLast3Months</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.FavoritedLast3Months</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ContactRequestsLast3Months</span> </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row m-auto" style="border-bottom: 2px solid var(--listings-border-blue)">
+                <div class="col-md-3"><label class="first-column-titles">Over 90 Days</label></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ViewsOver90Days</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ClicksOver90Days</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.FavoritedOver90Days</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ContactRequestsOver90Days</span> </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="row m-auto">
+                <div class="col-md-3"><label class="first-column-titles">Total</label></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.Views</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.Clicks</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.Favorited</span></div>
+                <div class="col-md-2 text-right"><span class="strong-number">@StatCardDTO.ContactRequests</span> </div>
+                <div class="col-md-1"></div>
+            </div>
+        }
+
+        <!--Links at bottom-->
+    <div class="row m-auto py-1" style="border-top: 1px solid gray;">
+        <div class="text-clr-grey col-md-3">Date Listed: @StatCardDTO.l_DateListed.ToShortDateString()</div>
+        <div class="col-md-3  bizhub-cursor-pointer bizhub-hyperlink" @onclick="NavigateToListing">View Listing</div>
+        <div class="col-md-3  bizhub-cursor-pointer bizhub-hyperlink" @onclick="NavigateToListingSetup">Edit Listing</div>
+        @* <div class="col-md-3 bizhub-cursor-pointer bizhub-hyperlink" @onclick="NavigateToContactRequests">View Contact Requests</div> *@
+    </div>
+    </div>
+</div>

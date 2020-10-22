@@ -1,0 +1,42 @@
+﻿<h4>Welcome to BizHub</h4>
+
+<h1 class="mb-3">Let's get you started</h1>
+<div class="rc-wrp">
+    <div class="radio-control">
+        @foreach (FSVisualItem Item in ONBOARD_RADIO_BUTTONS)
+        {
+            <div class="row pb-3">
+                <FSRadioButton Items="new List<FSVisualItem> { Item }" BoundValue="@ActiveMenu.ToString()" OnSelect="ChangeOnboard"></FSRadioButton>
+                @*<i class="fas fa-question-circle"></i>*@
+
+                <SfTooltip Target="#target" Content="@Item.Label">
+                    <i id="target" class="fas fa-question-circle"></i>
+                @*<SfButton ID="target" CssClass="fas fa-question-circle">
+                    </SfButton>*@
+                </SfTooltip>
+            </div>
+        }
+    </div>
+</div>
+
+@*<FSRadioButtons Items="@ONBOARD_RADIO_BUTTONS" BoundValue="@ActiveMenu.ToString()"
+    IsVerticalDisplay="true" OnSelect="ChangeOnboard"></FSRadioButtons>*@
+
+@if (IsShowPersonalInfo)
+{
+    @*<CmpOnboard_Personalinfo Controller="Controller" ></CmpOnboard_Personalinfo><div class="row mx-auto mt-4">
+        <button style="border-radius: 0px 0px 4px 4px;" @onclick="@Controller.Save(1)" class="btn btn-sm btn-success col-md-12">Save</button>
+    </div>*@
+}
+@if (IsShowCompanyInfo)
+{
+    @*<CmpOnboard_Companyinfo Controller="Controller" ></CmpOnboard_Companyinfo><div class="row mx-auto mt-4">
+        <button style="border-radius: 0px 0px 4px 4px;" @onclick="@Controller.Save" class="btn btn-sm btn-success col-md-12">Save</button>
+    </div>*@
+}
+@if (IsShowAgentInfo)
+{
+    @*<CmpOnboard_Agentinfo Controller="Controller" ></CmpOnboard_Agentinfo><div class="row mx-auto mt-4">
+        <button style="border-radius: 0px 0px 4px 4px;" @onclick="@Controller.Save" class="btn btn-sm btn-success col-md-12">Continue</button>
+    </div>*@
+}

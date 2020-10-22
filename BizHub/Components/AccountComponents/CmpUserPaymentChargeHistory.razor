@@ -1,0 +1,67 @@
+﻿@if (isShowChargeHistory)
+{
+<div class="payment-section pt-0">
+    <div class="charges-history">
+        <div class="card">
+            <div class="card-heading">
+                <div class="card-payment-information">
+                    <div class="charge-history">
+                        <h2>Charge History</h2>
+                    </div>
+                    <div class="img-inform">
+                        <img src="/images/visa.jpg" class="img-fluid img-thumbnail">
+                        <p>Visa ending in 1234</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-body">
+                <table class="table table-bordered">
+                    <thead class="light-grey">
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>04/12/2020</td>
+                            <td>Charge Descrion blah blah blah</td>
+                            <td>$ 312.27</td>
+                        </tr>
+                        <tr>
+                            <td>04/12/2020</td>
+                            <td>Charge Descrion blah blah blah</td>
+                            <td>$ 312.27</td>
+                        </tr>
+                        <tr>
+                            <td>04/12/2020</td>
+                            <td>Charge Descrion blah blah blah</td>
+                            <td>$ 312.27</td>
+                        </tr>
+                        <tr>
+                            <td>04/12/2020</td>
+                            <td>Charge Descrion blah blah blah</td>
+                            <td>$ 312.27</td>
+                        </tr>
+                        <tr>
+                            <td>04/12/2020</td>
+                            <td>Charge Descrion blah blah blah</td>
+                            <td>$ 312.27</td>
+                        </tr>
+                        <tr class="light-grey">
+                            <td colspan="2"></td>
+                            <td>$ 3,124,50s</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
+@code {
+    [Parameter]
+    public bool isShowChargeHistory { get; set; }
+
+}

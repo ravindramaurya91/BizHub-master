@@ -1,0 +1,448 @@
+﻿@page "/Message-Center"
+@page "/Message-Center/{CurrentMenu:long}"
+
+@using Syncfusion.Blazor.Navigations
+@inject IJSRuntime jsRuntime
+
+<SfSplitter Height="100%" Width="100%">
+    <SplitterPanes>
+        <SplitterPane Size="300px">
+            <ContentTemplate>
+                <div class="col-md-12 p-0">
+                    <div class="username_block">
+                        <div>
+                            <img src="/images/userprofile.png" />
+                        </div>
+                        <div>
+                            <span>Test user</span>
+                        </div>
+                    </div>
+                    <input type="text" @bind-value="@MyPhoneNumber" />
+                    <button @onclick="BeginOutboundPhoneCall">Call</button>
+                    <div class="search_block">
+                        <div class="input-group">
+                            <SfTextBox CssClass="valid-syncfusion-input p-0 my-1 background-white" @ref="upload" Placeholder="People, groups, messages" Created="@onCreateUpload"></SfTextBox>
+                        </div>
+                        @* <div class="col-md-12 text-right pr-0"> *@
+                        @*     <div class="dropdown"> *@
+                        @*       <button class="btn btn-secondary dropdown-toggle m-0 btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> *@
+                        @*         Dropdown button *@
+                        @*       </button> *@
+                        @*       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> *@
+                        @*         <a class="dropdown-item" @onclick="@(()=>CreateNewChat("individual"))">New Chat</a> *@
+                        @*         <a class="dropdown-item" @onclick="@(()=>CreateNewChat("group"))">New Group Chat</a> *@
+                        @*       </div> *@
+                        @*     </div> *@
+                        @* </div> *@
+
+                    </div>
+                    <div class="collapse_bar">
+
+                        <SfAccordion ExpandMode="@ExpandMode.Single">
+                            <AccordionItems>
+                                @foreach (var parent in Controller.Groups) {
+                                    <AccordionItem>
+                                        <HeaderTemplate>
+                                            <span @onclick="@(() => SelectItem(parent))">
+                                                @parent.Name
+                                            </span>
+                                        </HeaderTemplate>
+                                        <ContentTemplate>
+                                            <SfAccordion ExpandMode="@ExpandMode.Single">
+                                                <AccordionItems>
+                                                    @if (parent.Children != null) {
+                                                        @foreach (var child in parent.Children) {
+                                                            <AccordionItem>
+                                                                <HeaderTemplate>
+                                                                    @if (child is TextGroupDTO) {
+                                                                        <span @onclick="@(() => SelectItem(child))">
+                                                                            @child.Name
+                                                                        </span>
+                                                                    } else {
+                                                                    }
+                                                                </HeaderTemplate>
+                                                                <ContentTemplate>
+                                                                    @if (child.Children != null) {
+                                                                        @foreach (var grandchild in child.Children) {
+                                                                            <CmpTextChannelListItem ActiveChannelOid="ActiveItem.Oid" ListItem="grandchild" ListItemSelected="SelectItem"></CmpTextChannelListItem>
+                                                                        }
+                                                                    }
+                                                                </ContentTemplate>
+                                                            </AccordionItem>
+                                                        }
+                                                    } else {
+                                                        <AccordionItem>
+
+                                                        </AccordionItem>
+                                                    }
+                                                </AccordionItems>
+                                            </SfAccordion>
+                                        </ContentTemplate>
+                                    </AccordionItem>
+                                }
+                            </AccordionItems>
+                        </SfAccordion>
+
+
+                    </div>
+                </div>
+            </ContentTemplate>
+        </SplitterPane>
+        <SplitterPane>
+            <ContentTemplate>
+                @if (ActiveChannel != null) {
+                    <div class="chatroom">
+                        <div class="col-md-12 pr-0">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h1>@ActiveChannel.Name</h1>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="contact_icons list-unstyled" style="text-align: right; padding: 20px 30px;">
+                                            <li>
+                                                <a href="#">
+                                                    <img src="/images/videocall.png" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <img src="/images/call.png" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <img src="/images/addcontact.png" />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="chatbox">
+                                            <img class="chatroom_img" src="/images/chat-icon.png" />
+                                            <div class="chats" id="ChatDiv">
+                                                @{
+                                                    IsNewChannelRender = true;
+                                                    foreach (TextMessageDTO chat in @ActiveChannel.Messages) {
+                                                        if (chat.SentByOid != SessionMgr.Instance.User.EntityOid) {
+                                                            <div class="chatline">
+                                                                <div class="time">
+                                                                    <span>@chat.DateSent.ToShortTimeString()</span>
+                                                                    <span>@chat.SentBy</span>
+                                                                </div>
+                                                                <div class="chattext">
+                                                                    <div>
+                                                                        <img class="sending-user-avatar" src="@chat.Avatar">
+                                                                    </div>
+                                                                    @* <div><span class="status_ball">Flexin<i class="fas fa-clock"></i></span></div> *@
+                                                                    <div>
+                                                                        <p>@chat.Message</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        } else {
+                                                            <div class="chatline reply_chatline">
+                                                                <div class="time">
+                                                                    <span></span>
+                                                                    <span>@chat.DateSent.ToShortTimeString()</span>
+                                                                </div>
+                                                                <div class="chattext">
+                                                                    <div></div>
+                                                                    <div>
+                                                                        <p>@chat.Message</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-8">
+                                        <input type="text" id="ChatInput" class="form-control" placeholder="type a message" @bind="@MyMessage" @bind:event="oninput" @onkeydown="CheckForEnter">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-primary btn-sm" @onclick="@(()=>SendNewMessage(MyMessage))">Send</button>
+                                    </div>
+                                    <div class="col-md-3 text-right">
+                                        <ul class="contact_icons">
+                                            <li>
+                                                <a href="#">
+                                                    <img src="/images/picture.png" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <img src="/images/contactcard.png" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <img src="/images/mic.png" />
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <img src="/images/more.png" />
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="template-title">Message Center</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="chatbox">
+                                    <img class="chatroom_img" src="/images/chat-icon.png">
+                                    <div class="broker-card-container">
+                                        <div class="col-md-12 text-center">
+                                            <i class="fas fa-exclamation col-md-12" style=" font-size: 7rem; color: #b5b3b3;"></i>
+                                            <label class="mt-3" style="color:gray;">No Existing Message Threads</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </ContentTemplate>
+        </SplitterPane>
+    </SplitterPanes>
+</SfSplitter>
+
+
+@* <div class="container-fluid"> *@
+@*     <div class="row"> *@
+@*         <div class="col-md-2 p-0"> *@
+@*              $1$ <CmpMessageGroupMenu ActiveChannel="CurrentMenu" MenuItemSelected="SelectMenuItem" Controller="Controller"></CmpMessageGroupMenu> #1# *@
+@*         </div> *@
+@*         <div class="col-md-10 pr-4"> *@
+@*             <div class="chatroom"> *@
+@*                 <div class="container-fluid"> *@
+@*                     <div class="row"> *@
+@*                         <div class="col-md-8"> *@
+@*                             <h1>Robert Michaels</h1> *@
+@*                         </div> *@
+@*                         <div class="col-md-4"> *@
+@*                             <ul class="contact_icons list-unstyled"> *@
+@*                                 <li><a href="#"><img src="/images/videocall.png" /></a></li> *@
+@*                                 <li><a href="#"><img src="/images/call.png" /></a></li> *@
+@*                                 <li><a href="#"><img src="/images/addcontact.png" /></a></li> *@
+@*                             </ul> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                     <div class="row"> *@
+@*                         <div class="col-md-12"> *@
+@*                             <div class="chatbox"> *@
+@*                                 <img class="chatroom_img" src="/images/chat-icon.png" /> *@
+@*                                 <div class="chats"> *@
+@*                                     <div class="chatline"> *@
+@*                                         <div class="time"> *@
+@*                                             <span>7:54 AM</span> *@
+@*                                             <span>Robert Michaels</span> *@
+@*                                         </div> *@
+@*                                         <div class="chattext"> *@
+@*                                             <div><span class="status_ball">Flexin<i class="fas fa-clock"></i></span></div> *@
+@*                                             <div><p>This is the text that is sent from the recipient</p></div> *@
+@*                                         </div> *@
+@*                                     </div> *@
+@*                                     <div class="chatline reply_chatline"> *@
+@*                                         <div class="time"> *@
+@*                                             <span></span> *@
+@*                                             <span>8.10 AM</span> *@
+@*                                         </div> *@
+@*                                         <div class="chattext"> *@
+@*                                             <div></div> *@
+@*                                             <div><p>This is the text that is sent from the recipient</p></div> *@
+@*                                         </div> *@
+@*                                     </div> *@
+@*                                 </div> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                     <div class="row"> *@
+@*                         <div class="col-md-8"> *@
+@*                             <div class="form-group user_texting"> *@
+@*                                 <input type="text" class="form-control" placeholder="type a message"> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="col-md-4"> *@
+@*                             <ul class="contact_icons list-unstyled message_icons"> *@
+@*                                 <li><a href="#"><img src="/images/picture.png" /></a></li> *@
+@*                                 <li><a href="#"><img src="/images/contactcard.png" /></a></li> *@
+@*                                 <li><a href="#"><img src="/images/mic.png" /></a></li> *@
+@*                                 <li><a href="#"><img src="/images/more.png" /></a></li> *@
+@*                             </ul> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
+
+
+
+
+@* <div class="container-fluid home_container"> *@
+@*     <div class="row"> *@
+@*         <div class="col-lg-12"> *@
+@*         </div> *@
+@*     </div> *@
+@*     <div class="row"> *@
+@*         <div class="col-lg-12"> *@
+@*             <div class="wrapper"> *@
+@*                 <div class="chatsidebar"> *@
+@*                     <div class="username_block"> *@
+@*                         <div> *@
+@*                             <img src="/images/userprofile.png" /> *@
+@*                         </div> *@
+@*                         <div> *@
+@*                             <span>Test user</span> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                     <div class="search_block"> *@
+@*                         <div class="input-group"> *@
+@*                             <SfTextBox CssClass="valid-syncfusion-input p-0 my-1 background-white" @ref="upload" Placeholder="People, groups, messages" Created="@onCreateUpload"></SfTextBox> *@
+@*                         </div> *@
+@* *@
+@*                     </div> *@
+@*                     <div class="collapse_bar"> *@
+@* *@
+@*                         <SfAccordion ExpandMode="@ExpandMode.Single"> *@
+@*                             <AccordionItems> *@
+@*                                 @foreach (var parent in Controller.Groups) *@
+@*                                 { *@
+@*                                     <AccordionItem> *@
+@*                                         <HeaderTemplate>@parent.Name</HeaderTemplate> *@
+@*                                         <ContentTemplate> *@
+@*                                             <SfAccordion ExpandMode="@ExpandMode.Single"> *@
+@*                                                 <AccordionItems> *@
+@*                                                     @if (parent.Children != null) *@
+@*                                                     { *@
+@*                                                         @foreach (var child in parent.Children) *@
+@*                                                         { *@
+@*                                                             <AccordionItem> *@
+@*                                                                 <HeaderTemplate>@child.Name</HeaderTemplate> *@
+@*                                                                 <ContentTemplate> *@
+@*                                                                     @if (child.Children != null) *@
+@*                                                                     { *@
+@*                                                                         @foreach (var grandchild in child.Children) *@
+@*                                                                         { *@
+@*                                                                             <div class="contact_list_item only_text"> *@
+@*                                                                                 <span class="date">6/16/2020</span> *@
+@*                                                                                 <div> *@
+@*                                                                                     <span class="status_ball">N<i class="active round"></i></span> *@
+@*                                                                                 </div> *@
+@*                                                                                 <div> *@
+@*                                                                                     <p>@grandchild.Name</p> *@
+@*                                                                                     <span>We received your payment</span> *@
+@*                                                                                 </div> *@
+@*                                                                             </div> *@
+@*                                                                         } *@
+@*                                                                     } *@
+@*                                                                 </ContentTemplate> *@
+@*                                                             </AccordionItem> *@
+@*                                                         } *@
+@*                                                     } *@
+@*                                                     else *@
+@*                                                     { *@
+@*                                                         <AccordionItem> *@
+@* *@
+@*                                                         </AccordionItem> *@
+@*                                                     } *@
+@*                                                 </AccordionItems> *@
+@*                                             </SfAccordion> *@
+@*                                         </ContentTemplate> *@
+@*                                     </AccordionItem> *@
+@*                                 } *@
+@*                             </AccordionItems> *@
+@*                         </SfAccordion> *@
+@* *@
+@* *@
+@*                     </div> *@
+@*                 </div> *@
+@* *@
+@* *@
+@* *@
+@* *@
+@*                 <div class="chatroom"> *@
+@*                     <div class="container-fluid"> *@
+@*                         <div class="row"> *@
+@*                             <div class="col-md-8"> *@
+@*                                 <h1>Robert Michaels</h1> *@
+@*                             </div> *@
+@*                             <div class="col-md-4"> *@
+@*                                 <ul class="contact_icons list-unstyled"> *@
+@*                                     <li><a href="#"><img src="/images/videocall.png" /></a></li> *@
+@*                                     <li><a href="#"><img src="/images/call.png" /></a></li> *@
+@*                                     <li><a href="#"><img src="/images/addcontact.png" /></a></li> *@
+@*                                 </ul> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="row"> *@
+@*                             <div class="col-md-12"> *@
+@*                                 <div class="chatbox"> *@
+@*                                     <img class="chatroom_img" src="/images/chat-icon.png" /> *@
+@*                                     <div class="chats"> *@
+@*                                         <div class="chatline"> *@
+@*                                             <div class="time"> *@
+@*                                                 <span>7:54 AM</span> *@
+@*                                                 <span>Robert Michaels</span> *@
+@*                                             </div> *@
+@*                                             <div class="chattext"> *@
+@*                                                 <div><span class="status_ball">Flexin<i class="fas fa-clock"></i></span></div> *@
+@*                                                 <div><p>This is the text that is sent from the recipient</p></div> *@
+@*                                             </div> *@
+@*                                         </div> *@
+@*                                         <div class="chatline reply_chatline"> *@
+@*                                             <div class="time"> *@
+@*                                                 <span></span> *@
+@*                                                 <span>8.10 AM</span> *@
+@*                                             </div> *@
+@*                                             <div class="chattext"> *@
+@*                                                 <div></div> *@
+@*                                                 <div><p>This is the text that is sent from the recipient</p></div> *@
+@*                                             </div> *@
+@*                                         </div> *@
+@*                                     </div> *@
+@*                                 </div> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="row"> *@
+@*                             <div class="col-md-8"> *@
+@*                                 <div class="form-group user_texting"> *@
+@*                                     <input type="text" class="form-control" placeholder="type a message"> *@
+@*                                 </div> *@
+@*                             </div> *@
+@*                             <div class="col-md-4"> *@
+@*                                 <ul class="contact_icons list-unstyled message_icons"> *@
+@*                                     <li><a href="#"><img src="/images/picture.png" /></a></li> *@
+@*                                     <li><a href="#"><img src="/images/contactcard.png" /></a></li> *@
+@*                                     <li><a href="#"><img src="/images/mic.png" /></a></li> *@
+@*                                     <li><a href="#"><img src="/images/more.png" /></a></li> *@
+@*                                 </ul> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@

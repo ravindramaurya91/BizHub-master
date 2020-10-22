@@ -1,0 +1,128 @@
+﻿<div id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+    <div class="container-fluid">
+        <!--START-->
+        <div class="row list-border pb-2">
+            <div class="col-md-1 text-center px-1 pt-1">
+                <div class="listing-home-icon">
+                    <i class="fas fa-home"></i>
+                    <h5 style="font-size: 15px; color: var(--primary-blue)" class="mb-0">My Listings (@DisplayList.Count)</h5>
+                </div>
+            </div>
+            <div class="col-md-11 pt-3">
+                <div class="row">
+                    <label style="color: var(--primary-blue)" class="col-md-2 text-right pr-3 mb-0">Keyword Search</label>
+                    <input @bind-value="SearchString"  @onkeydown="CheckForSearchEnter" @bind-value:event="oninput" class="form-control col-md-4 mr-2" type="text">
+                    <button @onclick="ClearSearchString" class="btn btn-transparent clear-search-string">
+                        <i class="fas fa-times text-danger"></i>
+                    </button>
+                    <button @onclick="SearchListings" class="btn btn-sm btn-secondary col-md-1 bizhub-cursor-pointer" style=" height: 30px;">Search</button>
+                    <label for="sortby" class="col-md-2 mb-0 pt-1 text-right">Sort By</label>
+                    <div class="col-sm-2">
+                        <div class="btn-group dropleft">
+                            <a style="background: white;" id="dLabel" role="button" data-toggle="dropdown" class="btn dropdown-toggle form-control py-0" href="" aria-expanded="false">Alpha</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="">
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item" tabindex="-1" href="#">Alpha</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Alpha->CompanyName"))">Company Name</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Alpha->AdTitle"))">Ad Title</a></li>
+                                    </ul>
+                                </li>
+                                @* TODO Need to add a sort fo "Alpha->AdTitle"*@
+                                <li><a class="dropdown-item" href="#">Date Listed</a></li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item" tabindex="-1" href="#">Views</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("View->24Hours"))">Last 24 Hours</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("View->Last7Days"))">Last 7 Days</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("View->LastMonth"))">Last Month</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("View->Last3Months"))">Last 3 Months</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("View->Over90Days"))">Over 90 Days</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("View->Total"))">Total</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item" tabindex="-1" href="#">Clicks</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Click->24Hours"))">Last 24 Hours</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Click->Last7Days"))">Last 7 Days</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Click->LastMonth"))">Last Month</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Click->Last3Months"))">Last 3 Months</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Click->Over90Days"))">Over 90 Days</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item" tabindex="-1" href="#">Favorited</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Favorited->24Hours"))">Last 24 Hours</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Favorited->Last7Days"))">Last 7 Days</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Favorited->LastMonth"))">Last Month</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Favorited->Last3Months"))">Last 3 Months</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Favorited->Over90Days"))">Over 90 Days</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("Favorited->Total"))">Total</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item" tabindex="-1" href="#">Contact Request</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("ContactRequest->24Hours"))">Last 24 Hours</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("ContactRequest->Last7Days"))">Last 7 Days</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("ContactRequest->LastMonth"))">Last Month</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("ContactRequest->Last3Months"))">Last 3 Months</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("ContactRequest->Over90Days"))">Over 90 Days</a></li>
+                                        <li><a class="dropdown-item" @onclick="@(() =>Sort("ContactRequest->Total"))">Total</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END-->
+        <!--start-->
+        <div class="row expand-sec">
+            <div class="col-md-6">
+                <div class="row m-auto">
+                    <label @onclick="@(() =>FilterListingsByStatus("Active"))" style="border-right: 1px solid gray;" class="@(TabStatus == "Active" ? "active-listings-tab" : "") pr-2 bizhub-cursor-pointer">
+                        Active Listings
+                    </label>
+                    <label @onclick="@(() =>FilterListingsByStatus("Incomplete"))" style="border-right: 1px solid gray;" class="@(TabStatus == "Incomplete" ? "active-listings-tab" : "") px-2 bizhub-cursor-pointer">
+                        Incomplete Listings
+                    </label>
+                    <label @onclick="@(() =>FilterListingsByStatus("Historical"))" class="@(TabStatus == "Historical" ? "active-listings-tab" : "") pl-2 bizhub-cursor-pointer">
+                        Closed Listings
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <div class="expnd-all">
+                    @if (!IsAllExpanded) {
+                        <h5><span class="bizhub-cursor-pointer" @onclick="ExpandCollapseAll"><i class="fas fa-caret-down fa-fw"></i>Expand All</span></h5>
+                    }
+                    @if (IsAllExpanded) {
+                        <h5><span class="bizhub-cursor-pointer" @onclick="ExpandCollapseAll"><i class="fas fa-caret-up fa-fw"></i>Collapse All</span></h5>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+<!--end-->
+<!--start-->
+@if (TabStatus != "Incomplete") {
+    @foreach (ListingViewStatsCardDTO stat in DisplayList) {
+        <CmpWhseListingStatGrid StatCardDTO="stat" eToggleExpanded="CheckExpandStatus" eNavigateToNewPage="NavigateToNewPage"></CmpWhseListingStatGrid>
+    }
+} else {
+    @foreach (ListingViewStatsCardDTO stat in DisplayList) {
+        <div class="row mb-3" style="background: #cbcaca;">
+            <h4 class="col-md-5 my-auto">@stat.CompanyName</h4>
+            <div class="col-md-6 bizhub-align-center py-2">
+                <CmpListingSetupArrows CurrentStep="@GetActiveStep(stat.l_lkpListingSetupStatusOid)" ArrowSelected="(e=>ArrowSelected(e, stat))"></CmpListingSetupArrows>
+            </div>
+        </div>
+    }
+}

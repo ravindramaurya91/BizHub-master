@@ -1,0 +1,22 @@
+﻿@using BizHub.Areas.Identity 
+
+ <AuthorizeView>
+     <Authorized>
+         <!--
+         <a href="Identity/Account/Manage">My EntityOid is @context.User.Identity.EntityOid().ToString()</a>
+         <form method="post" action="Identity/Account/Logout">
+                      <button type="Submit" class="nav-link btn btn-link">Log out</button>
+                  </form>
+          -->
+         
+     </Authorized>
+    <NotAuthorized>
+        <!-- 
+        <a href="Identity/Account/Register">Register</a>
+        <a href="Identity/Account/Login">Login</a> 
+        -->
+        <a class="btn btn-outline-info mr-3" href="Identity/Account/Register">Register</a>
+        <a class="btn btn-outline-info mr-5" href="Identity/Account/Login">Sign In</a>
+
+    </NotAuthorized>
+</AuthorizeView>

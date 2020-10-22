@@ -1,0 +1,35 @@
+<div class="col-lg-12 control-section">
+    <div class="content-wrapper">
+        <div class="row">
+            <img class="email-center-icon mb-0 email-image-icon" src="/Images/email-circle.png">
+        </div>
+        <div class="row email-template-border">
+            <div class="col-md-12 float-right">
+                <button class="btn btn-sm create-email-btn mb-2 float-right bizhub-cursor-pointer">Create New List</button>
+            </div>
+            <div class="col-md-12"><h4 class="email-template-header">Recipient Management</h4></div>
+            
+            <SfSpinner @ref="SpinnerObj" Target="#container"></SfSpinner>
+            <div id="container campaigns-grid">
+
+                <SfGrid @ref="Grid" DataSource="@GridData" AllowPaging="true" AllowSorting="true" AllowGrouping="true" AllowFiltering="true" AllowReordering="true">
+                    <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.CheckBox"></GridFilterSettings>
+                    <GridPageSettings PageSize="15"></GridPageSettings>
+                    <GridColumns>
+                        <GridColumn Field="@nameof(ParentEmailObj.Category)" HeaderText="Name" IsPrimaryKey="true" Width="130"></GridColumn>
+                        <GridColumn Field="@nameof(ParentEmailObj.Description)" HeaderText="Description" IsPrimaryKey="true" Width="325"></GridColumn>
+                        <GridColumn Field="@nameof(ParentEmailObj.Category)" HeaderText="Type" IsPrimaryKey="true" Width="130"></GridColumn>
+                        @* <GridColumn Field="@nameof(ParentEmailObj.Category)" CustomAttributes="@(new Dictionary<string, object>() {{"class", "linked-grid-info"}})" HeaderText="Recipient List" IsPrimaryKey="true" Width="130"></GridColumn> *@
+                        <GridColumn HeaderText="Action" IsPrimaryKey="true" Width="75">
+                            <Template>
+                                @{ ParentEmailObj Parent = context as ParentEmailObj; }
+                                <button class="btn btn-sm btn-transparent py-0"><i class="far fa-edit" style="color: var(--primary-blue)"></i></button>
+                                <button class="btn btn-sm btn-transparent py-0"><i class="fas fa-times text-danger"></i></button>
+                            </Template>
+                        </GridColumn>
+                    </GridColumns>
+                </SfGrid>
+            </div>
+        </div>
+    </div>
+</div>

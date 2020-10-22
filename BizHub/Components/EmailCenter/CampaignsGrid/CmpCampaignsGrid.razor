@@ -1,0 +1,47 @@
+﻿<div class="col-lg-12 control-section">
+    <div class="content-wrapper">
+        <div class="row">
+            <img class="email-center-icon mb-0 email-image-icon" src="/Images/email-circle.png">
+        </div>
+        <div class="row email-template-border">
+            @if (!IsLoading) {
+                <div class="col-md-12 float-right">
+                    <button class="btn btn-sm create-email-btn mb-2 float-right bizhub-cursor-pointer" @onclick="CreateNewCampaign">Create New Campaign</button>
+                </div>
+                <div class="col-md-12"><h4 class="email-template-header">Email Campaigns</h4></div>
+                <div id="container campaigns-grid">
+                    <SfGrid @ref="Grid" DataSource="@Campaigns" AllowPaging="@GridOptions.IsAllowPaging" AllowSorting="@GridOptions.IsAllowSorting" AllowGrouping="@GridOptions.IsAllowGrouping"
+                            AllowFiltering="@GridOptions.IsAllowFiltering" AllowReordering="@GridOptions.IsAllowReordering" AllowResizing="@GridOptions.IsAllowResizing">
+                        <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.CheckBox"></GridFilterSettings>
+                        <GridPageSettings PageSize="@GridOptions.PageSize"></GridPageSettings>
+                        <GridColumns>
+                            <GridColumn HeaderText="Name" Width="130" Field="@nameof(EmailCampaignDTO.Name)"></GridColumn>
+                            <GridColumn Field="@nameof(EmailCampaignDTO.Description)" HeaderText="Description" Width="250"></GridColumn>
+                            <GridColumn Field="@nameof(EmailCampaignDTO.TemplateName)" HeaderText="Template Name" Width="125">
+                                <Template>
+                                    @{ EmailCampaignDTO Campaign = context as EmailCampaignDTO; }
+                                    <a @onclick="@(() => EditTemplate(Campaign))" style="color: var(--hyperlink-blue); cursor: pointer">@Campaign.TemplateName</a>
+                                </Template>
+                            </GridColumn>
+                            <GridColumn Field="@nameof(EmailCampaignDTO.RecipientDefinitionName)" HeaderText="Recipient Criteria" Width="125" >
+                                <Template>
+                                    @{ EmailCampaignDTO Campaign = context as EmailCampaignDTO; }
+                                    <a @onclick="@(() => EditRecipientCriteria(Campaign))" style="color: var(--hyperlink-blue); cursor: pointer">@Campaign.RecipientDefinitionName</a>
+                                </Template>
+                            </GridColumn>
+                            <GridColumn HeaderText="Action" Width="75">
+                                <Template>
+                                    @{ EmailCampaignDTO Campaign = context as EmailCampaignDTO; }
+                                    <button class="btn btn-sm btn-transparent py-0"><i class="far fa-edit" style="color: var(--primary-blue)" @onclick="@(() => EditCampaign(Campaign))"></i></button>
+                                    <button class="btn btn-sm btn-transparent py-0" @onclick="@(() => DeleteCampaign(Campaign))"><i class="fas fa-times text-danger"></i></button>
+                                </Template>
+                            </GridColumn>
+                        </GridColumns>
+                    </SfGrid>
+                </div>
+            } else {
+                <CmpLoadingSpinner></CmpLoadingSpinner>
+            }
+        </div>
+    </div>
+</div>

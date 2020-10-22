@@ -1,0 +1,66 @@
+﻿@* <div class="row"> *@
+@*     <div class="col-md-9 mx-auto bizhub-align-center py-3 my-3"> *@
+        <div class="col-md-12 arrow-steps clearfix" style="line-height: 1;">
+                <div class="col-md-4 p-1 step @(GetStepClass(1)) bizhub-cursor-pointer" @onclick="@(() => ArrowSelected.InvokeAsync(1))">
+                    @if (1 < CurrentStep)
+                    {
+                        <i class="fa fa-check mr-4"></i>
+                    }
+                    <span>Business Info</span>
+                </div>
+                <div class="col-md-4 p-1 step @(GetStepClass(2)) bizhub-cursor-pointer" @onclick="@(() => ArrowSelected.InvokeAsync(2))">
+                    @if (2 < CurrentStep)
+                    {
+                        <i class="fa fa-check  mr-4"></i>
+                    }
+                    <span> Finance</span>
+                </div>
+                <div class="col-md-4 p-1 step @(GetStepClass(3)) bizhub-cursor-pointer" @onclick="@(() => ArrowSelected.InvokeAsync(3))">
+                    @if (3 < CurrentStep)
+                    {
+                        <i class="fa fa-check mr-4"></i>
+                    }
+                    <span>Advertisement</span>
+                </div>
+            </div>
+@*     </div> *@
+@* </div> *@
+@*<div class="row mb-5">
+        <button type="button" class="btn btn-primary">Continue</button>
+    </div>*@
+
+@code {
+
+    #region Parameters
+    [Parameter]
+    public Int64 CurrentStep { get; set; }
+
+    [Parameter]
+    public EventCallback<Int64> ArrowSelected { get; set; }
+    
+
+    #endregion (Parameters)
+
+    #region Methods
+
+    public string GetStepClass(Int64 tiDivNumber)
+    {
+        string sReturn = "";
+        if (tiDivNumber == CurrentStep)
+        {
+            sReturn = CurrentClass;
+        }
+        if (tiDivNumber < CurrentStep)
+        {
+            sReturn = CompleteClass;
+        }
+        return sReturn;
+    }
+    #endregion (Methods)
+
+    #region Properties
+    public string CompleteClass = "complete";
+    public string CurrentClass = "current";
+    #endregion (Properties)
+
+}

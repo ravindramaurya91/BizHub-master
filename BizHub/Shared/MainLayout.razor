@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+@attribute [Authorize]
+@inject NavigationManager _navManager
+@inject IModalService _modalService
+
+<div class="main">
+    <div class="top-row px-4">
+            <Header />
+        </div>
+    <main class="master-background bizhub-min-height">
+        @*@if (_isLoading) {
+            <CmpLoadingSpinner></CmpLoadingSpinner>
+        }*@ 
+            @Body
+        </main>
+    <div class="content p-0 fixed-footer">
+        <Footer />
+    </div>
+</div>

@@ -1,0 +1,10 @@
+﻿<div class="control_wrapper">
+    @*<SfDropDownList TValue="string" TItem="FSVisualItem" Placeholder="@PlaceHolder" @bind-Value="@BoundValue" DataSource="@Items">
+            <DropDownListFieldSettings Value="Value" Text="Label"></DropDownListFieldSettings>
+        </SfDropDownList>*@
+    <select class="form-control" style="height:34px;" @bind="@BoundValue">
+        @foreach (FSVisualItem Item in Items) {
+            <option value="@Item.Value">@Item.Label</option>
+        }
+    </select>
+</div>
